@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: BottomNavigationBarRecipe(title: 'Flutter Demo Home Page'),
+      home: BottomNavigationBarRecipe(title: 'BottomNavigationBarRecipe Demo'),
     );
   }
 }
