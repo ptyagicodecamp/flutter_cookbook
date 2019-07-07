@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart' as words;
+import 'lexique_frsa.dart';
+import 'lexique_safr.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,72 +28,109 @@ class SeachAppBarRecipe extends StatefulWidget {
 }
 
 class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
-  final List<String> kWords;
+  final List<LexiqueFRSA> frsa;
+  final List<LexiqueSAFR> safr;
   _SearchAppBarDelegate _searchDelegate;
+
+  List<Object> wordList;
+  TabController tabController;
 
   //Initializing with sorted list of english words
   _SearchAppBarRecipeState()
-      : kWords = List.from(Set.from(words.all))
-    ..sort(
-          (w1, w2) => w1.toLowerCase().compareTo(w2.toLowerCase()),
-    ),
+      : frsa = listfrsa,
+        safr = listsafr,
         super();
-
 
   @override
   void initState() {
     super.initState();
+    tabController = TabController(vsync: this, length: 2);
     //Initializing search delegate with sorted list of English words
-    _searchDelegate = _SearchAppBarDelegate(kWords);
+    //_searchDelegate = _SearchAppBarDelegate(wordList);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text('Word List'),
-        actions: <Widget>[
-          //Adding the search widget in AppBar
-          IconButton(
-            tooltip: 'Search',
-            icon: const Icon(Icons.search),
-            //Don't block the main thread
-            onPressed: () {
-              showSearchPage(context, _searchDelegate);
-            },
-          ),
-        ],
-      ),
-      body: Scrollbar(
-        //Displaying all English words in list in app's main page
-        child: ListView.builder(
-          itemCount: kWords.length,
-          itemBuilder: (context, idx) =>
-              ListTile(
-                title: Text(kWords[idx]),
-                onTap: () {
-                  Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                          content: Text("Click the Search action"),
-                          action: SnackBarAction(
-                            label: 'Search',
-                            onPressed: (){
-                              showSearchPage(context, _searchDelegate);
-                            },
-                          )
-                      )
-                  );
+  Widget tabController() {
+    return new MaterialApp(
+      title: 'Wordlist',
+      debugShowCheckedModeBanner: false,
+      //theme: widget._themeData,
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: Text('Word List'),
+            actions: <Widget>[
+              //Adding the search widget in AppBar
+              IconButton(
+                tooltip: 'Search',
+                icon: const Icon(Icons.search),
+                //Don't block the main thread
+                onPressed: () {
+                  setState(() {
+                    var index = DefaultTabController.of(context).index;
+                    if (index == 0) {
+                      wordList = frsa;
+                    } else {
+                      wordList = safr;
+                    }
+                    _searchDelegate = _SearchAppBarDelegate(wordList);
+                    showSearchPage(context, _searchDelegate);
+                  });
                 },
               ),
+            ],
+            bottom: TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.free_breakfast)),
+                Tab(icon: Icon(Icons.place)),
+              ],
+            ),
+            //title: Text('Search Tabs Demo'),
+          ),
+          body: TabBarView(
+            children: [listViewWords(), listViewWords2()],
+          ),
         ),
       ),
     );
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return tabController();
+
+//    return Scaffold(
+//      body: Scrollbar(
+//        //Displaying all English words in list in app's main page
+//        child: tabController(),
+//      ),
+//    );
+  }
+
+  Widget listViewWords() {
+    return ListView.builder(
+      itemCount: frsa.length,
+      itemBuilder: (context, idx) => ListTile(
+        title: Text(frsa[idx].frFRSA),
+        onTap: () {},
+      ),
+    );
+  }
+
+  Widget listViewWords2() {
+    return ListView.builder(
+      itemCount: safr.length,
+      itemBuilder: (context, idx) => ListTile(
+        title: Text(safr[idx].saSAFR),
+        onTap: () {},
+      ),
+    );
+  }
+
   //Shows Search result
-  void showSearchPage(BuildContext context,
-      _SearchAppBarDelegate searchDelegate) async {
+  void showSearchPage(
+      BuildContext context, _SearchAppBarDelegate searchDelegate) async {
     final String selected = await showSearch<String>(
       context: context,
       delegate: searchDelegate,
@@ -110,12 +148,12 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
 
 //Search delegate
 class _SearchAppBarDelegate extends SearchDelegate<String> {
-  final List<String> _words;
-  final List<String> _history;
+  final List<Object> _words;
+  final List<Object> _history;
 
-  _SearchAppBarDelegate(List<String> words)
+  _SearchAppBarDelegate(List<Object> words)
       : _words = words,
-  //pre-populated history of words
+        //pre-populated history of words
         _history = <String>['apple', 'orange', 'banana', 'watermelon'],
         super();
 
@@ -171,7 +209,7 @@ class _SearchAppBarDelegate extends SearchDelegate<String> {
   Widget buildSuggestions(BuildContext context) {
     final Iterable<String> suggestions = this.query.isEmpty
         ? _history
-        : _words.where((word) => word.startsWith(query));
+        : _words.where((word) => word.toString().startsWith(query));
 
     return _WordSuggestionList(
       query: this.query,
@@ -188,22 +226,22 @@ class _SearchAppBarDelegate extends SearchDelegate<String> {
   @override
   List<Widget> buildActions(BuildContext context) {
     return <Widget>[
-      query.isNotEmpty ?
-      IconButton(
-        tooltip: 'Clear',
-        icon: const Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-          showSuggestions(context);
-        },
-      ) : IconButton(
-        icon: const Icon(Icons.mic),
-        tooltip: 'Voice input',
-        onPressed: () {
-          this.query = 'TBW: Get input from voice';
-        },
-
-      ),
+      query.isNotEmpty
+          ? IconButton(
+              tooltip: 'Clear',
+              icon: const Icon(Icons.clear),
+              onPressed: () {
+                query = '';
+                showSuggestions(context);
+              },
+            )
+          : IconButton(
+              icon: const Icon(Icons.mic),
+              tooltip: 'Voice input',
+              onPressed: () {
+                this.query = 'TBW: Get input from voice';
+              },
+            ),
     ];
   }
 }
