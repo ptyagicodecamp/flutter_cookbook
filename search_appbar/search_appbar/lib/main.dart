@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dual_word.dart';
 import 'lexique_frsa.dart';
 import 'lexique_safr.dart';
 
@@ -27,7 +28,8 @@ class SeachAppBarRecipe extends StatefulWidget {
   _SearchAppBarRecipeState createState() => _SearchAppBarRecipeState();
 }
 
-class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
+class _SearchAppBarRecipeState extends State<SeachAppBarRecipe>
+    with SingleTickerProviderStateMixin {
   final List<LexiqueFRSA> frsa;
   final List<LexiqueSAFR> safr;
   _SearchAppBarDelegate _searchDelegate;
@@ -44,12 +46,27 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
   @override
   void initState() {
     super.initState();
-    tabController = TabController(vsync: this, length: 2);
-    //Initializing search delegate with sorted list of English words
-    //_searchDelegate = _SearchAppBarDelegate(wordList);
+
+    //Initializing search delegate with frsa
+    _searchDelegate = _SearchAppBarDelegate(frsa);
+
+    tabController = TabController(vsync: this, length: 2)
+      ..addListener(() {
+        setState(() {
+          switch (tabController.index) {
+            case 0:
+              _searchDelegate = _SearchAppBarDelegate(frsa);
+              break;
+            case 1:
+              _searchDelegate = _SearchAppBarDelegate(safr);
+              break;
+
+          }
+        });
+      });
   }
 
-  Widget tabController() {
+  Widget tabApp() {
     return new MaterialApp(
       title: 'Wordlist',
       debugShowCheckedModeBanner: false,
@@ -67,16 +84,17 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
                 icon: const Icon(Icons.search),
                 //Don't block the main thread
                 onPressed: () {
-                  setState(() {
-                    var index = DefaultTabController.of(context).index;
-                    if (index == 0) {
-                      wordList = frsa;
-                    } else {
-                      wordList = safr;
-                    }
-                    _searchDelegate = _SearchAppBarDelegate(wordList);
-                    showSearchPage(context, _searchDelegate);
-                  });
+                  showSearchPage(context, _searchDelegate);
+//                  setState(() {
+//                    var index = DefaultTabController.of(context).index;
+//                    if (index == 0) {
+//                      wordList = frsa;
+//                    } else {
+//                      wordList = safr;
+//                    }
+//                    _searchDelegate = _SearchAppBarDelegate(wordList);
+//                    showSearchPage(context, _searchDelegate);
+//                  });
                 },
               ),
             ],
@@ -85,10 +103,12 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
                 Tab(icon: Icon(Icons.free_breakfast)),
                 Tab(icon: Icon(Icons.place)),
               ],
+              controller: tabController,
             ),
             //title: Text('Search Tabs Demo'),
           ),
           body: TabBarView(
+            controller: tabController,
             children: [listViewWords(), listViewWords2()],
           ),
         ),
@@ -96,16 +116,67 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return tabController();
-
+//  @override
+//  Widget build(BuildContext context) {
+//    return tabApp();
+//
 //    return Scaffold(
 //      body: Scrollbar(
 //        //Displaying all English words in list in app's main page
 //        child: tabController(),
 //      ),
 //    );
+//  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text(
+          "Search App",
+          style: TextStyle(
+              color: Colors.white, fontSize: 22.0, fontWeight: FontWeight.w600),
+        ),
+        actions: <Widget>[
+          IconButton(
+            tooltip: 'Search',
+            icon: const Icon(Icons.search),
+            //Don't block the main thread
+            onPressed: () {
+//              setState(() {
+//                var index = tabController;
+//                if (index == 0) {
+//                  wordList = frsa;
+//                } else {
+//                  wordList = safr;
+//                }
+//                _searchDelegate = _SearchAppBarDelegate(wordList);
+//
+//              });
+              setState(() {
+                showSearchPage(context, _searchDelegate);
+              });
+
+            },
+          ),
+
+        ],
+
+        bottom: TabBar(
+          tabs: [
+            Tab(text: "FRSA"),
+            Tab(text: "SAFR",),
+          ],
+          indicatorColor: Colors.white,
+          controller: tabController,
+        ),
+      ),
+      body: TabBarView(
+        controller: tabController,
+        children: [listViewWords(), listViewWords2()],
+      ),
+
+    );
   }
 
   Widget listViewWords() {
@@ -148,13 +219,13 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
 
 //Search delegate
 class _SearchAppBarDelegate extends SearchDelegate<String> {
-  final List<Object> _words;
-  final List<Object> _history;
+  final List<DualWord> _words;
+  final List<DualWord> _history;
 
   _SearchAppBarDelegate(List<Object> words)
       : _words = words,
         //pre-populated history of words
-        _history = <String>['apple', 'orange', 'banana', 'watermelon'],
+       _history = [], //<String>['apple', 'orange', 'banana', 'watermelon'],
         super();
 
   // Setting leading icon for the search bar.
@@ -207,15 +278,15 @@ class _SearchAppBarDelegate extends SearchDelegate<String> {
   // Suggestions list while typing search query - this.query.
   @override
   Widget buildSuggestions(BuildContext context) {
-    final Iterable<String> suggestions = this.query.isEmpty
-        ? _history
-        : _words.where((word) => word.toString().startsWith(query));
+    final Iterable<DualWord> suggestions = this.query.isEmpty
+        ? _words
+        : _words.where((word) => word.isMatching(query));
 
     return _WordSuggestionList(
       query: this.query,
       suggestions: suggestions.toList(),
-      onSelected: (String suggestion) {
-        this.query = suggestion;
+      onSelected: (DualWord suggestion) {
+        this.query = suggestion.getWord();
         this._history.insert(0, suggestion);
         showResults(context);
       },
@@ -250,9 +321,9 @@ class _SearchAppBarDelegate extends SearchDelegate<String> {
 class _WordSuggestionList extends StatelessWidget {
   const _WordSuggestionList({this.suggestions, this.query, this.onSelected});
 
-  final List<String> suggestions;
+  final List<DualWord> suggestions;
   final String query;
-  final ValueChanged<String> onSelected;
+  final ValueChanged<DualWord> onSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -260,17 +331,17 @@ class _WordSuggestionList extends StatelessWidget {
     return ListView.builder(
       itemCount: suggestions.length,
       itemBuilder: (BuildContext context, int i) {
-        final String suggestion = suggestions[i];
+        final DualWord suggestion = suggestions[i];
         return ListTile(
           leading: query.isEmpty ? Icon(Icons.history) : Icon(null),
           // Highlight the substring that matched the query.
           title: RichText(
             text: TextSpan(
-              text: suggestion.substring(0, query.length),
+              text: suggestion.getWord().substring(0, query.length),
               style: textTheme.copyWith(fontWeight: FontWeight.bold),
               children: <TextSpan>[
                 TextSpan(
-                  text: suggestion.substring(query.length),
+                  text: suggestion.getWord().substring(query.length),
                   style: textTheme,
                 ),
               ],
