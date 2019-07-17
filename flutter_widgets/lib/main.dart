@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'homepagedialogflow.dart';
+import 'router.dart' as router;
 
 void main() => runApp(new MyApp());
 
@@ -9,9 +9,10 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'Example Dialogflow Flutter',
       theme: new ThemeData(
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: Colors.blue,
       ),
-      home: new HomePageDialogflow(),
+      onGenerateRoute: router.generateRoute,
+      initialRoute: '/',
     );
   }
 }
