@@ -24,8 +24,7 @@ class _HomeState extends State {
                   gradient: new LinearGradient(
                     colors: [Colors.blue, Colors.cyan],
                   ),
-                  borderRadius: BorderRadius.circular(2)
-              ),
+                  borderRadius: BorderRadius.circular(2)),
               child: Card(
                 borderOnForeground: true,
                 child: ListTile(
@@ -36,8 +35,8 @@ class _HomeState extends State {
                     ),
                   ),
                   subtitle: Text(""),
-                  onTap: () =>
-                      Navigator.pushNamed(context, router.POP_UP_MENU_BUTTON_SF),
+                  onTap: () => Navigator.pushNamed(
+                      context, router.POP_UP_MENU_BUTTON_SF),
                 ),
               ),
             ),
@@ -50,8 +49,7 @@ class _HomeState extends State {
                   gradient: new LinearGradient(
                     colors: [Colors.blue, Colors.cyan],
                   ),
-                  borderRadius: BorderRadius.circular(2)
-              ),
+                  borderRadius: BorderRadius.circular(2)),
               child: Card(
                 borderOnForeground: true,
                 child: ListTile(
@@ -62,36 +60,12 @@ class _HomeState extends State {
                     ),
                   ),
                   subtitle: Text(""),
-                  onTap: () =>
-                      Navigator.pushNamed(context, router.POP_UP_MENU_BUTTON_SL),
+                  onTap: () => Navigator.pushNamed(
+                      context, router.POP_UP_MENU_BUTTON_SL),
                 ),
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.blueAccent,
-                  gradient: new LinearGradient(
-                    colors: [Colors.blue, Colors.cyan],
-                  ),
-                  borderRadius: BorderRadius.circular(2.0)),
-              child: Card(
-                borderOnForeground: true,
-                child: ListTile(
-                  title: Center(
-                    child: Text(
-                      "Image in ListView",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                  subtitle: Text(""),
-                  onTap: () => Navigator.pushNamed(context, router.LIST_IMAGES),
-                ),
-              ),
-            ),
-          )
         ],
       ),
     );

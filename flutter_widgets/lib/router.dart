@@ -3,12 +3,10 @@ import 'home.dart';
 import 'unknown.dart';
 import 'menus/sf_popupmenubutton.dart';
 import 'menus/sl_popupmenubutton.dart';
-import 'lists/list_images.dart';
 
 const String HOME = "/";
 const String POP_UP_MENU_BUTTON_SL = 'popupMenuButton_sl';
 const String POP_UP_MENU_BUTTON_SF = 'popupMenuButton_sf';
-const String LIST_IMAGES = 'LIST_IMAGES';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -24,10 +22,6 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
 
     case POP_UP_MENU_BUTTON_SL:
       return MaterialPageRoute(builder: (context) => PopupMenuButtonWidgetStateLess());
-      break;
-
-    case LIST_IMAGES:
-      return MaterialPageRoute(builder: (context) => ImageListView());
       break;
 
     default:

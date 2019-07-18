@@ -8,16 +8,18 @@ class PopupMenuButtonWidgetStateFul extends StatefulWidget {
 }
 
 class _PopupMenuButtonWidgetState extends State {
+  String choice = "Click Settings to make your selection";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PopupMenuButton Widget'),
+        title: Text('PopupMenuButton (Stateful)'),
         actions: <Widget>[
           PopupMenuButton(
-            onSelected: (NavLinks value) {
+            onSelected: (NavLinks link) {
               setState(() {
-                print(value);
+                choice = displayString(link);
               });
             },
             itemBuilder: (BuildContext context) {
@@ -30,6 +32,9 @@ class _PopupMenuButtonWidgetState extends State {
             },
           ),
         ],
+      ),
+      body: Center(
+        child: Text(choice, style: TextStyle(fontSize: 30),),
       ),
     );
   }
@@ -50,6 +55,10 @@ class _PopupMenuButtonWidgetState extends State {
       case NavLinks.Jobs:
         return "Jobs";
         break;
+
+      default:
+        return "";
+
     }
   }
 }
