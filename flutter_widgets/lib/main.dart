@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Example Dialogflow Flutter',
+      title: 'Flutter Widgets',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
