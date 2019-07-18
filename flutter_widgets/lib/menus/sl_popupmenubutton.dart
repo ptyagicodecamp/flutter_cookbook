@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 enum NavLinks { Home, Github, Videos, Jobs }
 
 class PopupMenuButtonWidgetStateLess extends StatelessWidget {
+  String choice = "Click Settings to make your selection";
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +24,15 @@ class PopupMenuButtonWidgetStateLess extends StatelessWidget {
           ),
         ],
       ),
+      body: Center(
+        child: Text(choice, style: TextStyle(fontSize: 40),),
+      ),
     );
   }
 
   void optionSelected(NavLinks link) {
     print(link);
+    choice = link.toString();
   }
 
   String displayString(NavLinks link) {
@@ -46,6 +51,9 @@ class PopupMenuButtonWidgetStateLess extends StatelessWidget {
       case NavLinks.Jobs:
         return "Jobs";
         break;
+
+      default:
+        return "";
     }
   }
 }
