@@ -1,16 +1,10 @@
-# flutter_widgets
+### How to fix material icons for Flutter Web (Hummingbird).
 
-A sample application to demonstrate Flutter widgets.
+Read article here: https://ptyagicodecamp.github.io/how-to-fix-material-icons-for-flutter-web-hummingbird.html
 
-## Getting Started
+Source code: https://github.com/ptyagicodecamp/flutter_cookbook/tree/popupmenubutton-web/flutter_widgets
 
-This project is a starting point for a Flutter application.
+Follow me at twitter: @ptyagi13
+Medium: @ptyagicodecamp
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#material-icons, #hummingbird, #design, #web, #flutter
