@@ -13,9 +13,18 @@ class PopupMenuButtonWidgetStateLess extends StatelessWidget {
         title: Text('PopupMenuButton (Stateless)'),
         actions: <Widget>[
           PopupMenuButton(
-            onSelected: (value) => Navigator.pushNamed(context, WEBVIEW,
-                arguments: WebViewArguments(
-                    title: displayString(value), url: linkUrl(value))),
+            onSelected: (value) {
+              //print the selected option
+              print(value);
+
+              //Update the current choice.
+              //However, this choice won't be updated in body section since it's a Stateless widget.
+              choice = displayString(value);
+
+              Navigator.pushNamed(context, WEBVIEW,
+                  arguments: WebViewArguments(
+                      title: displayString(value), url: linkUrl(value)));
+            },
             itemBuilder: (BuildContext context) {
               return NavLinks.values.map((link) {
                 return PopupMenuItem(
@@ -29,16 +38,11 @@ class PopupMenuButtonWidgetStateLess extends StatelessWidget {
       ),
       body: Center(
         child: Text(
+          //Print the current choice
           choice,
           style: TextStyle(fontSize: 30),
         ),
       ),
     );
   }
-
-  void optionSelected(NavLinks link) {
-    print(link);
-    choice = link.toString();
-  }
-
 }

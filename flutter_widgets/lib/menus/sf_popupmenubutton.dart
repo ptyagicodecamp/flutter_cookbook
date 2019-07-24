@@ -16,9 +16,13 @@ class _PopupMenuButtonWidgetState extends State {
         title: Text('PopupMenuButton (Stateful)'),
         actions: <Widget>[
           PopupMenuButton(
-            onSelected: (NavLinks link) {
+            onSelected: (NavLinks value) {
               setState(() {
-                choice = displayString(link);
+                //print the selected option
+                print(value);
+
+                //Update the current choice.
+                choice = displayString(value);
               });
             },
             itemBuilder: (BuildContext context) {
