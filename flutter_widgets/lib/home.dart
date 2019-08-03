@@ -30,13 +30,13 @@ class _HomeState extends State {
                 child: ListTile(
                   title: Center(
                     child: Text(
-                      "Popup Menu Button (Stateful)",
+                      "Swipe Animation",
                       style: TextStyle(fontSize: 20),
                     ),
                   ),
                   subtitle: Text(""),
                   onTap: () => Navigator.pushNamed(
-                      context, router.POP_UP_MENU_BUTTON_SF),
+                      context, router.SWIPE_ANIM),
                 ),
               ),
             ),
@@ -61,7 +61,7 @@ class _HomeState extends State {
                   ),
                   subtitle: Text(""),
                   onTap: () => Navigator.pushNamed(
-                      context, router.POP_UP_MENU_BUTTON_SL),
+                      context, router.SWIPE_ANIM),
                 ),
               ),
             ),
