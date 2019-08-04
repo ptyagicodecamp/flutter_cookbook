@@ -1,4 +1,4 @@
-import 'package:flutter_web/material.dart';
+import 'package:flutter/material.dart';
 import 'router.dart' as router;
 
 class Home extends StatefulWidget {

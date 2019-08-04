@@ -1,4 +1,5 @@
-import 'package:flutter_web/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import '../utils/images.dart';
 import 'card.dart';
 
@@ -26,7 +27,7 @@ class _SwipeAnimationDemo extends State with TickerProviderStateMixin {
     super.initState();
 
     _animationController = AnimationController(
-        duration: Duration(milliseconds: 1000), vsync: this);
+        duration: Duration(milliseconds: 100), vsync: this);
 
     rotate = Tween<double>(
       begin: -0.0,
@@ -112,7 +113,9 @@ class _SwipeAnimationDemo extends State with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    timeDilation = 0.4;
+    //timeDilation = 0.4;
+
+    int itemsCount = items.length;
 
     double initalBottom = 25.0;
     double posCardInBack = initalBottom + (items.length - 1) * 10 + 10;
@@ -123,23 +126,42 @@ class _SwipeAnimationDemo extends State with TickerProviderStateMixin {
         title: Text('Swipe Animation'),
       ),
       body: Container(
-        color: Colors.blue,
+        color: Colors.white,
         alignment: Alignment.center,
-        child: items.length > 0 ? Stack(
-          alignment: AlignmentDirectional.center,
-          children: items.map((item) {
-            //last card
-            if (items.indexOf(item) == items.length - 1) {
-              double skew = rotate.value < -10 ? 0.1 : 0.0;
-              return TopCard(context, item, 0, right.value, bottom.value, 0, width.value, rotate.value, skew, flag, selectItem, dismissItem, swipeRight, swipeLeft);
-            } else {
-              posCardInBack = posCardInBack - 10;
-              widhtCardInBack = widhtCardInBack + 10;
-              return ImmutableCard(context, item, width.value, null, null);
-            }
-          }).toList(),
+        child: itemsCount > 0
+            ? Stack(
+                alignment: AlignmentDirectional.center,
+                children: items.map((item) {
+                  //last card
+                  if (items.indexOf(item) == itemsCount - 1) {
 
-        ) : Text("All Done !", style: TextStyle(color: Colors.white, fontSize: 35),),
+                    return TopCard(
+                        context,
+                        item,
+                        0,
+                        right.value,
+                        bottom.value,
+                        0,
+                        widhtCardInBack + 10,
+                        rotate.value,
+                        rotate.value < -10 ? 0.1 : 0.0,
+                        flag,
+                        selectItem,
+                        dismissItem,
+                        swipeRight,
+                        swipeLeft);
+                  } else {
+                    posCardInBack = posCardInBack - 10;
+                    widhtCardInBack = widhtCardInBack + 10;
+                    return positionedImmutableCard(
+                        context, item, widhtCardInBack, posCardInBack);
+                  }
+                }).toList(),
+              )
+            : Text(
+                "All Done !",
+                style: TextStyle(color: Colors.white, fontSize: 35),
+              ),
       ),
     );
   }

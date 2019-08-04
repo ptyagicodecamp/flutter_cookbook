@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter_web/material.dart';
+import 'package:flutter/material.dart';
 
 Positioned TopCard(
     BuildContext context,
@@ -20,8 +20,9 @@ Positioned TopCard(
 
   return Positioned(
     bottom: 100.0 + bottom,
-    left: flag == 1 ? right != 0.0 ? right : null : null,
     right: flag == 0 ? right != 0.0 ? right : null : null,
+    left: flag == 1 ? right != 0.0 ? right : null : null,
+
     child: Dismissible(
       key: Key(Random().toString()),
       crossAxisEndOffset: -0.3,
@@ -38,7 +39,7 @@ Positioned TopCard(
           turns: AlwaysStoppedAnimation(
               flag == 0 ? rotation / 360 : -rotation / 360),
           child: Hero(
-            tag: 'card-' + Random().toString(),
+            tag: 'card',
             child: GestureDetector(
               child: ImmutableCard(context, decorationImage, width, rightSwipe, leftSwipe),
             ),
@@ -84,7 +85,9 @@ Card ImmutableCard(BuildContext context, DecorationImage decorationImage,
               children: <Widget>[
                 FlatButton(
                   padding: const EdgeInsets.all(0.0),
-                  onPressed: () => leftSwipe(),
+                  onPressed: () => {
+                    if (leftSwipe != null) leftSwipe()
+                  },
                   child: Container(
                     height: 60.0,
                     width: 130.0,
@@ -101,7 +104,9 @@ Card ImmutableCard(BuildContext context, DecorationImage decorationImage,
                 ),
                 FlatButton(
                   padding: const EdgeInsets.all(0.0),
-                  onPressed: () => rightSwipe(),
+                  onPressed: () => {
+                    if (rightSwipe != null) rightSwipe()
+                  },
                   child: Container(
                     height: 60.0,
                     width: 130.0,
@@ -122,5 +127,81 @@ Card ImmutableCard(BuildContext context, DecorationImage decorationImage,
         ],
       ),
     ),
+  );
+}
+
+Positioned positionedImmutableCard(BuildContext context, DecorationImage decorationImage,
+    double cardWidth, double bottom) {
+  Size screenSize = MediaQuery.of(context).size;
+  return Positioned(
+    bottom: 100.0 + bottom,
+    child: new Card(
+      color: Colors.transparent,
+      elevation: 4.0,
+      child: new Container(
+        alignment: Alignment.center,
+        width: screenSize.width / 1.2 + cardWidth,
+        height: screenSize.height / 1.7,
+        decoration: new BoxDecoration(
+          color: new Color.fromRGBO(121, 114, 173, 1.0),
+          borderRadius: new BorderRadius.circular(8.0),
+        ),
+        child: new Column(
+          children: <Widget>[
+            new Container(
+              width: screenSize.width / 1.2 + cardWidth,
+              height: screenSize.height / 2.2,
+              decoration: new BoxDecoration(
+                borderRadius: new BorderRadius.only(
+                    topLeft: new Radius.circular(8.0),
+                    topRight: new Radius.circular(8.0)),
+                image: decorationImage,
+              ),
+            ),
+            new Container(
+                width: screenSize.width / 1.2 + cardWidth,
+                height: screenSize.height / 1.7 - screenSize.height / 2.2,
+                alignment: Alignment.center,
+                child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    new FlatButton(
+                        padding: new EdgeInsets.all(0.0),
+                        onPressed: () {},
+                        child: new Container(
+                          height: 60.0,
+                          width: 130.0,
+                          alignment: Alignment.center,
+                          decoration: new BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: new BorderRadius.circular(60.0),
+                          ),
+                          child: new Text(
+                            "DON'T",
+                            style: new TextStyle(color: Colors.white),
+                          ),
+                        )),
+                    new FlatButton(
+                        padding: new EdgeInsets.all(0.0),
+                        onPressed: () {},
+                        child: new Container(
+                          height: 60.0,
+                          width: 130.0,
+                          alignment: Alignment.center,
+                          decoration: new BoxDecoration(
+                            color: Colors.cyan,
+                            borderRadius: new BorderRadius.circular(60.0),
+                          ),
+                          child: new Text(
+                            "I'M IN",
+                            style: new TextStyle(color: Colors.white),
+                          ),
+                        ))
+                  ],
+                ))
+          ],
+        ),
+      ),
+    )//ImmutableCard(context, decorationImage, width, null, null),
   );
 }
