@@ -1,10 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import '../utils/items.dart';
 
 Positioned TopCard(
     BuildContext context,
-    DecorationImage decorationImage,
+    CardItem cardItem,
     double left,
     double right,
     double bottom,
@@ -12,7 +13,6 @@ Positioned TopCard(
     double width,
     double rotation,
     double skew,
-    int flag,
     Function imageSelected,
     Function imageDismissed,
     Function rightSwipe,
@@ -20,28 +20,26 @@ Positioned TopCard(
 
   return Positioned(
     bottom: 100.0 + bottom,
-    right: flag == 0 ? right != 0.0 ? right : null : null,
-    left: flag == 1 ? right != 0.0 ? right : null : null,
 
     child: Dismissible(
       key: Key(Random().toString()),
       crossAxisEndOffset: -0.3,
       onDismissed: (DismissDirection direction) {
         if (direction == DismissDirection.endToStart)
-          imageDismissed(decorationImage);
+          imageDismissed(cardItem);
         else
-          imageSelected(decorationImage);
+          imageSelected(cardItem);
       },
       child: Transform(
-        alignment: flag == 0 ? Alignment.bottomRight : Alignment.bottomLeft,
+        alignment: isHerbivorous(cardItem) ? Alignment.bottomRight : Alignment.bottomLeft,
         transform: Matrix4.skewX(skew),
         child: RotationTransition(
           turns: AlwaysStoppedAnimation(
-              flag == 0 ? rotation / 360 : -rotation / 360),
+              isHerbivorous(cardItem) == 0 ? rotation / 360 : - rotation / 360),
           child: Hero(
             tag: 'card',
             child: GestureDetector(
-              child: ImmutableCard(context, decorationImage, width, rightSwipe, leftSwipe),
+              child: ImmutableCard(context, cardItem, width, rightSwipe, leftSwipe),
             ),
           ),
         ),
@@ -50,9 +48,12 @@ Positioned TopCard(
   );
 }
 
-Card ImmutableCard(BuildContext context, DecorationImage decorationImage,
+Card ImmutableCard(BuildContext context, CardItem cardItem,
     double width, Function rightSwipe, Function leftSwipe) {
   Size screenSize = MediaQuery.of(context).size;
+  DecorationImage decorationImage = DecorationImage(
+      image: AssetImage(cardItem.image),
+      fit: BoxFit.fill);
 
   return Card(
     color: Colors.transparent,
@@ -86,7 +87,7 @@ Card ImmutableCard(BuildContext context, DecorationImage decorationImage,
                 FlatButton(
                   padding: const EdgeInsets.all(0.0),
                   onPressed: () => {
-                    if (leftSwipe != null) leftSwipe()
+                    if (leftSwipe != null) leftSwipe(cardItem)
                   },
                   child: Container(
                     height: 60.0,
@@ -105,7 +106,7 @@ Card ImmutableCard(BuildContext context, DecorationImage decorationImage,
                 FlatButton(
                   padding: const EdgeInsets.all(0.0),
                   onPressed: () => {
-                    if (rightSwipe != null) rightSwipe()
+                    if (rightSwipe != null) rightSwipe(cardItem)
                   },
                   child: Container(
                     height: 60.0,
@@ -130,78 +131,11 @@ Card ImmutableCard(BuildContext context, DecorationImage decorationImage,
   );
 }
 
-Positioned positionedImmutableCard(BuildContext context, DecorationImage decorationImage,
+Positioned positionedImmutableCard(BuildContext context, CardItem cardItem,
     double cardWidth, double bottom) {
-  Size screenSize = MediaQuery.of(context).size;
+
   return Positioned(
     bottom: 100.0 + bottom,
-    child: new Card(
-      color: Colors.transparent,
-      elevation: 4.0,
-      child: new Container(
-        alignment: Alignment.center,
-        width: screenSize.width / 1.2 + cardWidth,
-        height: screenSize.height / 1.7,
-        decoration: new BoxDecoration(
-          color: new Color.fromRGBO(121, 114, 173, 1.0),
-          borderRadius: new BorderRadius.circular(8.0),
-        ),
-        child: new Column(
-          children: <Widget>[
-            new Container(
-              width: screenSize.width / 1.2 + cardWidth,
-              height: screenSize.height / 2.2,
-              decoration: new BoxDecoration(
-                borderRadius: new BorderRadius.only(
-                    topLeft: new Radius.circular(8.0),
-                    topRight: new Radius.circular(8.0)),
-                image: decorationImage,
-              ),
-            ),
-            new Container(
-                width: screenSize.width / 1.2 + cardWidth,
-                height: screenSize.height / 1.7 - screenSize.height / 2.2,
-                alignment: Alignment.center,
-                child: new Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    new FlatButton(
-                        padding: new EdgeInsets.all(0.0),
-                        onPressed: () {},
-                        child: new Container(
-                          height: 60.0,
-                          width: 130.0,
-                          alignment: Alignment.center,
-                          decoration: new BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: new BorderRadius.circular(60.0),
-                          ),
-                          child: new Text(
-                            "DON'T",
-                            style: new TextStyle(color: Colors.white),
-                          ),
-                        )),
-                    new FlatButton(
-                        padding: new EdgeInsets.all(0.0),
-                        onPressed: () {},
-                        child: new Container(
-                          height: 60.0,
-                          width: 130.0,
-                          alignment: Alignment.center,
-                          decoration: new BoxDecoration(
-                            color: Colors.cyan,
-                            borderRadius: new BorderRadius.circular(60.0),
-                          ),
-                          child: new Text(
-                            "I'M IN",
-                            style: new TextStyle(color: Colors.white),
-                          ),
-                        ))
-                  ],
-                ))
-          ],
-        ),
-      ),
-    )//ImmutableCard(context, decorationImage, width, null, null),
+    child: ImmutableCard(context, cardItem, cardWidth, null, null),
   );
 }

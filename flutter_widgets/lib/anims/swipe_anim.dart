@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import '../utils/images.dart';
+import '../utils/items.dart';
 import 'card.dart';
 
 List images = [herb1, carn1, herb2, carn2];
@@ -20,8 +20,7 @@ class _SwipeAnimationDemo extends State with TickerProviderStateMixin {
   Animation<double> width;
   Animation<double> rotate;
 
-  List items = images;
-  List selectedImages = [];
+  List<CardItem> items = cardItems;
 
   void initState() {
     super.initState();
@@ -78,42 +77,31 @@ class _SwipeAnimationDemo extends State with TickerProviderStateMixin {
     } on TickerCanceled {}
   }
 
-  dismissItem(DecorationImage image) {
+  dismissItem(CardItem cardItem) {
     setState(() {
-      items.remove(image);
+      items.remove(cardItem);
     });
   }
 
-  selectItem(DecorationImage image) {
+  selectItem(CardItem cardItem) {
     setState(() {
-      items.remove(image);
-      selectedImages.add(image);
+      items.remove(cardItem);
     });
   }
 
-  swipeRight() {
-    if (flag == 0) {
-      setState(() {
-        flag = 1;
-      });
-
+  swipeRight(CardItem cardItem) {
+    if (isHerbivorous(cardItem))
       _swipeAnimation();
-    }
   }
 
-  swipeLeft() {
-    if (flag == 1) {
-      setState(() {
-        flag = 0;
-      });
-
+  swipeLeft(CardItem cardItem) {
+    if (isCarnivorous(cardItem))
       _swipeAnimation();
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    //timeDilation = 0.4;
+    timeDilation = 1;
 
     int itemsCount = items.length;
 
@@ -145,7 +133,6 @@ class _SwipeAnimationDemo extends State with TickerProviderStateMixin {
                         widhtCardInBack + 10,
                         rotate.value,
                         rotate.value < -10 ? 0.1 : 0.0,
-                        flag,
                         selectItem,
                         dismissItem,
                         swipeRight,
