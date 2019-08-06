@@ -17,7 +17,6 @@ DecorationImage carn2 = DecorationImage(
     image: AssetImage('assets/images/carnivorous_cheetah.jpg'),
     fit: BoxFit.fill);
 
-enum AnimalType {herbivorous, carnivorous}
 
 //choice at right side
 bool isHerbivorous(CardItem cardItem) {

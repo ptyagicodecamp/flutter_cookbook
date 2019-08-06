@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import '../utils/items.dart';
 import 'card.dart';
+//Reference only
+List images = [herb1, carn1, herb2, carn2];
 
-//reference code
-//List images = [herb1, carn1, herb2, carn2];
-
-class SwipeAnimationDemo extends StatefulWidget {
+class SwipeAnimRotateDemo extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _SwipeAnimationDemo();
 }
@@ -14,9 +13,8 @@ class SwipeAnimationDemo extends StatefulWidget {
 class _SwipeAnimationDemo extends State with TickerProviderStateMixin {
   AnimationController _animationController;
 
- // int flag = 0;
+  int flag = 0;
 
-  Animation<double> left;
   Animation<double> right;
   Animation<double> bottom;
   Animation<double> width;
@@ -51,12 +49,6 @@ class _SwipeAnimationDemo extends State with TickerProviderStateMixin {
     right = Tween<double>(
       begin: 0.0,
       end: 400.0,
-    ).animate(
-        CurvedAnimation(parent: _animationController, curve: Curves.ease));
-
-    left = Tween<double>(
-      begin: 0.0,
-      end: -400.0,
     ).animate(
         CurvedAnimation(parent: _animationController, curve: Curves.ease));
 
@@ -102,12 +94,9 @@ class _SwipeAnimationDemo extends State with TickerProviderStateMixin {
       _swipeAnimation();
   }
 
-  swipeLeft(CardItem cardItem) async {
-    if (isCarnivorous(cardItem)) {
-      try {
-        await _animationController.reverse();
-      } on TickerCanceled {}
-    }
+  swipeLeft(CardItem cardItem) {
+    if (isCarnivorous(cardItem))
+      _swipeAnimation();
   }
 
   @override
@@ -137,7 +126,7 @@ class _SwipeAnimationDemo extends State with TickerProviderStateMixin {
                     return TopCard(
                         context,
                         item,
-                        left.value,
+                        0,
                         right.value,
                         bottom.value,
                         0,

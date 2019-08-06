@@ -20,6 +20,8 @@ Positioned TopCard(
 
   return Positioned(
     bottom: 100.0 + bottom,
+    right: isHerbivorous(cardItem) ? right != 0.0 ? right : null : null,
+    left: isCarnivorous(cardItem) ? left != 0.0 ? left : null : null,
 
     child: Dismissible(
       key: Key(Random().toString()),
@@ -35,13 +37,14 @@ Positioned TopCard(
         transform: Matrix4.skewX(skew),
         child: RotationTransition(
           turns: AlwaysStoppedAnimation(
-              isHerbivorous(cardItem) == 0 ? rotation / 360 : - rotation / 360),
-          child: Hero(
-            tag: 'card',
-            child: GestureDetector(
-              child: ImmutableCard(context, cardItem, width, rightSwipe, leftSwipe),
-            ),
-          ),
+              isHerbivorous(cardItem) == 0 ? rotation / 360 : -rotation / 360),
+            child: ImmutableCard(context, cardItem, width, rightSwipe, leftSwipe),
+//          child: Hero(
+//            tag: 'card',
+//            child: GestureDetector(
+//              child: ImmutableCard(context, cardItem, width, rightSwipe, leftSwipe),
+//            ),
+//          ),
         ),
       ),
     ),
