@@ -6,17 +6,14 @@ DecorationImage herb1 = DecorationImage(
     fit: BoxFit.fill);
 
 DecorationImage herb2 = DecorationImage(
-    image: AssetImage('assets/images/herbivorous_okapi.jpg'),
-    fit: BoxFit.fill);
+    image: AssetImage('assets/images/herbivorous_okapi.jpg'), fit: BoxFit.fill);
 
 DecorationImage carn1 = DecorationImage(
-    image: AssetImage('assets/images/carnivorous_cat.jpg'),
-    fit: BoxFit.fill);
+    image: AssetImage('assets/images/carnivorous_cat.jpg'), fit: BoxFit.fill);
 
 DecorationImage carn2 = DecorationImage(
     image: AssetImage('assets/images/carnivorous_cheetah.jpg'),
     fit: BoxFit.fill);
-
 
 //choice at right side
 bool isHerbivorous(CardItem cardItem) {
@@ -28,8 +25,8 @@ bool isCarnivorous(CardItem cardItem) {
   return cardItem.animalType.contains("carnivorous");
 }
 
-final List<CardItem> cardItems = CardItem.fromData(json.decode(Samples.jsonData()));
-
+final List<CardItem> cardItems =
+    CardItem.fromData(json.decode(Samples.jsonData()));
 
 class Samples {
   static String jsonData() {
@@ -43,11 +40,10 @@ class CardItem {
   final String image;
   final String animalType;
 
-
   CardItem(this.title, this.description, this.image, this.animalType);
 
-  CardItem.fromMap(Map<String, dynamic> data):
-        title = data["title"],
+  CardItem.fromMap(Map<String, dynamic> data)
+      : title = data["title"],
         description = data["description"],
         image = data["image"],
         animalType = data['animalType'];
@@ -55,5 +51,4 @@ class CardItem {
   static List<CardItem> fromData(List<dynamic> data) {
     return data.map((item) => CardItem.fromMap(item)).toList();
   }
-
 }

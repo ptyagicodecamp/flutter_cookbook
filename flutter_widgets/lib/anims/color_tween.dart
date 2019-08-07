@@ -1,10 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-
 import '../utils/items.dart';
-
-List images = [herb1];
 
 class ColorTweenAnimationDemo extends StatefulWidget {
   @override
@@ -12,10 +7,8 @@ class ColorTweenAnimationDemo extends StatefulWidget {
       new _ColorTweenAnimationDemoState();
 }
 
-class _ColorTweenAnimationDemoState
-    extends State<ColorTweenAnimationDemo>
+class _ColorTweenAnimationDemoState extends State<ColorTweenAnimationDemo>
     with SingleTickerProviderStateMixin {
-
   AnimationController _controller;
   Animation<Color> animation;
 
@@ -35,8 +28,6 @@ class _ColorTweenAnimationDemoState
       ..addListener(() {
         setState(() {});
       });
-
-    //_controller.forward();
   }
 
   @override
