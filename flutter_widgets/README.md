@@ -1,10 +1,12 @@
-### How to fix material icons for Flutter Web (Hummingbird).
+### Using ColorTween in Flutter app
 
-Read article here: https://ptyagicodecamp.github.io/how-to-fix-material-icons-for-flutter-web-hummingbird.html
+Read article here: https://ptyagicodecamp.github.io/using-colortween-in-flutter-app.html
 
-Source code: https://github.com/ptyagicodecamp/flutter_cookbook/tree/popupmenubutton-web/flutter_widgets
+* Native (Android / iOS) recipe source code is available [here](https://github.com/ptyagicodecamp/flutter_cookbook/tree/animations-native/flutter_widgets)
+
+* Web (Hummingbird) recipe source code is available [here](https://github.com/ptyagicodecamp/flutter_cookbook/tree/animations-web/flutter_widgets)
 
 Follow me at twitter: @ptyagi13
 Medium: @ptyagicodecamp
 
-#material-icons, #hummingbird, #design, #web, #flutter
+#animations, #hummingbird, #design, #web, #flutter, #android, #ios, #tweens, #color-tweens
