@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dual_word.dart';
-import 'lexique_frsa.dart';
-import 'lexique_safr.dart';
+import 'englist_to_hindi.dart';
+import 'hindi_to_english.dart';
 
 void main() => runApp(MyApp());
 
@@ -30,17 +30,17 @@ class SeachAppBarRecipe extends StatefulWidget {
 
 class _SearchAppBarRecipeState extends State<SeachAppBarRecipe>
     with SingleTickerProviderStateMixin {
-  final List<LexiqueFRSA> frsa;
-  final List<LexiqueSAFR> safr;
+  final List<EnglishToHindi> english;
+  final List<HindiToEnglish> hindi;
   _SearchAppBarDelegate _searchDelegate;
 
-  List<Object> wordList;
+  //List<Object> wordList;
   TabController tabController;
 
   //Initializing with sorted list of english words
   _SearchAppBarRecipeState()
-      : frsa = listfrsa,
-        safr = listsafr,
+      : english = listfrsa,
+        hindi = listsafr,
         super();
 
   @override
@@ -48,17 +48,17 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe>
     super.initState();
 
     //Initializing search delegate with frsa
-    _searchDelegate = _SearchAppBarDelegate(frsa);
+    _searchDelegate = _SearchAppBarDelegate(english);
 
     tabController = TabController(vsync: this, length: 2)
       ..addListener(() {
         setState(() {
           switch (tabController.index) {
             case 0:
-              _searchDelegate = _SearchAppBarDelegate(frsa);
+              _searchDelegate = _SearchAppBarDelegate(english);
               break;
             case 1:
-              _searchDelegate = _SearchAppBarDelegate(safr);
+              _searchDelegate = _SearchAppBarDelegate(hindi);
               break;
 
           }
@@ -85,16 +85,6 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe>
                 //Don't block the main thread
                 onPressed: () {
                   showSearchPage(context, _searchDelegate);
-//                  setState(() {
-//                    var index = DefaultTabController.of(context).index;
-//                    if (index == 0) {
-//                      wordList = frsa;
-//                    } else {
-//                      wordList = safr;
-//                    }
-//                    _searchDelegate = _SearchAppBarDelegate(wordList);
-//                    showSearchPage(context, _searchDelegate);
-//                  });
                 },
               ),
             ],
@@ -116,18 +106,6 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe>
     );
   }
 
-//  @override
-//  Widget build(BuildContext context) {
-//    return tabApp();
-//
-//    return Scaffold(
-//      body: Scrollbar(
-//        //Displaying all English words in list in app's main page
-//        child: tabController(),
-//      ),
-//    );
-//  }
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -143,16 +121,6 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe>
             icon: const Icon(Icons.search),
             //Don't block the main thread
             onPressed: () {
-//              setState(() {
-//                var index = tabController;
-//                if (index == 0) {
-//                  wordList = frsa;
-//                } else {
-//                  wordList = safr;
-//                }
-//                _searchDelegate = _SearchAppBarDelegate(wordList);
-//
-//              });
               setState(() {
                 showSearchPage(context, _searchDelegate);
               });
@@ -164,8 +132,8 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe>
 
         bottom: TabBar(
           tabs: [
-            Tab(text: "FRSA"),
-            Tab(text: "SAFR",),
+            Tab(text: "English"),
+            Tab(text: "Hindi",),
           ],
           indicatorColor: Colors.white,
           controller: tabController,
@@ -181,9 +149,9 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe>
 
   Widget listViewWords() {
     return ListView.builder(
-      itemCount: frsa.length,
+      itemCount: english.length,
       itemBuilder: (context, idx) => ListTile(
-        title: Text(frsa[idx].frFRSA),
+        title: Text(english[idx].english),
         onTap: () {},
       ),
     );
@@ -191,9 +159,9 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe>
 
   Widget listViewWords2() {
     return ListView.builder(
-      itemCount: safr.length,
+      itemCount: hindi.length,
       itemBuilder: (context, idx) => ListTile(
-        title: Text(safr[idx].saSAFR),
+        title: Text(hindi[idx].hindi),
         onTap: () {},
       ),
     );
@@ -319,10 +287,11 @@ class _SearchAppBarDelegate extends SearchDelegate<String> {
 
 // Suggestions list widget displayed in the search page.
 class _WordSuggestionList extends StatelessWidget {
-  const _WordSuggestionList({this.suggestions, this.query, this.onSelected});
+  const _WordSuggestionList({this.suggestions, this.query, this.otherWord, this.onSelected});
 
   final List<DualWord> suggestions;
   final String query;
+  final String otherWord;
   final ValueChanged<DualWord> onSelected;
 
   @override
