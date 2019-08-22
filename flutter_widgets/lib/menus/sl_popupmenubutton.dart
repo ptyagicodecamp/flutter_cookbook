@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-enum NavLinks { Home, Github, Videos, Jobs }
+import 'package:flutter_widgets/router.dart';
+import 'webview.dart';
+import 'util.dart';
 
 class PopupMenuButtonWidgetStateLess extends StatelessWidget {
   String choice = "Click Settings to make your selection";
@@ -9,10 +10,21 @@ class PopupMenuButtonWidgetStateLess extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PopupMenuButton Widget'),
+        title: Text('PopupMenuButton (Stateless)'),
         actions: <Widget>[
           PopupMenuButton(
-            onSelected: optionSelected,
+            onSelected: (value) {
+              //print the selected option
+              print(value);
+
+              //Update the current choice.
+              //However, this choice won't be updated in body section since it's a Stateless widget.
+              choice = displayString(value);
+
+              Navigator.pushNamed(context, WEBVIEW,
+                  arguments: WebViewArguments(
+                      title: displayString(value), url: linkUrl(value)));
+            },
             itemBuilder: (BuildContext context) {
               return NavLinks.values.map((link) {
                 return PopupMenuItem(
@@ -25,35 +37,12 @@ class PopupMenuButtonWidgetStateLess extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Text(choice, style: TextStyle(fontSize: 40),),
+        child: Text(
+          //Print the current choice
+          choice,
+          style: TextStyle(fontSize: 30),
+        ),
       ),
     );
-  }
-
-  void optionSelected(NavLinks link) {
-    print(link);
-    choice = link.toString();
-  }
-
-  String displayString(NavLinks link) {
-    switch (link) {
-      case NavLinks.Home:
-        return "Home";
-        break;
-
-      case NavLinks.Github:
-        return "Github";
-        break;
-      case NavLinks.Videos:
-        return "Videos";
-        break;
-
-      case NavLinks.Jobs:
-        return "Jobs";
-        break;
-
-      default:
-        return "";
-    }
   }
 }

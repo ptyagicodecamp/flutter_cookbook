@@ -3,12 +3,12 @@ import 'home.dart';
 import 'unknown.dart';
 import 'menus/sf_popupmenubutton.dart';
 import 'menus/sl_popupmenubutton.dart';
-import 'lists/list_images.dart';
+import 'menus/webview.dart';
 
 const String HOME = "/";
-const String POP_UP_MENU_BUTTON_SL = 'popupMenuButton_sl';
-const String POP_UP_MENU_BUTTON_SF = 'popupMenuButton_sf';
-const String LIST_IMAGES = 'LIST_IMAGES';
+const String POP_UP_MENU_BUTTON_SL = '/popupMenuButton_sl';
+const String POP_UP_MENU_BUTTON_SF = '/popupMenuButton_sf';
+const String WEBVIEW = '/webview';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -26,8 +26,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(builder: (context) => PopupMenuButtonWidgetStateLess());
       break;
 
-    case LIST_IMAGES:
-      return MaterialPageRoute(builder: (context) => ImageListView());
+    case WEBVIEW:
+      return MaterialPageRoute(builder: (context) {
+        final WebViewArguments args = routeSettings.arguments;
+        return MyWebView(title: args.title, url: args.url);
+      });
       break;
 
     default:

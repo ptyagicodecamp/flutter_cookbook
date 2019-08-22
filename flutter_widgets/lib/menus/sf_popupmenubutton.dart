@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-enum NavLinks { Home, Github, Videos, Jobs }
+import 'util.dart';
 
 class PopupMenuButtonWidgetStateFul extends StatefulWidget {
   @override
@@ -14,12 +13,16 @@ class _PopupMenuButtonWidgetState extends State {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PopupMenuButton Widget'),
+        title: Text('PopupMenuButton (Stateful)'),
         actions: <Widget>[
           PopupMenuButton(
-            onSelected: (NavLinks link) {
+            onSelected: (NavLinks value) {
               setState(() {
-                choice = displayString(link);
+                //print the selected option
+                print(value);
+
+                //Update the current choice.
+                choice = displayString(value);
               });
             },
             itemBuilder: (BuildContext context) {
@@ -34,31 +37,8 @@ class _PopupMenuButtonWidgetState extends State {
         ],
       ),
       body: Center(
-        child: Text(choice, style: TextStyle(fontSize: 35),),
+        child: Text(choice, style: TextStyle(fontSize: 30),),
       ),
     );
-  }
-
-  String displayString(NavLinks link) {
-    switch(link) {
-      case NavLinks.Home:
-        return "Home";
-        break;
-
-      case NavLinks.Github:
-        return "Github";
-        break;
-      case NavLinks.Videos:
-        return "Videos";
-        break;
-
-      case NavLinks.Jobs:
-        return "Jobs";
-        break;
-
-      default:
-        return "";
-
-    }
   }
 }
