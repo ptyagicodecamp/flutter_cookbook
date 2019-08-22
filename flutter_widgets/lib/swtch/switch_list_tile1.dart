@@ -12,6 +12,7 @@ class SwitchListTile1 extends StatefulWidget {
 
 class _SwitchListTileState extends State<SwitchListTile1> {
   bool selected = false;
+  String privLabel = 'Privacy Policy';
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +25,18 @@ class _SwitchListTileState extends State<SwitchListTile1> {
           HyperlinkedLabelSwitch(
             padding:
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
-            label: 'Privacy Policy',
+            label: privLabel,
             hyperlink:
                 'https://docs.google.com/document/d/1TAqTE7MBzuIagISHHzjGxSHoY1z884LXR3iGIojz1sA/edit?usp=sharing',
             value: selected,
             onChange: (bool v) {
               setState(() {
                 selected = v;
+                if (selected) {
+                  privLabel = 'Privacy Policy (Accepted)';
+                } else {
+                  privLabel = 'Privacy Policy';
+                }
               });
             },
           )
