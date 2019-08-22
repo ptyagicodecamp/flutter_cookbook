@@ -111,7 +111,7 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe>
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(
-          "Search App",
+          "Search in Tabs",
           style: TextStyle(
               color: Colors.white, fontSize: 22.0, fontWeight: FontWeight.w600),
         ),
