@@ -1,5 +1,16 @@
 import 'package:flutter/material.dart';
 import 'router.dart' as router;
+import 'recipes.dart';
+
+final List<RecipeWidget> recipes = [
+  RecipeWidget("Switch ListTile", "Clickable link to Privacy Policy", router.SWITCH_LISTTILE_1),
+  RecipeWidget(
+      "Popup Menu Button (Stateful)", "", router.POP_UP_MENU_BUTTON_SF),
+  RecipeWidget(
+      "Popup Menu Button (Stateless)", "", router.POP_UP_MENU_BUTTON_SL),
+  RecipeWidget(
+      "Image in ListView", "Images loaded in list view", router.LIST_IMAGES)
+];
 
 class Home extends StatefulWidget {
   @override
@@ -13,61 +24,11 @@ class _HomeState extends State {
       appBar: AppBar(
         title: Text('Flutter Widgets'),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(10.0),
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.blueAccent,
-                  gradient: new LinearGradient(
-                    colors: [Colors.blue, Colors.cyan],
-                  ),
-                  borderRadius: BorderRadius.circular(2)),
-              child: Card(
-                borderOnForeground: true,
-                child: ListTile(
-                  title: Center(
-                    child: Text(
-                      "Popup Menu Button (Stateful)",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                  subtitle: Text(""),
-                  onTap: () => Navigator.pushNamed(
-                      context, router.POP_UP_MENU_BUTTON_SF),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.blueAccent,
-                  gradient: new LinearGradient(
-                    colors: [Colors.blue, Colors.cyan],
-                  ),
-                  borderRadius: BorderRadius.circular(2)),
-              child: Card(
-                borderOnForeground: true,
-                child: ListTile(
-                  title: Center(
-                    child: Text(
-                      "Popup Menu Button (Stateless)",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                  subtitle: Text(""),
-                  onTap: () => Navigator.pushNamed(
-                      context, router.POP_UP_MENU_BUTTON_SL),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+      body: ListView.builder(
+          itemCount: recipes.length,
+          itemBuilder: (BuildContext context, int index) {
+            return recipes[index];
+          }),
     );
   }
 }
