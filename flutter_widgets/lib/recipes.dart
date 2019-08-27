@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'util.dart';
+
 class RecipeWidget extends StatelessWidget {
   String name;
   String description;
@@ -8,10 +10,15 @@ class RecipeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(this.name),
-      subtitle: Text(this.description),
-      onTap: () => Navigator.pushNamed(context, this.pageName),
+    return Column(
+      children: <Widget>[
+        ListTile(
+          title: Text(this.name),
+          subtitle: Text(this.description),
+          onTap: () => Navigator.pushNamed(context, this.pageName),
+        ),
+        Divider(color: Colors.blue, ),
+      ],
     );
   }
 }
