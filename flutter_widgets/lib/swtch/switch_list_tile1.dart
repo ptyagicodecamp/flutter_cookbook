@@ -11,8 +11,8 @@ class SwitchListTile1 extends StatefulWidget {
 }
 
 class _SwitchListTileState extends State<SwitchListTile1> {
-  bool selected = false;
-  String privLabel = 'Privacy Policy';
+  bool accepted = false;
+  String privacyLabel = 'Privacy Policy';
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +25,17 @@ class _SwitchListTileState extends State<SwitchListTile1> {
           HyperlinkedLabelSwitch(
             padding:
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
-            label: privLabel,
+            label: privacyLabel,
             hyperlink:
                 'https://docs.google.com/document/d/1TAqTE7MBzuIagISHHzjGxSHoY1z884LXR3iGIojz1sA/edit?usp=sharing',
-            value: selected,
+            selected: accepted,
             onChange: (bool v) {
               setState(() {
-                selected = v;
-                if (selected) {
-                  privLabel = 'Privacy Policy (Accepted)';
+                accepted = v;
+                if (accepted) {
+                  privacyLabel = 'Privacy Policy (Accepted)';
                 } else {
-                  privLabel = 'Privacy Policy';
+                  privacyLabel = 'Privacy Policy';
                 }
               });
             },
@@ -48,15 +48,16 @@ class _SwitchListTileState extends State<SwitchListTile1> {
 
 class HyperlinkedLabelSwitch extends StatelessWidget {
   final String label;
-  final bool value;
+  final String hyperlink;
+  final bool selected;
   final Function onChange;
   final EdgeInsets padding;
-  final String hyperlink;
+
 
   const HyperlinkedLabelSwitch(
       {Key key,
       this.label,
-      this.value,
+      this.selected,
       this.onChange,
       this.padding,
       this.hyperlink});
@@ -89,7 +90,7 @@ class HyperlinkedLabelSwitch extends StatelessWidget {
 
           //2. Next comes the switch to save the user's selection
           Switch(
-            value: value,
+            value: selected,
             onChanged: (bool v) {
               onChange(v);
             },
