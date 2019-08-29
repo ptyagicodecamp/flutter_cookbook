@@ -64,7 +64,7 @@ class HyperlinkedLabelSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Material(child: Padding(
       padding: padding,
       child: Row(
         children: <Widget>[
@@ -84,7 +84,7 @@ class HyperlinkedLabelSwitch extends StatelessWidget {
                         //open hyperlink in webview
                         Navigator.pushNamed(context, WEBVIEW,
                             arguments:
-                                WebViewArguments(title: label, url: hyperlink));
+                            WebViewArguments(title: label, url: hyperlink));
                       })),
           ),
 
@@ -97,6 +97,6 @@ class HyperlinkedLabelSwitch extends StatelessWidget {
           )
         ],
       ),
-    );
+    ),);
   }
 }
