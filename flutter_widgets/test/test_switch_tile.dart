@@ -12,6 +12,10 @@ import 'package:flutter_widgets/main.dart';
 import 'package:flutter_widgets/swtch/switch_list_tile1.dart';
 
 void main() {
+  //Test classes don't have access to MaterialApp.
+  // So, we need to wrap widget to be tested in MaterialApp.
+  //We need to use [MediaQuery](https://api.flutter.dev/flutter/widgets/MediaQuery-class.html)
+  //to access layout information of testable widget
   Widget buildTestableWidget(Widget widget) {
     return MediaQuery(data: MediaQueryData(), child: MaterialApp(home: widget));
   }
