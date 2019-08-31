@@ -1,4 +1,4 @@
-# Code recipes #
+# Flutter Code recipes #
 
 Follow me at twitter: @ptyagi13
 Medium: @ptyagicodecamp
