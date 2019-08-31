@@ -3,6 +3,8 @@ import 'router.dart' as router;
 import 'recipes.dart';
 
 final List<RecipeWidget> recipes = [
+  RecipeWidget(
+      "Login (Firebase / GoogleSignIn)", "Login functionality using two ways: 1. Google SignIn, 2. Email/password", router.FIREBASE_LOGIN),
   RecipeWidget("Switch ListTile", "Clickable link to Privacy Policy", router.SWITCH_LISTTILE_1),
   RecipeWidget(
       "Popup Menu Button (Stateful)", "", router.POP_UP_MENU_BUTTON_SF),

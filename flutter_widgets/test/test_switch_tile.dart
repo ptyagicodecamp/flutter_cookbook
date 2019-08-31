@@ -21,20 +21,22 @@ void main() {
   }
 
   testWidgets('Testing Privacy Policy Switch', (WidgetTester tester) async {
+
     await tester.pumpWidget(buildTestableWidget(SwitchListTile1()));
+
     final comp = find.byType(SwitchListTile1);
     print(comp.description);
+
     bool accepted = false;
     String privacyLabel = 'Privacy Policy';
 
     await tester.pumpWidget(StatefulBuilder(
       builder: (BuildContext context, StateSetter setState) {
-        return buildTestableWidget(          HyperlinkedLabelSwitch(
-          padding:
-          const EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
+        return buildTestableWidget(HyperlinkedLabelSwitch(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 50.0),
           label: privacyLabel,
           hyperlink:
-          'https://docs.google.com/document/d/1TAqTE7MBzuIagISHHzjGxSHoY1z884LXR3iGIojz1sA/edit?usp=sharing',
+              'https://docs.google.com/document/d/1TAqTE7MBzuIagISHHzjGxSHoY1z884LXR3iGIojz1sA/edit?usp=sharing',
           selected: accepted,
           onChange: (bool v) {
             setState(() {
@@ -64,7 +66,6 @@ void main() {
     expect(find.byType(RichText), findsOneWidget);
 
     expect(find.byType(Switch), findsOneWidget);
-
 
     //Testing toggling switch
     await tester.pump(Duration(seconds: 5));
