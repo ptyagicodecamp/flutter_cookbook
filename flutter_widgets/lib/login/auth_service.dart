@@ -9,7 +9,8 @@ abstract class BaseAuthService with ChangeNotifier {
   Future<FirebaseUser> signIn(String email, String password);
   Future<FirebaseUser> googleSignIn();
   Future<FirebaseUser> updateUser(FirebaseUser user);
-  Future<FirebaseUser> createUser(String firstName, String lastName, String email, String password);
+  Future<FirebaseUser> createUser(
+      String firstName, String lastName, String email, String password);
   Future<void> signOut();
 }
 
@@ -24,7 +25,8 @@ class FireAuthService extends BaseAuthService {
   @override
   Future<FirebaseUser> signIn(String email, String password) async {
     try {
-      var auth = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+      var auth = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
       notifyListeners();
       return auth.user;
     } catch (e) {
@@ -43,15 +45,15 @@ class FireAuthService extends BaseAuthService {
       );
 
       FirebaseUser firebaseUser =
-      (await _firebaseAuth.signInWithCredential(credential)).user;
+          (await _firebaseAuth.signInWithCredential(credential)).user;
 
-    //creates user entry after logging-in for first tie.
-    updateUser(firebaseUser);
-    notifyListeners();
+      //creates user entry after logging-in for first tie.
+      updateUser(firebaseUser);
+      notifyListeners();
 
-    return firebaseUser;
+      return firebaseUser;
     } catch (e) {
-    throw AuthException(e.code, e.message);
+      throw AuthException(e.code, e.message);
     }
   }
 
@@ -73,8 +75,10 @@ class FireAuthService extends BaseAuthService {
   }
 
   @override
-  Future<FirebaseUser> createUser(String firstName, String lastName, String email, String password) async {
-    var auth = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+  Future<FirebaseUser> createUser(
+      String firstName, String lastName, String email, String password) async {
+    var auth = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
     UserUpdateInfo info = UserUpdateInfo();
     info.displayName = '$firstName $lastName';
     await auth.user.updateProfile(info);
@@ -87,6 +91,4 @@ class FireAuthService extends BaseAuthService {
     _firebaseAuth.signOut();
     notifyListeners();
   }
-
-
 }

@@ -64,8 +64,9 @@ class _LogInPageState extends State<LogInPage> {
                     height: 44.0,
                     backgroundColor: Colors.cyan,
                     onPressed: () async {
-                      FirebaseUser user = await Provider.of<FireAuthService>(context)
-                          .googleSignIn();
+                      FirebaseUser user =
+                          await Provider.of<FireAuthService>(context)
+                              .googleSignIn();
 
                       widget.onSignIn(user);
                     })
