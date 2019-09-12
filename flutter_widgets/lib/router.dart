@@ -44,7 +44,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       });
       break;
 
-    case USER_PROFILE:
+/*    case USER_PROFILE:
       return MaterialPageRoute(builder: (context) {
         final FirebaseUser firebaseUser = routeSettings.arguments;
         return ChangeNotifierProvider<FireAuthService>(
@@ -85,7 +85,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         );
       });
       break;
-
+*/
     case SWITCH_LISTTILE_1:
       return MaterialPageRoute(builder: (context) => SwitchListTile1());
       break;
