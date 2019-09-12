@@ -32,7 +32,6 @@ dependencies:
   firebase_auth: ^0.14.0+4 #user auth
   cloud_firestore: ^0.12.9+1 #saving user profiles
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
