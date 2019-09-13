@@ -4,12 +4,12 @@ import 'package:flutter_widgets/themes/themes_notifier.dart';
 import 'package:provider/provider.dart';
 
 //Note: Use code below to just run this demo
-/*void main() => runApp(ChangeNotifierProvider<ThemesNotifier>(
+void main() => runApp(ChangeNotifierProvider<ThemesNotifier>(
       child: ThemesDemo(),
       builder: (BuildContext context) {
         return ThemesNotifier();
       },
-    ));*/
+    ));
 
 class ThemesDemo extends StatefulWidget {
   @override

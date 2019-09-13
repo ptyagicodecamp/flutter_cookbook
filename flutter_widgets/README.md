@@ -3,7 +3,18 @@
 Follow me at twitter: @ptyagi13
 Medium: @ptyagicodecamp
 
+#flutter, #flutter-themes, #flutter-widgets,#cross-platform, #android, #ios, #mobile,#flutter-development,#flutter-channel, #flutter-samples,#flutter-code,#material
+
+
 Checkout code recipes listing [here](https://ptyagicodecamp.github.io/a-flutter-live-booklet-flutter-component-recipes.html)
+
+
+## Implement Flutter themes using Provider ##
+Implementing switching from light to dark theme and vice versa using [Provider plugin](https://pub.dev/packages/provider) for dependency injection and state management.
+
+* Read article [here](https://ptyagicodecamp.github.io/implement-flutter-themes-using-provider.html)
+
+* Source code is available [here](https://github.com/ptyagicodecamp/flutter_cookbook/tree/widgets-web/flutter_widgets/lib/themes)
 
 
 ## Material icons for Flutter Web (Hummingbird) ##
