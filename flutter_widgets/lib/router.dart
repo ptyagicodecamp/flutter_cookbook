@@ -13,6 +13,7 @@ import 'menus/sf_popupmenubutton.dart';
 import 'menus/sl_popupmenubutton.dart';
 import 'menus/webview.dart';
 import 'login/firebase_login.dart';
+import 'quizzie/quizze_demo.dart';
 
 const String HOME = "/";
 const String POP_UP_MENU_BUTTON_SL = '/popupMenuButton_sl';
@@ -24,6 +25,7 @@ const String FIREBASE_LOGIN = 'FIREBASE_LOGIN';
 const String USER_PROFILE = 'USER_PROFILE';
 const String LOGIN_PAGE = 'LOGIN_PAGE';
 const String THEMES_DEMO = 'THEMES_DEMO';
+const String COLOR_FILTER_DEMO = 'COLOR_FILTER_DEMO';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -31,6 +33,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
     case HOME:
       return MaterialPageRoute(builder: (context) => Home());
+      break;
+
+    case COLOR_FILTER_DEMO:
+      return MaterialPageRoute(builder: (context) => QuizzieDemo());
       break;
 
     case THEMES_DEMO:

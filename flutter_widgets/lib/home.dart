@@ -3,6 +3,8 @@ import 'router.dart' as router;
 import 'recipes.dart';
 
 final List<RecipeWidget> recipes = [
+  RecipeWidget("ColorFilter", "Blends two colors. Released in Flutter 1.9",
+      router.COLOR_FILTER_DEMO),
   RecipeWidget("Themes in Action ", "Toggle between Light & Dark themes",
       router.THEMES_DEMO),
   RecipeWidget(
