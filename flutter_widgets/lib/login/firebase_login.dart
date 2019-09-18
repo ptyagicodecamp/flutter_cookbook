@@ -1,5 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fb_auth/data/classes/auth_user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widgets/plugins/firebase/change_notifier.dart';
+import 'package:flutter_widgets/plugins/firebase/fire_auth_service.dart';
 import 'package:flutter_widgets/widgets_lib.dart';
 import 'package:provider/provider.dart';
 import 'auth_service.dart';
@@ -17,7 +19,7 @@ class FirebaseAuthLogin extends StatefulWidget {
 
 class _FirebaseAuthLoginState extends State<FirebaseAuthLogin> {
   static bool noData = false;
-  static FirebaseUser user;
+  static MyAuthUser user;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class _FirebaseAuthLoginState extends State<FirebaseAuthLogin> {
     return futureWidget();
   }
 
-  void signIn(FirebaseUser user) {
+  void signIn(MyAuthUser user) {
     Navigator.popAndPushNamed(context, router.USER_PROFILE, arguments: user);
   }
 
@@ -44,9 +46,9 @@ class _FirebaseAuthLoginState extends State<FirebaseAuthLogin> {
   }
 
   FutureBuilder futureWidget() {
-    return FutureBuilder<FirebaseUser>(
+    return FutureBuilder<MyAuthUser>(
       future: Provider.of<FireAuthService>(context).currentUser(),
-      builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
+      builder: (context, AsyncSnapshot<MyAuthUser> snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.error != null) {
             return Text(snapshot.error.toString());

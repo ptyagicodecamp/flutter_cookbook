@@ -1,7 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fb_auth/data/classes/auth_user.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets/login/auth_service.dart';
 import 'package:flutter_widgets/login/login_page.dart';
+import 'package:flutter_widgets/plugins/firebase/change_notifier.dart';
 import 'package:flutter_widgets/themes/themes_demo.dart';
 import 'package:flutter_widgets/themes/themes_notifier.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +15,7 @@ import 'menus/sf_popupmenubutton.dart';
 import 'menus/sl_popupmenubutton.dart';
 import 'menus/webview.dart';
 import 'login/firebase_login.dart';
+import 'plugins/firebase/fire_auth_service.dart';
 
 const String HOME = "/";
 const String POP_UP_MENU_BUTTON_SL = '/popupMenuButton_sl';
@@ -46,7 +49,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
 
     case USER_PROFILE:
       return MaterialPageRoute(builder: (context) {
-        final FirebaseUser firebaseUser = routeSettings.arguments;
+        final MyAuthUser firebaseUser = routeSettings.arguments;
         return ChangeNotifierProvider<FireAuthService>(
           child: UserProfilePage(
               currentUser: firebaseUser,

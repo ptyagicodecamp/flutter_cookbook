@@ -1,17 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
+import 'package:fb_auth/data/classes/auth_user.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_widgets/home.dart';
 import 'package:flutter_widgets/login/auth_service.dart';
-import 'package:flutter_widgets/menus/webview.dart';
-import 'package:flutter_widgets/router.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_widgets/plugins/firebase/change_notifier.dart';
+import 'package:flutter_widgets/plugins/firebase/fire_auth_service.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_widgets/router.dart' as router;
 
 //user Firebase Auth to login using Google account credentials
 class UserProfilePage extends StatefulWidget {
-  final FirebaseUser currentUser;
+  final MyAuthUser currentUser;
   final VoidCallback onSignOut;
 
   UserProfilePage({this.currentUser, this.onSignOut});
@@ -29,9 +25,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
   @override
   Widget build(BuildContext context) {
     if (widget.currentUser != null) {
-      if (widget.currentUser.photoUrl != null) {
-        photoUrl = widget.currentUser.photoUrl;
-      }
+//      if (widget.currentUser.photoUrl != null) {
+//        photoUrl = widget.currentUser.photoUrl;
+//      }
 
       if (widget.currentUser.displayName != null) {
         displayName = widget.currentUser.displayName;

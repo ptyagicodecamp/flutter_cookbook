@@ -32,6 +32,12 @@ dependencies:
   firebase_auth: ^0.14.0+4 #user auth
   cloud_firestore: ^0.12.9+1 #saving user profiles
 
+  #firebase: ^5.0.4
+  fb_auth: any
+
+  universal_html: ^1.1.0
+  url_launcher: ^5.1.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

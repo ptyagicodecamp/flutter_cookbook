@@ -1,13 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widgets/plugins/firebase/change_notifier.dart';
+import 'package:flutter_widgets/plugins/firebase/fire_auth_service.dart';
 import 'package:provider/provider.dart';
 import '../widgets_lib.dart';
-import 'auth_service.dart';
-import 'package:flutter_widgets/router.dart' as router;
 
 class LogInPage extends StatefulWidget {
   final String title;
-  final void Function(FirebaseUser) onSignIn;
+  final void Function(MyAuthUser) onSignIn;
 
   LogInPage({Key key, this.title, this.onSignIn}) : super(key: key);
 
@@ -64,8 +63,9 @@ class _LogInPageState extends State<LogInPage> {
                     height: 44.0,
                     backgroundColor: Colors.cyan,
                     onPressed: () async {
-                      FirebaseUser user = await Provider.of<FireAuthService>(context)
-                          .googleSignIn();
+                      MyAuthUser user =
+                          await Provider.of<FireAuthService>(context)
+                              .googleSignIn();
 
                       widget.onSignIn(user);
                     })
@@ -81,18 +81,18 @@ class _LogInPageState extends State<LogInPage> {
       //hides keyboard
       FocusScope.of(context).requestFocus(new FocusNode());
       try {
-        FirebaseUser firebaseUser = _formType == FormType.login
+        MyAuthUser myAuthUser = _formType == FormType.login
             ? await Provider.of<FireAuthService>(context)
                 .signIn(_email, _password)
             : await Provider.of<FireAuthService>(context)
                 .createUser(_email, '', _email, _password);
 
-        String userId = firebaseUser.uid;
+        String userId = myAuthUser.uid;
 
         setState(() {
           _hintText = 'Signed In\n\nUser id: $userId';
           //user created his account. Now directly sign-in
-          widget.onSignIn(firebaseUser);
+          widget.onSignIn(myAuthUser);
         });
       } catch (e) {
         setState(() {
