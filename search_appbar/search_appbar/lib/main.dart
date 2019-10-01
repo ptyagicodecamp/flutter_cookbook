@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart' as words;
+import 'package:speech_recognition/speech_recognition.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,25 +27,84 @@ class SeachAppBarRecipe extends StatefulWidget {
   _SearchAppBarRecipeState createState() => _SearchAppBarRecipeState();
 }
 
+class Language {
+  final String name;
+  final String code;
+
+  const Language(this.name, this.code);
+}
+
 class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
+  //speech
+  SpeechRecognition _speech;
+  bool _speechRecognitionAvailable = false;
+  bool _isListening = false;
+
+  String transcription = '';
+
+//String _currentLocale = 'en_US';
+  Language selectedLang = const Language('English', 'en_US');
+
   final List<String> kWords;
   _SearchAppBarDelegate _searchDelegate;
 
   //Initializing with sorted list of english words
   _SearchAppBarRecipeState()
       : kWords = List.from(Set.from(words.all))
-    ..sort(
-          (w1, w2) => w1.toLowerCase().compareTo(w2.toLowerCase()),
-    ),
+          ..sort(
+            (w1, w2) => w1.toLowerCase().compareTo(w2.toLowerCase()),
+          ),
         super();
-
 
   @override
   void initState() {
     super.initState();
     //Initializing search delegate with sorted list of English words
-    _searchDelegate = _SearchAppBarDelegate(kWords);
+    activateSpeechRecognizer();
+    _searchDelegate = _SearchAppBarDelegate(kWords, transcription);
   }
+
+  // Platform messages are asynchronous, so we initialize in an async method.
+  void activateSpeechRecognizer() {
+    print('_MyAppState.activateSpeechRecognizer... ');
+    _speech = new SpeechRecognition();
+    _speech.setAvailabilityHandler(onSpeechAvailability);
+    _speech.setCurrentLocaleHandler(onCurrentLocale);
+    _speech.setRecognitionStartedHandler(onRecognitionStarted);
+    _speech.setRecognitionResultHandler(onRecognitionResult);
+    _speech.setRecognitionCompleteHandler(onRecognitionComplete);
+    _speech.setErrorHandler(errorHandler);
+    _speech
+        .activate()
+        .then((res) => setState(() => _speechRecognitionAvailable = res));
+  }
+
+  void start() => _speech
+      .listen(locale: selectedLang.code)
+      .then((result) => print('_MyAppState.start => result $result'));
+
+  void cancel() =>
+      _speech.cancel().then((result) => setState(() => _isListening = result));
+
+  void stop() => _speech.stop().then((result) {
+        setState(() => _isListening = result);
+      });
+
+  void onSpeechAvailability(bool result) =>
+      setState(() => _speechRecognitionAvailable = result);
+
+  void onCurrentLocale(String locale) {
+    print('_MyAppState.onCurrentLocale... $locale');
+    setState(() => selectedLang = const Language('English', 'en_US'));
+  }
+
+  void onRecognitionStarted() => setState(() => _isListening = true);
+
+  void onRecognitionResult(String text) => setState(() => transcription = text);
+
+  void onRecognitionComplete() => setState(() => _isListening = false);
+
+  void errorHandler() => activateSpeechRecognizer();
 
   @override
   Widget build(BuildContext context) {
@@ -62,37 +122,48 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
               showSearchPage(context, _searchDelegate);
             },
           ),
+          !_isListening
+              ? IconButton(
+                  tooltip: 'Mic',
+                  icon: const Icon(Icons.mic),
+                  //Don't block the main thread
+                  onPressed: () => _speechRecognitionAvailable && !_isListening
+                      ? () => start()
+                      : null,
+                )
+              : IconButton(
+                  tooltip: 'Stop',
+                  icon: const Icon(Icons.stop),
+                  //Don't block the main thread
+                  onPressed: () => stop(),
+                ),
         ],
       ),
       body: Scrollbar(
         //Displaying all English words in list in app's main page
         child: ListView.builder(
           itemCount: kWords.length,
-          itemBuilder: (context, idx) =>
-              ListTile(
-                title: Text(kWords[idx]),
-                onTap: () {
-                  Scaffold.of(context).showSnackBar(
-                      SnackBar(
-                          content: Text("Click the Search action"),
-                          action: SnackBarAction(
-                            label: 'Search',
-                            onPressed: (){
-                              showSearchPage(context, _searchDelegate);
-                            },
-                          )
-                      )
-                  );
-                },
-              ),
+          itemBuilder: (context, idx) => ListTile(
+            title: Text(kWords[idx]),
+            onTap: () {
+              Scaffold.of(context).showSnackBar(SnackBar(
+                  content: Text("Click the Search action"),
+                  action: SnackBarAction(
+                    label: 'Search',
+                    onPressed: () {
+                      showSearchPage(context, _searchDelegate);
+                    },
+                  )));
+            },
+          ),
         ),
       ),
     );
   }
 
   //Shows Search result
-  void showSearchPage(BuildContext context,
-      _SearchAppBarDelegate searchDelegate) async {
+  void showSearchPage(
+      BuildContext context, _SearchAppBarDelegate searchDelegate) async {
     final String selected = await showSearch<String>(
       context: context,
       delegate: searchDelegate,
@@ -112,11 +183,13 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
 class _SearchAppBarDelegate extends SearchDelegate<String> {
   final List<String> _words;
   final List<String> _history;
+  final String preQry;
 
-  _SearchAppBarDelegate(List<String> words)
+  _SearchAppBarDelegate(List<String> words, String qry)
       : _words = words,
-  //pre-populated history of words
+        //pre-populated history of words
         _history = <String>['apple', 'orange', 'banana', 'watermelon'],
+        preQry = qry,
         super();
 
   // Setting leading icon for the search bar.
@@ -188,22 +261,27 @@ class _SearchAppBarDelegate extends SearchDelegate<String> {
   @override
   List<Widget> buildActions(BuildContext context) {
     return <Widget>[
-      query.isNotEmpty ?
-      IconButton(
-        tooltip: 'Clear',
-        icon: const Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-          showSuggestions(context);
-        },
-      ) : IconButton(
-        icon: const Icon(Icons.mic),
-        tooltip: 'Voice input',
-        onPressed: () {
-          this.query = 'TBW: Get input from voice';
-        },
-
-      ),
+      query.isNotEmpty
+          ? IconButton(
+              tooltip: 'Clear',
+              icon: const Icon(Icons.clear),
+              onPressed: () {
+                query = '';
+                showSuggestions(context);
+              },
+            )
+          : null,
+//      IconButton(
+//              icon: const Icon(Icons.mic),
+//              tooltip: 'Voice input',
+//              onPressed: () {
+//                print("Pressing mic");
+//                _speech.listen(locale: 'en_US').then((result) {
+//                  this.query = result; //'TBW: Get input from voice';
+//                  print('_MyAppState.start => result $result');
+//                });
+//              },
+//            ),
     ];
   }
 }
