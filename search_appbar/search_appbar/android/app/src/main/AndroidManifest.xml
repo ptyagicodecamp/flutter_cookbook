@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.pcc.searchappbar">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.pcc.searchappbar"
+    tools:overrideLibrary="com.ly.permission">
 
     <!-- The INTERNET permission is required for development. Specifically,
          flutter needs it to communicate with the running application
