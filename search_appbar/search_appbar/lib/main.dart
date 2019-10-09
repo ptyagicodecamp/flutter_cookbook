@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-//import 'package:english_words/english_words.dart' as words;
+import 'package:english_words/english_words.dart' as words;
 import 'package:speech_recognition/speech_recognition.dart';
 
-void main() {
-  runApp(new MyApp());
-}
+void main() => runApp(MyApp());
 
-const languages = const [
-  const Language('Francais', 'fr_FR'),
-  const Language('English', 'en_US'),
-  const Language('Pусский', 'ru_RU'),
-  const Language('Italiano', 'it_IT'),
-  const Language('Español', 'es_ES'),
-];
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'SeachAppBarRecipe',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: SeachAppBarRecipe(title: 'SeachAppBarRecipe'),
+    );
+  }
+}
 
 class Language {
   final String name;
@@ -22,25 +26,42 @@ class Language {
   const Language(this.name, this.code);
 }
 
-class MyApp extends StatefulWidget {
+class SeachAppBarRecipe extends StatefulWidget {
+  SeachAppBarRecipe({Key key, this.title}) : super(key: key);
+
+  final String title;
+
   @override
-  _MyAppState createState() => new _MyAppState();
+  _SearchAppBarRecipeState createState() => _SearchAppBarRecipeState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
+  //speech
   SpeechRecognition _speech;
-
   bool _speechRecognitionAvailable = false;
   bool _isListening = false;
 
   String transcription = '';
 
-  //String _currentLocale = 'en_US';
-  Language selectedLang = languages.first;
+//String _currentLocale = 'en_US';
+  Language selectedLang = const Language('English', 'en_US');
+
+  final List<String> kWords;
+  _SearchAppBarDelegate _searchDelegate;
+
+  //Initializing with sorted list of english words
+  _SearchAppBarRecipeState()
+      : kWords = List.from(Set.from(words.all))
+          ..sort(
+            (w1, w2) => w1.toLowerCase().compareTo(w2.toLowerCase()),
+          ),
+        super();
 
   @override
-  initState() {
+  void initState() {
     super.initState();
+    //Initializing search delegate with sorted list of English words
+    _searchDelegate = _SearchAppBarDelegate(kWords);
     activateSpeechRecognizer();
   }
 
@@ -71,209 +92,54 @@ class _MyAppState extends State<MyApp> {
         .then((res) => setState(() => _speechRecognitionAvailable = res));
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text('SpeechRecognition'),
-          actions: [
-            new PopupMenuButton<Language>(
-              onSelected: _selectLangHandler,
-              itemBuilder: (BuildContext context) => _buildLanguagesWidgets,
-            )
-          ],
-        ),
-        body: new Padding(
-            padding: new EdgeInsets.all(8.0),
-            child: new Center(
-              child: new Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  new Expanded(
-                      child: new Container(
-                          padding: const EdgeInsets.all(8.0),
-                          color: Colors.grey.shade200,
-                          child: new Text(transcription))),
-                  _buildButton(
-                    onPressed: _speechRecognitionAvailable && !_isListening
-                        ? () => start()
-                        : null,
-                    label: _isListening
-                        ? 'Listening...'
-                        : 'Listen (${selectedLang.code})',
-                  ),
-                  _buildButton(
-                    onPressed: _isListening ? () => cancel() : null,
-                    label: 'Cancel',
-                  ),
-                  _buildButton(
-                    onPressed: _isListening ? () => stop() : null,
-                    label: 'Stop',
-                  ),
-                ],
+  void start() => _speech
+      .listen(locale: selectedLang.code)
+      .then((result) => print('Strted listening => result $result'));
+
+  void cancel() =>
+      _speech.cancel().then((result) => setState(() => _isListening = result));
+
+  void stop() => _speech.stop().then((result) {
+        setState(() => _isListening = result);
+      });
+
+  void onSpeechAvailability(bool result) =>
+      setState(() => _speechRecognitionAvailable = result);
+
+  void onCurrentLocale(String locale) =>
+      setState(() => selectedLang = Language('English', 'en_US'));
+
+  void onRecognitionStarted() => setState(() => _isListening = true);
+
+  void onRecognitionResult(String text) {
+    setState(() {
+      transcription = text;
+      showSearchPage(context, _searchDelegate, transcription);
+    });
+  }
+
+  void onRecognitionComplete() => setState(() => _isListening = false);
+
+  void errorHandler() => activateSpeechRecognizer();
+
+  Widget _buildVoiceInput({String label, VoidCallback onPressed}) =>
+      new Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            children: <Widget>[
+              FlatButton(
+                //onPressed: onPressed,
+                child: Text(
+                  label,
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
-            )),
-      ),
-    );
-  }
-
-  List<CheckedPopupMenuItem<Language>> get _buildLanguagesWidgets => languages
-      .map((l) => new CheckedPopupMenuItem<Language>(
-            value: l,
-            checked: selectedLang == l,
-            child: new Text(l.name),
-          ))
-      .toList();
-
-  void _selectLangHandler(Language lang) {
-    setState(() => selectedLang = lang);
-  }
-
-  Widget _buildButton({String label, VoidCallback onPressed}) => new Padding(
-      padding: new EdgeInsets.all(12.0),
-      child: new RaisedButton(
-        color: Colors.cyan.shade600,
-        onPressed: onPressed,
-        child: new Text(
-          label,
-          style: const TextStyle(color: Colors.white),
-        ),
-      ));
-
-  void start() => _speech
-      .listen(locale: selectedLang.code)
-      .then((result) => print('_MyAppState.start => result $result'));
-
-  void cancel() =>
-      _speech.cancel().then((result) => setState(() => _isListening = result));
-
-  void stop() => _speech.stop().then((result) {
-        setState(() => _isListening = result);
-      });
-
-  void onSpeechAvailability(bool result) =>
-      setState(() => _speechRecognitionAvailable = result);
-
-  void onCurrentLocale(String locale) {
-    print('_MyAppState.onCurrentLocale... $locale');
-    setState(
-        () => selectedLang = languages.firstWhere((l) => l.code == locale));
-  }
-
-  void onRecognitionStarted() => setState(() => _isListening = true);
-
-  void onRecognitionResult(String text) => setState(() => transcription = text);
-
-  void onRecognitionComplete() => setState(() => _isListening = false);
-
-  void errorHandler() => activateSpeechRecognizer();
-}
-
-/*void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'SeachAppBarRecipe',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: SeachAppBarRecipe(title: 'SeachAppBarRecipe'),
-    );
-  }
-}
-
-class SeachAppBarRecipe extends StatefulWidget {
-  SeachAppBarRecipe({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _SearchAppBarRecipeState createState() => _SearchAppBarRecipeState();
-}
-
-class Language {
-  final String name;
-  final String code;
-
-  const Language(this.name, this.code);
-}
-
-class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
-  //speech
-  SpeechRecognition _speech;
-  bool _speechRecognitionAvailable = false;
-  bool _isListening = false;
-
-  String transcription = '';
-
-//String _currentLocale = 'en_US';
-  Language selectedLang = const Language('English', 'en_US');
-
-  final List<String> kWords;
-  _SearchAppBarDelegate _searchDelegate;
-
-  //Initializing with sorted list of english words
-  _SearchAppBarRecipeState()
-      : kWords = List.from(Set.from(words.all))
-          ..sort(
-            (w1, w2) => w1.toLowerCase().compareTo(w2.toLowerCase()),
-          ),
-        super();
-
-  @override
-  void initState() {
-    super.initState();
-    //Initializing search delegate with sorted list of English words
-    activateSpeechRecognizer();
-    _searchDelegate = _SearchAppBarDelegate(kWords, transcription);
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  void activateSpeechRecognizer() {
-    print('_MyAppState.activateSpeechRecognizer... ');
-    _speech = new SpeechRecognition();
-    _speech.setAvailabilityHandler(onSpeechAvailability);
-    _speech.setCurrentLocaleHandler(onCurrentLocale);
-    _speech.setRecognitionStartedHandler(onRecognitionStarted);
-    _speech.setRecognitionResultHandler(onRecognitionResult);
-    _speech.setRecognitionCompleteHandler(onRecognitionComplete);
-    //_speech.setErrorHandler(errorHandler);
-    _speech
-        .activate()
-        .then((res) => setState(() => _speechRecognitionAvailable = res));
-  }
-
-  void start() => _speech
-      .listen(locale: selectedLang.code)
-      .then((result) => print('_MyAppState.start => result $result'));
-
-  void cancel() =>
-      _speech.cancel().then((result) => setState(() => _isListening = result));
-
-  void stop() => _speech.stop().then((result) {
-        setState(() => _isListening = result);
-      });
-
-  void onSpeechAvailability(bool result) =>
-      setState(() => _speechRecognitionAvailable = result);
-
-  void onCurrentLocale(String locale) {
-    print('_MyAppState.onCurrentLocale... $locale');
-    setState(() => selectedLang = const Language('English', 'en_US'));
-  }
-
-  void onRecognitionStarted() => setState(() => _isListening = true);
-
-  void onRecognitionResult(String text) => setState(() => transcription = text);
-
-  void onRecognitionComplete() => setState(() => _isListening = false);
-
-  void errorHandler() => activateSpeechRecognizer();
+              IconButton(
+                icon: Icon(Icons.mic),
+                onPressed: onPressed,
+              ),
+            ],
+          ));
 
   @override
   Widget build(BuildContext context) {
@@ -282,30 +148,21 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
         automaticallyImplyLeading: false,
         title: Text('Word List'),
         actions: <Widget>[
+          _buildVoiceInput(
+            onPressed: _speechRecognitionAvailable && !_isListening
+                ? () => start()
+                : () => stop(),
+            label: _isListening ? 'Listening...' : '',
+          ),
           //Adding the search widget in AppBar
           IconButton(
             tooltip: 'Search',
             icon: const Icon(Icons.search),
             //Don't block the main thread
             onPressed: () {
-              showSearchPage(context, _searchDelegate);
+              showSearchPage(context, _searchDelegate, transcription);
             },
           ),
-          !_isListening
-              ? IconButton(
-                  tooltip: 'Mic',
-                  icon: const Icon(Icons.mic),
-                  //Don't block the main thread
-                  onPressed: () => _speechRecognitionAvailable && !_isListening
-                      ? () => start()
-                      : null,
-                )
-              : IconButton(
-                  tooltip: 'Stop',
-                  icon: const Icon(Icons.stop),
-                  //Don't block the main thread
-                  onPressed: () => stop(),
-                ),
         ],
       ),
       body: Scrollbar(
@@ -320,7 +177,7 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
                   action: SnackBarAction(
                     label: 'Search',
                     onPressed: () {
-                      showSearchPage(context, _searchDelegate);
+                      showSearchPage(context, _searchDelegate, transcription);
                     },
                   )));
             },
@@ -331,11 +188,12 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
   }
 
   //Shows Search result
-  void showSearchPage(
-      BuildContext context, _SearchAppBarDelegate searchDelegate) async {
+  void showSearchPage(BuildContext context,
+      _SearchAppBarDelegate searchDelegate, String transcription) async {
     final String selected = await showSearch<String>(
       context: context,
       delegate: searchDelegate,
+      query: transcription,
     );
 
     if (selected != null) {
@@ -354,11 +212,11 @@ class _SearchAppBarDelegate extends SearchDelegate<String> {
   final List<String> _history;
   final String preQry;
 
-  _SearchAppBarDelegate(List<String> words, String qry)
+  _SearchAppBarDelegate(List<String> words)
       : _words = words,
         //pre-populated history of words
         _history = <String>['apple', 'orange', 'banana', 'watermelon'],
-        preQry = qry,
+        preQry = "",
         super();
 
   // Setting leading icon for the search bar.
@@ -429,29 +287,19 @@ class _SearchAppBarDelegate extends SearchDelegate<String> {
   // Action buttons at the right of search bar.
   @override
   List<Widget> buildActions(BuildContext context) {
-    return <Widget>[
-      query.isNotEmpty
-          ? IconButton(
-              tooltip: 'Clear',
-              icon: const Icon(Icons.clear),
-              onPressed: () {
-                query = '';
-                showSuggestions(context);
-              },
-            )
-          : null,
-//      IconButton(
-//              icon: const Icon(Icons.mic),
-//              tooltip: 'Voice input',
-//              onPressed: () {
-//                print("Pressing mic");
-//                _speech.listen(locale: 'en_US').then((result) {
-//                  this.query = result; //'TBW: Get input from voice';
-//                  print('_MyAppState.start => result $result');
-//                });
-//              },
-//            ),
-    ];
+    List<Widget> actions = List();
+    if (query.isNotEmpty) {
+      actions.add(IconButton(
+        tooltip: 'Clear',
+        icon: const Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+          showSuggestions(context);
+        },
+      ));
+    }
+
+    return actions;
   }
 }
 
@@ -493,4 +341,3 @@ class _WordSuggestionList extends StatelessWidget {
     );
   }
 }
-*/
