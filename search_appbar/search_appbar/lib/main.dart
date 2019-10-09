@@ -19,13 +19,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Language {
-  final String name;
-  final String code;
-
-  const Language(this.name, this.code);
-}
-
 class SeachAppBarRecipe extends StatefulWidget {
   SeachAppBarRecipe({Key key, this.title}) : super(key: key);
 
@@ -42,9 +35,6 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
   bool _isListening = false;
 
   String transcription = '';
-
-//String _currentLocale = 'en_US';
-  Language selectedLang = const Language('English', 'en_US');
 
   final List<String> kWords;
   _SearchAppBarDelegate _searchDelegate;
@@ -93,7 +83,7 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
   }
 
   void start() => _speech
-      .listen(locale: selectedLang.code)
+      .listen(locale: 'en_US')
       .then((result) => print('Strted listening => result $result'));
 
   void cancel() =>
@@ -107,7 +97,7 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
       setState(() => _speechRecognitionAvailable = result);
 
   void onCurrentLocale(String locale) =>
-      setState(() => selectedLang = Language('English', 'en_US'));
+      setState(() => print("current locale: $locale"));
 
   void onRecognitionStarted() => setState(() => _isListening = true);
 
