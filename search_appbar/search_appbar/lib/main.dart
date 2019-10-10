@@ -76,7 +76,6 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
     _speech.setRecognitionStartedHandler(onRecognitionStarted);
     _speech.setRecognitionResultHandler(onRecognitionResult);
     _speech.setRecognitionCompleteHandler(onRecognitionComplete);
-    //_speech.setErrorHandler(errorHandler);
     _speech
         .activate()
         .then((res) => setState(() => _speechRecognitionAvailable = res));
@@ -110,15 +109,12 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
 
   void onRecognitionComplete() => setState(() => _isListening = false);
 
-  void errorHandler() => activateSpeechRecognizer();
-
   Widget _buildVoiceInput({String label, VoidCallback onPressed}) =>
       new Padding(
           padding: const EdgeInsets.all(12.0),
           child: Row(
             children: <Widget>[
               FlatButton(
-                //onPressed: onPressed,
                 child: Text(
                   label,
                   style: const TextStyle(color: Colors.white),
