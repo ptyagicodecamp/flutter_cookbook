@@ -69,7 +69,6 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
   void activateSpeechRecognizer() {
     requestPermission();
 
-    print('_MyAppState.activateSpeechRecognizer... ');
     _speech = new SpeechRecognition();
     _speech.setAvailabilityHandler(onSpeechAvailability);
     _speech.setCurrentLocaleHandler(onCurrentLocale);
@@ -83,7 +82,7 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
 
   void start() => _speech
       .listen(locale: 'en_US')
-      .then((result) => print('Strted listening => result $result'));
+      .then((result) => print('Started listening => result $result'));
 
   void cancel() =>
       _speech.cancel().then((result) => setState(() => _isListening = result));
