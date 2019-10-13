@@ -103,6 +103,7 @@ class _SearchAppBarRecipeState extends State<SeachAppBarRecipe> {
     setState(() {
       transcription = text;
       showSearchPage(context, _searchDelegate, transcription);
+      stop();
     });
   }
 
