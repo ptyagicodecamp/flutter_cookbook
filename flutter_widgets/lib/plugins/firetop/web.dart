@@ -1,8 +1,6 @@
 import 'package:fb_auth/fb_auth.dart';
-import 'package:flutter_widgets/login/auth_service.dart';
-import 'package:universal_html/prefer_universal/html.dart' as html;
-import 'package:fb_auth/data/classes/auth_user.dart';
-import 'package:fb_auth/data/services/auth/auth.dart';
+//import 'package:fb_auth/data/classes/auth_user.dart';
+//import 'package:fb_auth/data/services/auth/auth.dart';
 import 'change_notifier.dart';
 
 class FireAuthService extends BaseAuthService {

@@ -2,19 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fb_auth/fb_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import 'change_notifier.dart';
 
 class FireAuthService extends BaseAuthService {
   FireAuthService._();
   FireAuthService();
 
-  static final FirebaseAuth _auth = FirebaseAuth.instance;
+  static final _auth = FBAuth();
 
   @override
   Future<MyAuthUser> currentUser() async {
-    FirebaseUser user = await _auth.currentUser();
+    AuthUser user = await _auth.currentUser();
     return user != null
         ? MyAuthUser(
             uid: user.uid, displayName: user.displayName, email: user.email)
@@ -23,11 +21,9 @@ class FireAuthService extends BaseAuthService {
 
   @override
   Future<MyAuthUser> signIn(String email, String password) async {
-    var auth = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password);
-
+    var auth = await _auth.login(email, password);
     notifyListeners();
-    FirebaseUser user = auth.user;
+    AuthUser user = auth;
     return MyAuthUser(
         uid: user.uid, displayName: user.displayName, email: user.email);
   }
@@ -42,7 +38,7 @@ class FireAuthService extends BaseAuthService {
     );
 
     FirebaseUser firebaseUser =
-        (await _auth.signInWithCredential(credential)).user;
+        (await FirebaseAuth.instance.signInWithCredential(credential)).user;
 
     //creates user entry after logging-in for first tie.
     updateUser(MyAuthUser(
@@ -92,7 +88,7 @@ class FireAuthService extends BaseAuthService {
 
   @override
   Future<void> signOut() async {
-    _auth.signOut();
+    _auth.logout();
     notifyListeners();
   }
 }

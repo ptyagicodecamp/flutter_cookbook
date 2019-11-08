@@ -3,7 +3,7 @@ import 'package:fb_auth/data/classes/auth_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets/login/auth_service.dart';
 import 'package:flutter_widgets/login/login_page.dart';
-import 'package:flutter_widgets/plugins/firebase/change_notifier.dart';
+import 'package:flutter_widgets/plugins/firetop/change_notifier.dart';
 import 'package:flutter_widgets/themes/themes_demo.dart';
 import 'package:flutter_widgets/themes/themes_notifier.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,8 @@ import 'menus/sf_popupmenubutton.dart';
 import 'menus/sl_popupmenubutton.dart';
 import 'menus/webview.dart';
 import 'login/firebase_login.dart';
-import 'plugins/firebase/fire_auth_service.dart';
+import 'plugins/firetop/fire_auth_service.dart';
+import 'sliders/slider_demo.dart';
 
 const String HOME = "/";
 const String POP_UP_MENU_BUTTON_SL = '/popupMenuButton_sl';
@@ -27,6 +28,7 @@ const String FIREBASE_LOGIN = 'FIREBASE_LOGIN';
 const String USER_PROFILE = 'USER_PROFILE';
 const String LOGIN_PAGE = 'LOGIN_PAGE';
 const String THEMES_DEMO = 'THEMES_DEMO';
+const String SLIDER_DEMO = 'SLIDER_DEMO';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -34,6 +36,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
     case HOME:
       return MaterialPageRoute(builder: (context) => Home());
+      break;
+
+    case SLIDER_DEMO:
+      return MaterialPageRoute(builder: (context) => SliderDemo());
       break;
 
     case THEMES_DEMO:

@@ -1,7 +1,7 @@
 import 'package:fb_auth/data/classes/auth_user.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_widgets/plugins/firebase/change_notifier.dart';
-import 'package:flutter_widgets/plugins/firebase/fire_auth_service.dart';
+import 'package:flutter_widgets/plugins/firetop/change_notifier.dart';
+import 'package:flutter_widgets/plugins/firetop/fire_auth_service.dart';
 import 'package:flutter_widgets/widgets_lib.dart';
 import 'package:provider/provider.dart';
 import 'auth_service.dart';

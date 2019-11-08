@@ -3,6 +3,7 @@ import 'router.dart' as router;
 import 'recipes.dart';
 
 final List<RecipeWidget> recipes = [
+  RecipeWidget("Slider Demo", "Slider snd Range Slider", router.SLIDER_DEMO),
   RecipeWidget("Themes in Action ", "Toggle between Light & Dark themes",
       router.THEMES_DEMO),
   RecipeWidget(

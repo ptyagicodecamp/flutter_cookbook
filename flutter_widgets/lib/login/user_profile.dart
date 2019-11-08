@@ -1,8 +1,8 @@
 import 'package:fb_auth/data/classes/auth_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets/login/auth_service.dart';
-import 'package:flutter_widgets/plugins/firebase/change_notifier.dart';
-import 'package:flutter_widgets/plugins/firebase/fire_auth_service.dart';
+import 'package:flutter_widgets/plugins/firetop/change_notifier.dart';
+import 'package:flutter_widgets/plugins/firetop/fire_auth_service.dart';
 import 'package:provider/provider.dart';
 
 //user Firebase Auth to login using Google account credentials
