@@ -7,6 +7,8 @@ final List<RecipeWidget> recipes = [
       "Animating Container - Curves explorations", router.ANIMATED_CONTAINER),
   RecipeWidget("AnimatedPadding widget",
       "Animating Container - Curves explorations", router.ANIMATED_PADDING),
+  RecipeWidget("AnimatedPositioned widget",
+      "Animating Positioned - Curves explorations", router.ANIMATED_POSITIONED),
 ];
 
 class Home extends StatefulWidget {

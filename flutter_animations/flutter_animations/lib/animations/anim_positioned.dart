@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'anim_curves.dart';
 
-class AnimatedContainerDemo extends StatefulWidget {
+class AnimatedPositionedDemo extends StatefulWidget {
   @override
-  _AnimatedContainerDemoState createState() => _AnimatedContainerDemoState();
+  _AnimatedPositionedDemoState createState() => _AnimatedPositionedDemoState();
 }
 
-class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
+class _AnimatedPositionedDemoState extends State<AnimatedPositionedDemo> {
   DropDownOption dropDownValue;
   bool selected = false;
 
@@ -14,9 +14,9 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("AnimatedContainer Demo"),
+        title: Text("AnimatedPositioned Demo"),
       ),
-      body: Column(
+      body: Stack(
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(20.0),
@@ -51,7 +51,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
           SizedBox(
             height: 20,
           ),
-          animatedContainer(context),
+          animatedPositionedWidget(context),
         ],
       ),
     );
@@ -86,21 +86,13 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
     );
   }
 
-  Widget animatedContainer(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selected = !selected;
-        });
-      },
-      child: AnimatedContainer(
-        width: selected ? 400.0 : 200.0,
-        height: selected ? 200.0 : 400.0,
-        alignment: selected ? Alignment.center : AlignmentDirectional.topCenter,
-        duration: Duration(seconds: 2),
-        curve: dropDownValue != null ? dropDownValue.curveCubic : Curves.linear,
-        child: Image.asset('assets/images/sea.jpg'),
-      ),
+  Widget animatedPositionedWidget(BuildContext context) {
+    return AnimatedPositioned(
+      width: selected ? 400.0 : 200.0,
+      height: selected ? 200.0 : 400.0,
+      duration: Duration(seconds: 2),
+      curve: dropDownValue != null ? dropDownValue.curveCubic : Curves.linear,
+      child: Image.asset('assets/images/sea.jpg'),
     );
   }
 
