@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'unknown.dart';
 import 'animations/anim_container.dart';
+import 'animations/anim_padding.dart';
 
 const String HOME = "/";
 const String ANIMATED_CONTAINER = "ANIMATED_CONTAINER";
+const String ANIMATED_PADDING = "ANIMATED_PADDING";
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -16,6 +18,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
 
     case ANIMATED_CONTAINER:
       return MaterialPageRoute(builder: (context) => AnimatedContainerDemo());
+      break;
+
+    case ANIMATED_PADDING:
+      return MaterialPageRoute(builder: (context) => AnimatedPaddingDemo());
       break;
 
     default:

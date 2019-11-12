@@ -2,12 +2,12 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 
-class AnimatedContainerDemo extends StatefulWidget {
+class AnimatedPaddingDemo extends StatefulWidget {
   @override
-  _AnimatedContainerDemoState createState() => _AnimatedContainerDemoState();
+  _AnimatedPaddingDemoState createState() => _AnimatedPaddingDemoState();
 }
 
-class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
+class _AnimatedPaddingDemoState extends State<AnimatedPaddingDemo> {
   List<DropDownOption> curveOptions = [
     DropDownOption(Curves.linear, "linear", "A linear animation curve."),
     DropDownOption(
@@ -119,25 +119,17 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
 
   DropDownOption dropDownValue;
   bool selected = false;
+  double paddingValue = 8.0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("AnimatedContainer Demo"),
+        title: Text("AnimatedPadding Demo"),
       ),
       body: Column(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                dropDownMenu(context),
-                playAnimation(context),
-              ],
-            ),
-          ),
+          dropDownMenu(context),
           SizedBox(
             height: 20,
           ),
@@ -161,7 +153,11 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
           SizedBox(
             height: 20,
           ),
-          animatedContainer(context),
+          animatedPaddingWidget(context),
+          SizedBox(
+            height: 40,
+          ),
+          playAnimation(context),
         ],
       ),
     );
@@ -196,20 +192,22 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
     );
   }
 
-  Widget animatedContainer(BuildContext context) {
+  Widget animatedPaddingWidget(BuildContext context) {
     return GestureDetector(
       onTap: () {
         setState(() {
           selected = !selected;
+          selected ? paddingValue = 20 : paddingValue = 8.0;
         });
       },
-      child: AnimatedContainer(
-        width: selected ? 400.0 : 200.0,
-        height: selected ? 200.0 : 400.0,
-        alignment: selected ? Alignment.center : AlignmentDirectional.topCenter,
-        duration: Duration(seconds: 2),
-        curve: dropDownValue != null ? dropDownValue.curveCubic : Curves.linear,
-        child: Image.asset('assets/images/sea.jpg'),
+      child: Center(
+        child: AnimatedPadding(
+          padding: EdgeInsets.all(paddingValue),
+          duration: Duration(seconds: 2),
+          curve:
+              dropDownValue != null ? dropDownValue.curveCubic : Curves.linear,
+          child: Image.asset('assets/images/sea.jpg'),
+        ),
       ),
     );
   }
@@ -217,9 +215,10 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
   Widget playAnimation(BuildContext context) {
     return RaisedButton(
       color: Colors.blueAccent,
-      child: Text("Animate"),
+      child: Text("Update Padding"),
       onPressed: () => setState(() {
         selected = !selected;
+        selected ? paddingValue = 40 : paddingValue = 8.0;
       }),
     );
   }

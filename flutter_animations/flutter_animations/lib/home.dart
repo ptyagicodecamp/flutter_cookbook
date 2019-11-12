@@ -3,8 +3,10 @@ import 'router.dart' as router;
 import 'recipes.dart';
 
 final List<RecipeWidget> recipes = [
-  RecipeWidget("AnimatedContainer widget", "Animating Container",
-      router.ANIMATED_CONTAINER),
+  RecipeWidget("AnimatedContainer widget",
+      "Animating Container - Curves explorations", router.ANIMATED_CONTAINER),
+  RecipeWidget("AnimatedPadding widget",
+      "Animating Container - Curves explorations", router.ANIMATED_PADDING),
 ];
 
 class Home extends StatefulWidget {
