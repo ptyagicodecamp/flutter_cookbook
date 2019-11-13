@@ -7,7 +7,7 @@ class AnimatedPositionedDemo extends StatefulWidget {
 }
 
 class _AnimatedPositionedDemoState extends State<AnimatedPositionedDemo> {
-  DropDownOption dropDownValue;
+  AnimationCurve dropDownValue;
   bool selected = false;
 
   @override
@@ -57,10 +57,20 @@ class _AnimatedPositionedDemoState extends State<AnimatedPositionedDemo> {
     );
   }
 
+  Widget animatedPositionedWidget(BuildContext context) {
+    return AnimatedPositioned(
+      width: selected ? 400.0 : 200.0,
+      height: selected ? 200.0 : 400.0,
+      duration: Duration(seconds: 2),
+      curve: dropDownValue != null ? dropDownValue.curveCubic : Curves.linear,
+      child: Image.asset('assets/images/sea.jpg'),
+    );
+  }
+
   Widget dropDownMenu(BuildContext context) {
     return Container(
       alignment: AlignmentDirectional.topCenter,
-      child: DropdownButton<DropDownOption>(
+      child: DropdownButton<AnimationCurve>(
         value: dropDownValue == null ? curveOptions[0] : dropDownValue,
         icon: Icon(Icons.arrow_downward),
         iconSize: 24,
@@ -70,29 +80,19 @@ class _AnimatedPositionedDemoState extends State<AnimatedPositionedDemo> {
           height: 2,
           color: Colors.blue,
         ),
-        onChanged: (DropDownOption newValue) {
+        onChanged: (AnimationCurve newValue) {
           setState(() {
             dropDownValue = newValue;
           });
         },
         items: curveOptions
-            .map<DropdownMenuItem<DropDownOption>>((DropDownOption value) {
-          return DropdownMenuItem<DropDownOption>(
+            .map<DropdownMenuItem<AnimationCurve>>((AnimationCurve value) {
+          return DropdownMenuItem<AnimationCurve>(
             value: value,
             child: Text(value.curveName),
           );
         }).toList(),
       ),
-    );
-  }
-
-  Widget animatedPositionedWidget(BuildContext context) {
-    return AnimatedPositioned(
-      width: selected ? 400.0 : 200.0,
-      height: selected ? 200.0 : 400.0,
-      duration: Duration(seconds: 2),
-      curve: dropDownValue != null ? dropDownValue.curveCubic : Curves.linear,
-      child: Image.asset('assets/images/sea.jpg'),
     );
   }
 

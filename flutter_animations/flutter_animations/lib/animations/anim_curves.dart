@@ -1,120 +1,120 @@
 import 'package:flutter/material.dart';
 
-List<DropDownOption> curveOptions = [
-  DropDownOption(Curves.linear, "linear", "A linear animation curve."),
-  DropDownOption(
+List<AnimationCurve> curveOptions = [
+  AnimationCurve(Curves.linear, "linear", "A linear animation curve."),
+  AnimationCurve(
       Curves.decelerate,
       "decelerate",
       "A curve where the rate of change starts out quickly and then decelerates. "
           "Upside-down `f(t) = t²` parabola."),
-  DropDownOption(
+  AnimationCurve(
       Curves.fastLinearToSlowEaseIn,
       "fastLinearToSlowEaseIn",
       "A curve that is very steep and linear at the beginning, "
           "but quickly flattens out and very slowly eases in."),
-  DropDownOption(Curves.ease, "ease",
+  AnimationCurve(Curves.ease, "ease",
       "A cubic animation curve that speeds up quickly and ends slowly."),
-  DropDownOption(Curves.easeIn, "easeIn",
+  AnimationCurve(Curves.easeIn, "easeIn",
       "A cubic animation curve that starts slowly and ends quickly."),
-  DropDownOption(Curves.easeInToLinear, "easeInToLinear",
+  AnimationCurve(Curves.easeInToLinear, "easeInToLinear",
       "A cubic animation curve that starts starts slowly and ends linearly."),
-  DropDownOption(Curves.easeInSine, "easeInSine",
+  AnimationCurve(Curves.easeInSine, "easeInSine",
       "A cubic animation curve that starts slowly and ends quickly."),
-  DropDownOption(Curves.easeOutSine, "easeOutSine",
+  AnimationCurve(Curves.easeOutSine, "easeOutSine",
       "A cubic animation curve that starts quickly and ends slowly."),
-  DropDownOption(Curves.easeInOutSine, "easeInOutSine",
+  AnimationCurve(Curves.easeInOutSine, "easeInOutSine",
       "A cubic animation curve that starts slowly, speeds up, and then ends slowly."),
-  DropDownOption(
+  AnimationCurve(
       Curves.easeInQuad,
       "easeInQuad",
       "A cubic animation curve that starts slowly and ends quickly. "
           "Based on a quadratic equation where `f(t) = t²`"),
-  DropDownOption(Curves.easeOutQuad, "easeOutQuad",
+  AnimationCurve(Curves.easeOutQuad, "easeOutQuad",
       "A cubic animation curve that starts quickly and ends slowly."),
-  DropDownOption(Curves.easeInOutQuad, "easeInOutQuad",
+  AnimationCurve(Curves.easeInOutQuad, "easeInOutQuad",
       "A cubic animation curve that starts slowly, speeds up, and then ends slowly."),
-  DropDownOption(
+  AnimationCurve(
       Curves.easeInCubic,
       "easeInCubic",
       "A cubic animation curve that starts "
           "slowly and ends quickly. This curve is based on a cubic equation where `f(t) = t³`."),
-  DropDownOption(Curves.easeOutCubic, "easeOutCubic",
+  AnimationCurve(Curves.easeOutCubic, "easeOutCubic",
       " A cubic animation curve that starts quickly and ends slowly."),
-  DropDownOption(Curves.easeInOutCubic, "easeInOutCubic",
+  AnimationCurve(Curves.easeInOutCubic, "easeInOutCubic",
       "A cubic animation curve that starts slowly, speeds up, and then ends slowly."),
-  DropDownOption(
+  AnimationCurve(
       Curves.easeInQuart,
       "easeInQuart",
       "A cubic animation curve that starts slowly and ends quickly. "
           "This curve is based on a quartic equation where `f(t) = t⁴`."),
-  DropDownOption(Curves.easeOutQuart, "easeOutQuart",
+  AnimationCurve(Curves.easeOutQuart, "easeOutQuart",
       "A cubic animation curve that starts quickly and ends slowly."),
-  DropDownOption(Curves.easeInOutQuart, "easeInOutQuart",
+  AnimationCurve(Curves.easeInOutQuart, "easeInOutQuart",
       "A cubic animation curve that starts slowly, speeds up, and then ends slowly."),
-  DropDownOption(
+  AnimationCurve(
       Curves.easeInQuint,
       "easeInQuint",
       "A cubic animation curve that starts slowly and ends quickly. "
           "This curve is based on a quintic equation where `f(t) = t⁵`"),
-  DropDownOption(Curves.easeOutQuint, "easeOutQuint",
+  AnimationCurve(Curves.easeOutQuint, "easeOutQuint",
       "A cubic animation curve that starts quickly and ends slowly."),
-  DropDownOption(Curves.easeInOutQuart, "easeInOutQuart",
+  AnimationCurve(Curves.easeInOutQuart, "easeInOutQuart",
       "A cubic animation curve that starts slowly, speeds up, and then ends slowly."),
-  DropDownOption(
+  AnimationCurve(
       Curves.easeInExpo,
       "easeInExpo",
       "A cubic animation curve that starts slowly and ends quickly. "
           "This curve is based on an exponential equation where `f(t) = 2¹⁰⁽ᵗ⁻¹⁾`."),
-  DropDownOption(Curves.easeOutExpo, "easeOutExpo",
+  AnimationCurve(Curves.easeOutExpo, "easeOutExpo",
       "A cubic animation curve that starts quickly and ends slowly."),
-  DropDownOption(Curves.easeInOutExpo, "easeInOutExpo",
+  AnimationCurve(Curves.easeInOutExpo, "easeInOutExpo",
       "A cubic animation curve that starts slowly, speeds up, and then ends slowly."),
-  DropDownOption(
+  AnimationCurve(
       Curves.easeInCirc,
       "easeInCirc",
       "A cubic animation curve that starts slowly and ends quickly. "
           "This curve is effectively the bottom-right quarter of a circle."),
-  DropDownOption(Curves.easeOutCirc, "easeOutCirc",
+  AnimationCurve(Curves.easeOutCirc, "easeOutCirc",
       "A cubic animation curve that starts quickly and ends slowly. This curve is effectively the top-left quarter of a circle."),
-  DropDownOption(Curves.easeInOutCirc, "easeInOutCirc",
+  AnimationCurve(Curves.easeInOutCirc, "easeInOutCirc",
       "A cubic animation curve that starts slowly, speeds up, and then ends slowly."),
-  DropDownOption(Curves.easeInBack, "easeInBack",
+  AnimationCurve(Curves.easeInBack, "easeInBack",
       "A cubic animation curve that starts slowly and ends quickly."),
-  DropDownOption(Curves.easeOutBack, "easeOutBack",
+  AnimationCurve(Curves.easeOutBack, "easeOutBack",
       "A cubic animation curve that starts quickly and ends slowly."),
-  DropDownOption(Curves.easeInOutBack, "easeInOutBack",
+  AnimationCurve(Curves.easeInOutBack, "easeInOutBack",
       "A cubic animation curve that starts slowly, speeds up, and then ends slowly."),
-  DropDownOption(Curves.easeInOut, "easeInOut",
+  AnimationCurve(Curves.easeInOut, "easeInOut",
       "A cubic animation curve that starts quickly and ends slowly."),
-  DropDownOption(Curves.linearToEaseOut, "linearToEaseOut",
+  AnimationCurve(Curves.linearToEaseOut, "linearToEaseOut",
       "A cubic animation curve that starts linearly and ends slowly."),
-  DropDownOption(Curves.fastOutSlowIn, "fastOutSlowIn",
+  AnimationCurve(Curves.fastOutSlowIn, "fastOutSlowIn",
       "A curve that starts quickly and eases into its final position."),
-  DropDownOption(
+  AnimationCurve(
       Curves.slowMiddle,
       "slowMiddle",
       "A cubic animation curve that starts quickly, slows down, "
           "and then ends quickly."),
-  DropDownOption(Curves.bounceIn, "bounceIn",
+  AnimationCurve(Curves.bounceIn, "bounceIn",
       "An oscillating curve that grows in magnitude."),
-  DropDownOption(Curves.bounceOut, "bounceOut",
+  AnimationCurve(Curves.bounceOut, "bounceOut",
       "An oscillating curve that first grows and then shrink in magnitude."),
-  DropDownOption(Curves.bounceInOut, "bounceInOut",
+  AnimationCurve(Curves.bounceInOut, "bounceInOut",
       "An oscillating curve that first grows and then shrink in magnitude."),
-  DropDownOption(Curves.elasticIn, "elasticeIn",
+  AnimationCurve(Curves.elasticIn, "elasticeIn",
       "An oscillating curve that grows in magnitude while overshooting its bounds."),
-  DropDownOption(Curves.elasticOut, "elasticOut",
+  AnimationCurve(Curves.elasticOut, "elasticOut",
       "An oscillating curve that shrinks in magnitude while overshooting its bounds."),
-  DropDownOption(Curves.elasticInOut, "elasticInOut",
+  AnimationCurve(Curves.elasticInOut, "elasticInOut",
       "An oscillating curve that grows and then shrinks in magnitude while overshooting its bounds."),
 ];
 
-class DropDownOption {
+class AnimationCurve {
   Curve curveCubic;
   String curveName;
   String description;
 
-  DropDownOption(Curve cubic, String name, String desc) {
+  AnimationCurve(Curve cubic, String name, String desc) {
     this.curveCubic = cubic;
     this.curveName = name;
     this.description = desc;

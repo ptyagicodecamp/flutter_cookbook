@@ -7,7 +7,7 @@ class AnimatedPaddingDemo extends StatefulWidget {
 }
 
 class _AnimatedPaddingDemoState extends State<AnimatedPaddingDemo> {
-  DropDownOption dropDownValue;
+  AnimationCurve dropDownValue;
   bool selected = false;
   double paddingValue = 8.0;
 
@@ -53,35 +53,6 @@ class _AnimatedPaddingDemoState extends State<AnimatedPaddingDemo> {
     );
   }
 
-  Widget dropDownMenu(BuildContext context) {
-    return Container(
-      alignment: AlignmentDirectional.topCenter,
-      child: DropdownButton<DropDownOption>(
-        value: dropDownValue == null ? curveOptions[0] : dropDownValue,
-        icon: Icon(Icons.arrow_downward),
-        iconSize: 24,
-        elevation: 16,
-        style: TextStyle(color: Colors.blueAccent),
-        underline: Container(
-          height: 2,
-          color: Colors.blue,
-        ),
-        onChanged: (DropDownOption newValue) {
-          setState(() {
-            dropDownValue = newValue;
-          });
-        },
-        items: curveOptions
-            .map<DropdownMenuItem<DropDownOption>>((DropDownOption value) {
-          return DropdownMenuItem<DropDownOption>(
-            value: value,
-            child: Text(value.curveName),
-          );
-        }).toList(),
-      ),
-    );
-  }
-
   Widget animatedPaddingWidget(BuildContext context) {
     return GestureDetector(
       onTap: () {
@@ -98,6 +69,35 @@ class _AnimatedPaddingDemoState extends State<AnimatedPaddingDemo> {
               dropDownValue != null ? dropDownValue.curveCubic : Curves.linear,
           child: Image.asset('assets/images/sea.jpg'),
         ),
+      ),
+    );
+  }
+
+  Widget dropDownMenu(BuildContext context) {
+    return Container(
+      alignment: AlignmentDirectional.topCenter,
+      child: DropdownButton<AnimationCurve>(
+        value: dropDownValue == null ? curveOptions[0] : dropDownValue,
+        icon: Icon(Icons.arrow_downward),
+        iconSize: 24,
+        elevation: 16,
+        style: TextStyle(color: Colors.blueAccent),
+        underline: Container(
+          height: 2,
+          color: Colors.blue,
+        ),
+        onChanged: (AnimationCurve newValue) {
+          setState(() {
+            dropDownValue = newValue;
+          });
+        },
+        items: curveOptions
+            .map<DropdownMenuItem<AnimationCurve>>((AnimationCurve value) {
+          return DropdownMenuItem<AnimationCurve>(
+            value: value,
+            child: Text(value.curveName),
+          );
+        }).toList(),
       ),
     );
   }
