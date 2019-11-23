@@ -1,6 +1,7 @@
 import 'package:fb_auth/data/classes/auth_user.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widgets/images/load_image.dart';
 import 'package:flutter_widgets/login/auth_service.dart';
 import 'package:flutter_widgets/login/login_page.dart';
 import 'package:flutter_widgets/plugins/firetop/change_notifier.dart';
@@ -29,6 +30,7 @@ const String USER_PROFILE = 'USER_PROFILE';
 const String LOGIN_PAGE = 'LOGIN_PAGE';
 const String THEMES_DEMO = 'THEMES_DEMO';
 const String SLIDER_DEMO = 'SLIDER_DEMO';
+const String LOAD_IMAGE_FIR_STORAGE = 'LOAD_IMAGE_FIR_STORAGE';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -36,6 +38,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
     case HOME:
       return MaterialPageRoute(builder: (context) => Home());
+      break;
+
+    case LOAD_IMAGE_FIR_STORAGE:
+      return MaterialPageRoute(builder: (context) => LoadFirbaseStorageImage());
       break;
 
     case SLIDER_DEMO:

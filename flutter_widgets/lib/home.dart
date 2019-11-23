@@ -3,6 +3,8 @@ import 'router.dart' as router;
 import 'recipes.dart';
 
 final List<RecipeWidget> recipes = [
+  RecipeWidget("Loading Image", "Loading image from Firebase Storage",
+      router.LOAD_IMAGE_FIR_STORAGE),
   RecipeWidget("Slider Demo", "Slider snd Range Slider", router.SLIDER_DEMO),
   RecipeWidget("Themes in Action ", "Toggle between Light & Dark themes",
       router.THEMES_DEMO),
