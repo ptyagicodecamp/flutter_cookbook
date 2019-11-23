@@ -16,7 +16,6 @@ class FireStorageService extends ChangeNotifier {
 
   static Future<dynamic> loadImage(BuildContext context, String image) async {
     var url = await storage().ref(image).getDownloadURL();
-    print("Priyanka-web: " + url.path);
     return url;
   }
 }
