@@ -3,6 +3,10 @@ import 'router.dart' as router;
 import 'recipes.dart';
 
 final List<RecipeWidget> recipes = [
+  RecipeWidget(
+      "ColorTween Animation",
+      "Implement animation using ColorTween for Android, iOS and WebApp.",
+      router.COLOR_TWEEN),
   RecipeWidget("AnimatedContainer widget",
       "Animating Container - Curves explorations", router.ANIMATED_CONTAINER),
   RecipeWidget("AnimatedPadding widget",
