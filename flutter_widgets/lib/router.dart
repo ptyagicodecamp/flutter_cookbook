@@ -7,6 +7,7 @@ import 'package:flutter_widgets/login/login_page.dart';
 import 'package:flutter_widgets/plugins/firetop/change_notifier.dart';
 import 'package:flutter_widgets/themes/themes_demo.dart';
 import 'package:flutter_widgets/themes/themes_notifier.dart';
+import 'package:flutter_widgets/tts/tts_sample.dart';
 import 'package:provider/provider.dart';
 import 'home.dart';
 import 'login/user_profile.dart';
@@ -31,6 +32,7 @@ const String LOGIN_PAGE = 'LOGIN_PAGE';
 const String THEMES_DEMO = 'THEMES_DEMO';
 const String SLIDER_DEMO = 'SLIDER_DEMO';
 const String LOAD_IMAGE_FIR_STORAGE = 'LOAD_IMAGE_FIR_STORAGE';
+const String TTS_PLUGIN = 'TTS_PLUGIN';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -38,6 +40,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
     case HOME:
       return MaterialPageRoute(builder: (context) => Home());
+      break;
+
+    case TTS_PLUGIN:
+      return MaterialPageRoute(builder: (context) => TTSPluginRecipe());
       break;
 
     case LOAD_IMAGE_FIR_STORAGE:

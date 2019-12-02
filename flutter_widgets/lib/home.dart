@@ -3,6 +3,10 @@ import 'router.dart' as router;
 import 'recipes.dart';
 
 final List<RecipeWidget> recipes = [
+  RecipeWidget(
+      "Text-To-Speech Plugin",
+      "Code recipe to demonstrate usage of tts Flutter plugin",
+      router.TTS_PLUGIN),
   RecipeWidget("Loading Image", "Loading image from Firebase Storage",
       router.LOAD_IMAGE_FIR_STORAGE),
   RecipeWidget("Slider Demo", "Slider snd Range Slider", router.SLIDER_DEMO),

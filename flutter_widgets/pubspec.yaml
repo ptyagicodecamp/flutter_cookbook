@@ -44,6 +44,9 @@ dependencies:
   #dismissible widgets
   flutter_slidable: ^0.5.4
 
+  #Flutter Text-to-speech dep
+  flutter_tts: ^0.7.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -64,6 +67,7 @@ flutter:
     - assets/images/sea-rocks.jpg
     - assets/images/sea2.jpg
     - assets/images/sea3.jpg
+    - assets/images/griffith_observatory.jpg
     #- assets/images/menu.png
 
 
