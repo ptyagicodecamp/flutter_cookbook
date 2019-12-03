@@ -32,8 +32,6 @@ class _TTSPluginRecipeState extends State<TTSPluginRecipe> {
       "The Griffith Observatory is the most iconic building in Los Angeles, perched high in the Hollywood Hills, 1,134 feet above sea level.";
   bool isPlaying = false;
   FlutterTts _flutterTts;
-  dynamic language;
-  dynamic voice;
 
   @override
   void initState() {
