@@ -78,7 +78,8 @@ flutter:
     - assets/images/sea2.jpg
     - assets/images/sea3.jpg
     - assets/images/griffith_observatory.jpg
-    #- assets/images/menu.png
+    - assets/images/menu.png
+    - assets/images/tomato.jpg
 
 
   # To add assets to your application, add an assets section, like this:

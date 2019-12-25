@@ -3,7 +3,7 @@ import 'package:flutter_widgets/quizzie/quizze_page.dart';
 
 //Note: Use code below to just run this demo.
 // OR comment it out if you want to run it on Web as part of recipe sample app
-void main() => runApp(QuizzieDemo());
+//void main() => runApp(QuizzieDemo());
 
 class QuizzieDemo extends StatefulWidget {
   @override
