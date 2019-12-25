@@ -10,6 +10,7 @@ import 'package:flutter_widgets/themes/themes_notifier.dart';
 import 'package:flutter_widgets/tts/tts_sample.dart';
 import 'package:provider/provider.dart';
 import 'home.dart';
+import 'lists/list_images.dart';
 import 'login/user_profile.dart';
 import 'swtch/switch_list_tile1.dart';
 import 'unknown.dart';
@@ -44,6 +45,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(builder: (context) => Home());
       break;
 
+    case LIST_IMAGES:
+      return MaterialPageRoute(builder: (context) => ImageListView());
+      break;
+
     case TTS_PLUGIN:
       return MaterialPageRoute(builder: (context) => TTSPluginRecipe());
       break;
@@ -69,7 +74,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       });
       break;
 
-/*    case USER_PROFILE:
+    case USER_PROFILE:
       return MaterialPageRoute(builder: (context) {
         final MyAuthUser firebaseUser = routeSettings.arguments;
         return ChangeNotifierProvider<FireAuthService>(
@@ -110,7 +115,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         );
       });
       break;
-*/
+
     case SWITCH_LISTTILE_1:
       return MaterialPageRoute(builder: (context) => SwitchListTile1());
       break;
