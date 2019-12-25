@@ -25,12 +25,25 @@ dependencies:
   cupertino_icons: ^0.1.2
   webview_flutter: ^0.3.10+3
 
-  #firebase auth for Google SignIn
-  google_sign_in: ^4.0.7 #google signin
   provider: ^3.1.0 #ChangeNotifier, Consumer, Providers
-  firebase_core: ^0.4.0+9
-  firebase_auth: ^0.14.0+4 #user auth
-  cloud_firestore: ^0.12.9+1 #saving user profiles
+
+  #firebase auth for Google SignIn
+#  google_sign_in: ^4.0.7 #google signin
+#
+#  firebase_core: ^0.4.0+9
+#  firebase: any
+#  firebase_auth: ^0.14.0+4 #user auth
+#  cloud_firestore: ^0.12.9+1 #saving user profiles
+#
+#dependency_overrides:
+#  firebase:
+#    git:
+#      url: https://github.com/FirebaseExtended/firebase-dart
+#
+#  provider:
+#    git:
+#      url: https://github.com/kevmoo/provider
+#      ref: flutter_web #branch
 
   #firebase: ^5.0.4
   fb_auth: ^0.0.2+1
@@ -51,10 +64,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
 
@@ -63,6 +72,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+    - assets/images/
     - assets/flutter-to-fly-creds.json
     - assets/images/sea-rocks.jpg
     - assets/images/sea2.jpg

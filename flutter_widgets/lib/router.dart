@@ -19,6 +19,7 @@ import 'menus/webview.dart';
 import 'login/firebase_login.dart';
 import 'plugins/firetop/fire_auth_service.dart';
 import 'sliders/slider_demo.dart';
+import 'quizzie/quizze_demo.dart';
 
 const String HOME = "/";
 const String POP_UP_MENU_BUTTON_SL = '/popupMenuButton_sl';
@@ -33,6 +34,7 @@ const String THEMES_DEMO = 'THEMES_DEMO';
 const String SLIDER_DEMO = 'SLIDER_DEMO';
 const String LOAD_IMAGE_FIR_STORAGE = 'LOAD_IMAGE_FIR_STORAGE';
 const String TTS_PLUGIN = 'TTS_PLUGIN';
+const String COLOR_FILTER_DEMO = 'COLOR_FILTER_DEMO';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -52,6 +54,8 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
 
     case SLIDER_DEMO:
       return MaterialPageRoute(builder: (context) => SliderDemo());
+    case COLOR_FILTER_DEMO:
+      return MaterialPageRoute(builder: (context) => QuizzieDemo());
       break;
 
     case THEMES_DEMO:
@@ -65,7 +69,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       });
       break;
 
-    case USER_PROFILE:
+/*    case USER_PROFILE:
       return MaterialPageRoute(builder: (context) {
         final MyAuthUser firebaseUser = routeSettings.arguments;
         return ChangeNotifierProvider<FireAuthService>(
@@ -106,7 +110,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         );
       });
       break;
-
+*/
     case SWITCH_LISTTILE_1:
       return MaterialPageRoute(builder: (context) => SwitchListTile1());
       break;

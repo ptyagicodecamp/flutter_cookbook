@@ -10,6 +10,8 @@ final List<RecipeWidget> recipes = [
   RecipeWidget("Loading Image", "Loading image from Firebase Storage",
       router.LOAD_IMAGE_FIR_STORAGE),
   RecipeWidget("Slider Demo", "Slider snd Range Slider", router.SLIDER_DEMO),
+  RecipeWidget("ColorFilter", "Blends two colors. Released in Flutter 1.9",
+      router.COLOR_FILTER_DEMO),
   RecipeWidget("Themes in Action ", "Toggle between Light & Dark themes",
       router.THEMES_DEMO),
   RecipeWidget(

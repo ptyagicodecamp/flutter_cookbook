@@ -81,7 +81,7 @@ packages:
   cupertino_icons:
     dependency: "direct main"
     description:
-      name: cupertino_icons
+      name: convert
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2"
@@ -108,15 +108,20 @@ packages:
     version: "5.0.6"
   firebase_auth:
     dependency: "direct main"
+    version: "2.1.1"
+  crypto:
+    dependency: transitive
     description:
-      name: firebase_auth
+      name: crypto
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.14.0+9"
   firebase_core:
+    version: "2.1.2"
+  cupertino_icons:
     dependency: "direct main"
     description:
-      name: firebase_core
+      name: cupertino_icons
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.2"
@@ -174,8 +179,10 @@ packages:
     version: "8.5.0"
   google_sign_in:
     dependency: "direct main"
+  image:
+    dependency: transitive
     description:
-      name: google_sign_in
+      name: image
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.14"
@@ -220,7 +227,7 @@ packages:
       name: js
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.1+1"
+    version: "2.1.4"
   matcher:
     dependency: transitive
     description:
