@@ -28,12 +28,12 @@ dependencies:
   provider: ^3.1.0 #ChangeNotifier, Consumer, Providers
 
   #firebase auth for Google SignIn
-#  google_sign_in: ^4.0.7 #google signin
+  google_sign_in: ^4.0.7 #google signin
 #
 #  firebase_core: ^0.4.0+9
 #  firebase: any
 #  firebase_auth: ^0.14.0+4 #user auth
-#  cloud_firestore: ^0.12.9+1 #saving user profiles
+  cloud_firestore: ^0.12.9+1 #saving user profiles
 #
 #dependency_overrides:
 #  firebase:
