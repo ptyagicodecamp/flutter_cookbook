@@ -3,6 +3,8 @@ import 'router.dart' as router;
 import 'recipes.dart';
 
 final List<RecipeWidget> recipes = [
+  RecipeWidget("Theme Caching (Moor)", "Save current theme in local database",
+      router.THEMES_DEMO_DB),
   RecipeWidget(
       "Text-To-Speech Plugin",
       "Code recipe to demonstrate usage of tts Flutter plugin",

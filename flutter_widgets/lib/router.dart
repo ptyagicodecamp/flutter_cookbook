@@ -4,10 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widgets/images/load_image.dart';
 import 'package:flutter_widgets/login/auth_service.dart';
 import 'package:flutter_widgets/login/login_page.dart';
+import 'package:flutter_widgets/plugins/db/shared.dart';
+import 'package:flutter_widgets/plugins/db/theme_prefs.dart';
 import 'package:flutter_widgets/plugins/firetop/change_notifier.dart';
+import 'package:flutter_widgets/themes/db/themes_db.dart';
+import 'package:flutter_widgets/themes/db/themes_notifier_db.dart';
 import 'package:flutter_widgets/themes/themes_demo.dart';
 import 'package:flutter_widgets/themes/themes_notifier.dart';
 import 'package:flutter_widgets/tts/tts_sample.dart';
+import 'package:moor/moor.dart';
 import 'package:provider/provider.dart';
 import 'home.dart';
 import 'lists/list_images.dart';
@@ -32,6 +37,7 @@ const String FIREBASE_LOGIN = 'FIREBASE_LOGIN';
 const String USER_PROFILE = 'USER_PROFILE';
 const String LOGIN_PAGE = 'LOGIN_PAGE';
 const String THEMES_DEMO = 'THEMES_DEMO';
+const String THEMES_DEMO_DB = 'THEMES_DEMO_DB';
 const String SLIDER_DEMO = 'SLIDER_DEMO';
 const String LOAD_IMAGE_FIR_STORAGE = 'LOAD_IMAGE_FIR_STORAGE';
 const String TTS_PLUGIN = 'TTS_PLUGIN';
@@ -43,6 +49,25 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
     case HOME:
       return MaterialPageRoute(builder: (context) => Home());
+      break;
+
+    case THEMES_DEMO_DB:
+      return MaterialPageRoute(builder: (context) {
+        return MultiProvider(
+          providers: [
+            Provider<MyDatabase>(
+              builder: (_) => constructDb(logStatements: true),
+              dispose: (context, db) => db.close(),
+            ),
+            ChangeNotifierProvider<ThemesNotifierDB>(
+              builder: (_) {
+                return ThemesNotifierDB();
+              },
+            )
+          ],
+          child: ThemesDBCaching(),
+        );
+      });
       break;
 
     case LIST_IMAGES:

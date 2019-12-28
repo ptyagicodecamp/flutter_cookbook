@@ -25,6 +25,15 @@ dependencies:
   cupertino_icons: ^0.1.2
   webview_flutter: ^0.3.10+3
 
+#  moor_flutter: any
+  moor: ^2.2.0
+  # Database for mobile and Desktop
+  moor_ffi: ^0.2.0
+
+  # Helper to find the database path on mobile
+  path_provider: ^1.3.0
+  path: ^1.6.4
+
   provider: ^3.1.0 #ChangeNotifier, Consumer, Providers
 
   #firebase auth for Google SignIn
@@ -34,16 +43,6 @@ dependencies:
 #  firebase: any
 #  firebase_auth: ^0.14.0+4 #user auth
   cloud_firestore: ^0.12.9+1 #saving user profiles
-#
-#dependency_overrides:
-#  firebase:
-#    git:
-#      url: https://github.com/FirebaseExtended/firebase-dart
-#
-#  provider:
-#    git:
-#      url: https://github.com/kevmoo/provider
-#      ref: flutter_web #branch
 
   #firebase: ^5.0.4
   fb_auth: ^0.0.2+1
@@ -63,7 +62,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  build_runner: ^1.4.0
+  built_value_generator: ^6.5.0
+  moor_generator: ^2.2.0
 # The following section is specific to Flutter.
 flutter:
 
