@@ -11,7 +11,7 @@ class ThemesDBCaching extends StatefulWidget {
 class _ThemesDBCachingState extends State<ThemesDBCaching> {
   @override
   Widget build(BuildContext context) {
-    Provider.of<ThemesNotifierDB>(context).fetchActiveThemeData(context);
+    Provider.of<ThemesNotifierDB>(context).loadActiveThemeData(context);
     return MaterialApp(
         theme: Provider.of<ThemesNotifierDB>(context).currentThemeData,
         home: Scaffold(

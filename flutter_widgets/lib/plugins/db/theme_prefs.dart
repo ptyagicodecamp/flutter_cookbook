@@ -14,19 +14,15 @@ class ThemePrefs extends Table {
 // Moor prepares database table
 @UseMoor(tables: [ThemePrefs])
 class MyDatabase extends _$MyDatabase {
-//  MyDatabase(QueryExecutor e) : super(e);
-
   MyDatabase(QueryExecutor e) : super(e);
 
-  // we tell the database where to store the data with this constructor
-//  MyDatabase()
-//      : super(FlutterQueryExecutor.inDatabaseFolder(path: 'db.sqlite'));
-
-  // you should bump this number whenever you change or add a table definition. Migrations
-  // are covered later in this readme.
+  // Bump schemaVersion whenever there's change.
   @override
-  int get schemaVersion => 6;
+  int get schemaVersion => 1;
 
+  //Keeping it simple
+  //reset the database whenever there's update.
+  // Add light theme as default theme after first launch and upgrade
   @override
   MigrationStrategy get migration {
     return MigrationStrategy(onCreate: (Migrator m) {
@@ -44,8 +40,6 @@ class MyDatabase extends _$MyDatabase {
     });
   }
 
-  Future<List<ThemePref>> get allThemePrefs => select(themePrefs).get();
-
   void activateTheme(MyThemes theme) {
     ThemePref pref =
         ThemePref(theme_id: theme.index, theme_name: theme.toString());
@@ -56,17 +50,10 @@ class MyDatabase extends _$MyDatabase {
       (delete(themePrefs)..where((t) => t.theme_id.equals(i))).go();
 
   //The stream will automatically emit new items whenever the underlying data changes.
-  Stream<bool> isPresent(int id) {
+  Stream<bool> themeIdExists(int id) {
     return select(themePrefs)
         .watch()
         .map((prefs) => prefs.any((pref) => pref.theme_id == id));
-  }
-
-  Future<ThemePref> isThemeActive(int id) {
-    return (select(themePrefs)..where((theme) => theme.theme_id.equals(id)))
-        .getSingle();
-    // runs SELECT * FROM users WHERE id = ?, automatically binds the parameter
-    // and parses the result row.
   }
 
   Future<ThemePref> getActiveTheme() {

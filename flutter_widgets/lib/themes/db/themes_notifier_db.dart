@@ -28,7 +28,7 @@ class ThemesNotifierDB with ChangeNotifier {
         : currentTheme = MyThemes.light;
 
     var myDatabase = Provider.of<MyDatabase>(context);
-    var isOldThemeActive = myDatabase.isPresent(oldTheme.index);
+    var isOldThemeActive = myDatabase.themeIdExists(oldTheme.index);
 
     if (isOldThemeActive != null) {
       myDatabase.deactivateTheme(oldTheme.index);
@@ -43,7 +43,7 @@ class ThemesNotifierDB with ChangeNotifier {
         .then((themePref) => themePref.theme_id);
   }
 
-  void fetchActiveThemeData(BuildContext context) async {
+  void loadActiveThemeData(BuildContext context) async {
     int themeId = await getActiveThemeID(context);
     currentTheme = MyThemes.values[themeId];
   }
