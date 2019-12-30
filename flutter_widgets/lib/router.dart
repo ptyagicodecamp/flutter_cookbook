@@ -9,6 +9,8 @@ import 'package:flutter_widgets/plugins/db/theme_prefs.dart';
 import 'package:flutter_widgets/plugins/firetop/change_notifier.dart';
 import 'package:flutter_widgets/themes/db/themes_db.dart';
 import 'package:flutter_widgets/themes/db/themes_notifier_db.dart';
+import 'package:flutter_widgets/themes/sharedPrefs/themes_notifier_sp.dart';
+import 'package:flutter_widgets/themes/sharedPrefs/themes_sharedPrefs.dart';
 import 'package:flutter_widgets/themes/themes_demo.dart';
 import 'package:flutter_widgets/themes/themes_notifier.dart';
 import 'package:flutter_widgets/tts/tts_sample.dart';
@@ -38,6 +40,7 @@ const String USER_PROFILE = 'USER_PROFILE';
 const String LOGIN_PAGE = 'LOGIN_PAGE';
 const String THEMES_DEMO = 'THEMES_DEMO';
 const String THEMES_DEMO_DB = 'THEMES_DEMO_DB';
+const String THEMES_DEMO_SHAREDPREFS = 'THEMES_DEMO_SHAREDPREFS';
 const String SLIDER_DEMO = 'SLIDER_DEMO';
 const String LOAD_IMAGE_FIR_STORAGE = 'LOAD_IMAGE_FIR_STORAGE';
 const String TTS_PLUGIN = 'TTS_PLUGIN';
@@ -49,6 +52,25 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
     case HOME:
       return MaterialPageRoute(builder: (context) => Home());
+      break;
+
+    case THEMES_DEMO_SHAREDPREFS:
+      return MaterialPageRoute(builder: (context) {
+        return MultiProvider(
+          providers: [
+//            Provider<MyDatabase>(
+//              builder: (_) => constructDb(logStatements: true),
+//              dispose: (context, db) => db.close(),
+//            ),
+            ChangeNotifierProvider<ThemesNotifierSharedPrefs>(
+              builder: (_) {
+                return ThemesNotifierSharedPrefs();
+              },
+            )
+          ],
+          child: ThemesSharedPrefsCaching(),
+        );
+      });
       break;
 
     case THEMES_DEMO_DB:

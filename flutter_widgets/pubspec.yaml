@@ -25,6 +25,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   webview_flutter: ^0.3.10+3
 
+  shared_preferences: ^0.5.6
+
 #  moor_flutter: any
   moor: ^2.2.0
   # Database for mobile and Desktop

@@ -1,22 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_widgets/themes/db/themes_notifier_db.dart';
+import 'package:flutter_widgets/themes/sharedPrefs/themes_notifier_sp.dart';
 import 'package:provider/provider.dart';
 
-class ThemesDBCaching extends StatefulWidget {
+class ThemesSharedPrefsCaching extends StatefulWidget {
   @override
-  _ThemesDBCachingState createState() => _ThemesDBCachingState();
+  _ThemesSharedPrefsCachingState createState() =>
+      _ThemesSharedPrefsCachingState();
 }
 
-class _ThemesDBCachingState extends State<ThemesDBCaching> {
+class _ThemesSharedPrefsCachingState extends State<ThemesSharedPrefsCaching> {
   @override
   Widget build(BuildContext context) {
-    Provider.of<ThemesNotifierDB>(context).fetchActiveThemeData(context);
+    Provider.of<ThemesNotifierSharedPrefs>(context)
+        .loadActiveThemeData(context);
     return MaterialApp(
-        theme: Provider.of<ThemesNotifierDB>(context).currentThemeData,
+        theme: Provider.of<ThemesNotifierSharedPrefs>(context).currentThemeData,
         home: Scaffold(
           appBar: AppBar(
-            title: Text("Theme DB Caching (Moor)"),
+            title: Text("Theme Caching (SharedPreference)"),
           ),
           body: body(),
         ));
@@ -47,7 +49,8 @@ class _ThemesDBCachingState extends State<ThemesDBCaching> {
           RaisedButton(
             child: Text("Switch Theme"),
             onPressed: () {
-              Provider.of<ThemesNotifierDB>(context).switchTheme(context);
+              Provider.of<ThemesNotifierSharedPrefs>(context)
+                  .switchTheme(context);
             },
           ),
         ],
