@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widgets/themes/sharedPrefs/themes_notifier_sp.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(ChangeNotifierProvider<ThemesNotifierSharedPrefs>(
-    child: ThemesSharedPrefsCaching(),
-    builder: (BuildContext context) {
-      return ThemesNotifierSharedPrefs();
-    }));
+//void main() => runApp(ChangeNotifierProvider<ThemesNotifierSharedPrefs>(
+//    child: ThemesSharedPrefsCaching(),
+//    builder: (BuildContext context) {
+//      return ThemesNotifierSharedPrefs();
+//    }));
 
 class ThemesSharedPrefsCaching extends StatefulWidget {
   @override
@@ -21,6 +21,7 @@ class _ThemesSharedPrefsCachingState extends State<ThemesSharedPrefsCaching> {
     Provider.of<ThemesNotifierSharedPrefs>(context)
         .loadActiveThemeData(context);
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: Provider.of<ThemesNotifierSharedPrefs>(context).currentThemeData,
         home: Scaffold(
           appBar: AppBar(

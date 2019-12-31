@@ -30,6 +30,7 @@ class _ThemesDBCachingState extends State<ThemesDBCaching> {
   Widget build(BuildContext context) {
     Provider.of<ThemesNotifierDB>(context).loadActiveThemeData(context);
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: Provider.of<ThemesNotifierDB>(context).currentThemeData,
         home: Scaffold(
           appBar: AppBar(

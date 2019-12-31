@@ -29,12 +29,6 @@ class ThemesNotifierSharedPrefs with ChangeNotifier {
     activateTheme(currentTheme);
   }
 
-  Future<int> getActiveThemeID(BuildContext context) {
-    return Provider.of<MyDatabase>(context)
-        .getActiveTheme()
-        .then((themePref) => themePref.theme_id);
-  }
-
   Future<void> activateTheme(MyThemes theme) async {
     var sharedPrefs = await SharedPreferences.getInstance();
     await sharedPrefs.setInt('theme_id', theme.index);
