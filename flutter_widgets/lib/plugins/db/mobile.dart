@@ -5,8 +5,10 @@ import 'package:moor_ffi/moor_ffi.dart';
 import 'package:path_provider/path_provider.dart' as paths;
 import 'package:path/path.dart' as p;
 
-import 'theme_prefs.dart';
+import '../../themes/db/theme_prefs.dart';
 
+//Note: Implementation borrowed from this To Do App Template project
+//https://github.com/appleeducate/moor_shared
 MyDatabase constructDb({bool logStatements = false}) {
   if (Platform.isIOS || Platform.isAndroid) {
     final executor = LazyDatabase(() async {
@@ -20,9 +22,9 @@ MyDatabase constructDb({bool logStatements = false}) {
     final file = File('db.sqlite');
     return MyDatabase(VmDatabase(file, logStatements: logStatements));
   }
-  // if (Platform.isWindows) {
-  //   final file = File('db.sqlite');
-  //   return Database(VMDatabase(file, logStatements: logStatements));
-  // }
+  if (Platform.isWindows) {
+    final file = File('db.sqlite');
+    return MyDatabase(VmDatabase(file, logStatements: logStatements));
+  }
   return MyDatabase(VmDatabase.memory(logStatements: logStatements));
 }

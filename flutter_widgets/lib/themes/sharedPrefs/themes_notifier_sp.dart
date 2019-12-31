@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_widgets/plugins/db/theme_prefs.dart';
+import 'package:flutter_widgets/themes/db/theme_prefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum MyThemes { light, dark }

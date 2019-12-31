@@ -1,11 +1,8 @@
-import 'package:fb_auth/data/classes/auth_user.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets/images/load_image.dart';
-import 'package:flutter_widgets/login/auth_service.dart';
 import 'package:flutter_widgets/login/login_page.dart';
 import 'package:flutter_widgets/plugins/db/shared.dart';
-import 'package:flutter_widgets/plugins/db/theme_prefs.dart';
+import 'package:flutter_widgets/themes/db/theme_prefs.dart';
 import 'package:flutter_widgets/plugins/firetop/change_notifier.dart';
 import 'package:flutter_widgets/themes/db/themes_db.dart';
 import 'package:flutter_widgets/themes/db/themes_notifier_db.dart';
@@ -14,7 +11,6 @@ import 'package:flutter_widgets/themes/sharedPrefs/themes_sharedPrefs.dart';
 import 'package:flutter_widgets/themes/themes_demo.dart';
 import 'package:flutter_widgets/themes/themes_notifier.dart';
 import 'package:flutter_widgets/tts/tts_sample.dart';
-import 'package:moor/moor.dart';
 import 'package:provider/provider.dart';
 import 'home.dart';
 import 'lists/list_images.dart';
@@ -56,19 +52,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
 
     case THEMES_DEMO_SHAREDPREFS:
       return MaterialPageRoute(builder: (context) {
-        return MultiProvider(
-          providers: [
-//            Provider<MyDatabase>(
-//              builder: (_) => constructDb(logStatements: true),
-//              dispose: (context, db) => db.close(),
-//            ),
-            ChangeNotifierProvider<ThemesNotifierSharedPrefs>(
-              builder: (_) {
-                return ThemesNotifierSharedPrefs();
-              },
-            )
-          ],
+        return ChangeNotifierProvider<ThemesNotifierSharedPrefs>(
           child: ThemesSharedPrefsCaching(),
+          builder: (BuildContext context) {
+            return ThemesNotifierSharedPrefs();
+          },
         );
       });
       break;

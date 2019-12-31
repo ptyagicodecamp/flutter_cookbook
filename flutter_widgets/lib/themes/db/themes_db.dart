@@ -1,7 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widgets/plugins/db/shared.dart';
+import 'package:flutter_widgets/themes/db/theme_prefs.dart';
 import 'package:flutter_widgets/themes/db/themes_notifier_db.dart';
 import 'package:provider/provider.dart';
+
+//void main() => runApp(MultiProvider(
+//      providers: [
+//        Provider<MyDatabase>(
+//          builder: (_) => constructDb(logStatements: true),
+//          dispose: (context, db) => db.close(),
+//        ),
+//        ChangeNotifierProvider<ThemesNotifierDB>(
+//          builder: (_) {
+//            return ThemesNotifierDB();
+//          },
+//        )
+//      ],
+//      child: ThemesDBCaching(),
+//    ));
 
 class ThemesDBCaching extends StatefulWidget {
   @override

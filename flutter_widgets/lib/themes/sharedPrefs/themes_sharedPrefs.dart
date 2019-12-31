@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widgets/themes/sharedPrefs/themes_notifier_sp.dart';
 import 'package:provider/provider.dart';
 
+void main() => runApp(ChangeNotifierProvider<ThemesNotifierSharedPrefs>(
+    child: ThemesSharedPrefsCaching(),
+    builder: (BuildContext context) {
+      return ThemesNotifierSharedPrefs();
+    }));
+
 class ThemesSharedPrefsCaching extends StatefulWidget {
   @override
   _ThemesSharedPrefsCachingState createState() =>
