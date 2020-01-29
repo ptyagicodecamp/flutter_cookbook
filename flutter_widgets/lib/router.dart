@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widgets/files/load_pdf.dart';
 import 'package:flutter_widgets/images/load_image.dart';
 import 'package:flutter_widgets/login/login_page.dart';
 import 'package:flutter_widgets/plugins/db/shared.dart';
@@ -41,6 +42,7 @@ const String SLIDER_DEMO = 'SLIDER_DEMO';
 const String LOAD_IMAGE_FIR_STORAGE = 'LOAD_IMAGE_FIR_STORAGE';
 const String TTS_PLUGIN = 'TTS_PLUGIN';
 const String COLOR_FILTER_DEMO = 'COLOR_FILTER_DEMO';
+const String LOAD_PDF_FIR_STORAGE = 'LOAD_PDF_FIR_STORAGE';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -48,6 +50,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
     case HOME:
       return MaterialPageRoute(builder: (context) => Home());
+      break;
+
+    case LOAD_PDF_FIR_STORAGE:
+      return MaterialPageRoute(builder: (context) => LoadFirbaseStoragePdf());
       break;
 
     case THEMES_DEMO_SHAREDPREFS:

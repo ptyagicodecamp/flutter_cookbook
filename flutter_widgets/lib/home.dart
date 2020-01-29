@@ -3,6 +3,8 @@ import 'router.dart' as router;
 import 'recipes.dart';
 
 final List<RecipeWidget> recipes = [
+  RecipeWidget("Loading PDF", "Loading PDF file from Firebase Storage",
+      router.LOAD_PDF_FIR_STORAGE),
   RecipeWidget("Theme Caching (SharedPreferences)",
       "Save current theme using SharedPrefs", router.THEMES_DEMO_SHAREDPREFS),
   RecipeWidget("Theme Caching (Moor)", "Save current theme in local database",

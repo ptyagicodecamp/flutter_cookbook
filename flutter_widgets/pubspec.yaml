@@ -61,6 +61,17 @@ dependencies:
   #Flutter Text-to-speech dep
   flutter_tts: ^0.7.0
 
+  #http
+  http: ^0.12.0+4
+  flutter_full_pdf_viewer: ^1.0.6
+
+  #placeholder transparent images
+  transparent_image: ^1.0.0
+
+  #Share with other apps
+  share_extend: "^1.1.1"
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -85,6 +96,7 @@ flutter:
     - assets/images/griffith_observatory.jpg
     - assets/images/menu.png
     - assets/images/tomato.jpg
+    - assets/images/flutter_slides.jpg
 
 
   # To add assets to your application, add an assets section, like this:
