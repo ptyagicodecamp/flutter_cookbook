@@ -14,7 +14,8 @@ class FireStorageService extends ChangeNotifier {
         messagingSenderId: "728428768644");
   }
 
-  static Future<dynamic> loadImage(BuildContext context, String image) async {
+  static Future<dynamic> loadFromStorage(
+      BuildContext context, String image) async {
     var url = await storage().ref(image).getDownloadURL();
     return url;
   }

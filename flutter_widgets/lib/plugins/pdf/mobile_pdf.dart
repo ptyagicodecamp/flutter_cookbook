@@ -20,7 +20,7 @@ class LaunchFile {
 
   static Future<dynamic> loadFromFirebase(
       BuildContext context, String url) async {
-    return FireStorageService.loadImage(context, file);
+    return FireStorageService.loadFromStorage(context, file);
   }
 
   static Future<dynamic> createFileFromPdfUrl(dynamic url) async {

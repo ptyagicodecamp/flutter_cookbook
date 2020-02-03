@@ -37,36 +37,22 @@ class _LoadFirbaseStoragePdfState extends State<LoadFirbaseStoragePdf> {
   @override
   void initState() {
     super.initState();
-    LaunchFile.loadFromFirebase(context, file).then((url) {
-//      pdfUrl = url;
-//      print("Initialized pdfUrl: " + pdfUrl);
-      LaunchFile.createFileFromPdfUrl(url).then(
-        (f) => setState(
-          () {
-            if (f is File) {
-              pathPDF = f.path;
-              print(pathPDF);
-            } else if (url is Uri) {
-              pdfUrl = url.toString();
-              print("Url");
-              print(pdfUrl);
-            }
-          },
-        ),
-      );
-    });
 
-//    LaunchFile.loadFromFirebase(context, file)
-//        .then((url) => LaunchFile.createFileFromPdfUrl(url).then(
-//              (f) => setState(
-//                () {
-//                  if (f is File) {
-//                    pathPDF = f.path;
-//                    print(pathPDF);
-//                  }
-//                },
-//              ),
-//            ));
+    //Fetch file from FirebaseStorage first
+    LaunchFile.loadFromFirebase(context, file)
+        //Creating PDF file at disk for ios and android & assigning pdf url for web
+        .then((url) => LaunchFile.createFileFromPdfUrl(url).then(
+              (f) => setState(
+                () {
+                  if (f is File) {
+                    pathPDF = f.path;
+                    print(pathPDF);
+                  } else if (url is Uri) {
+                    pdfUrl = url.toString();
+                  }
+                },
+              ),
+            ));
   }
 
   @override
@@ -93,7 +79,7 @@ class _LoadFirbaseStoragePdfState extends State<LoadFirbaseStoragePdf> {
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: Text(
-                      "Loading image from Firebase Storage",
+                      "Loading Slides PDF from Firebase Storage",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 28,

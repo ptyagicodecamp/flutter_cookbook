@@ -150,7 +150,8 @@ class _LoadFirbaseStorageImageState extends State<LoadFirbaseStorageImage> {
 
   Future<Widget> _getImage(BuildContext context, String image) async {
     Image m;
-    await FireStorageService.loadImage(context, image).then((downloadUrl) {
+    await FireStorageService.loadFromStorage(context, image)
+        .then((downloadUrl) {
       m = Image.network(
         downloadUrl.toString(),
         fit: BoxFit.scaleDown,
