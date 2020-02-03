@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_widgets/files/load_pdf.dart';
 import 'package:flutter_widgets/images/load_image.dart';
 import 'package:flutter_widgets/login/login_page.dart';
+import 'package:flutter_widgets/pdf/load_pdf.dart';
 import 'package:flutter_widgets/plugins/db/shared.dart';
 import 'package:flutter_widgets/themes/db/theme_prefs.dart';
 import 'package:flutter_widgets/plugins/firetop/change_notifier.dart';
