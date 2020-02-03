@@ -25,7 +25,7 @@ class LaunchFile {
 
   static Future<dynamic> createFileFromPdfUrl(dynamic url) async {
     final filename =
-        'todaysheet.pdf'; //I did it on purpose to avoid strange naming conflicts
+        'flutterSlides.pdf'; //I did it on purpose to avoid strange naming conflicts
     print(filename);
     var request = await HttpClient().getUrl(Uri.parse(url));
     var response = await request.close();

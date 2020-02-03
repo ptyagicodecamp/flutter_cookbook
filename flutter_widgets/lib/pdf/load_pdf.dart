@@ -108,7 +108,7 @@ class _LoadFirbaseStoragePdfState extends State<LoadFirbaseStoragePdf> {
                     ],
                   ),
                 ),
-                loadButton(context),
+                openPDFButton(context),
               ],
             ),
           ),
@@ -117,7 +117,7 @@ class _LoadFirbaseStoragePdfState extends State<LoadFirbaseStoragePdf> {
     );
   }
 
-  Widget loadButton(BuildContext context) {
+  Widget openPDFButton(BuildContext context) {
     return Container(
       child: Stack(
         children: <Widget>[
@@ -147,17 +147,5 @@ class _LoadFirbaseStoragePdfState extends State<LoadFirbaseStoragePdf> {
         ],
       ),
     );
-  }
-
-  Future<File> createFileOfPdfUrl(String url) async {
-    final filename = "thePDF.pdf";
-
-    var request = await HttpClient().getUrl(Uri.parse(url));
-    var response = await request.close();
-    var bytes = await consolidateHttpClientResponseBytes(response);
-    String dir = (await getApplicationDocumentsDirectory()).path;
-    File file = new File('$dir/$filename');
-    await file.writeAsBytes(bytes);
-    return file;
   }
 }
