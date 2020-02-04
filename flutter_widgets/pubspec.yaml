@@ -72,6 +72,9 @@ dependencies:
   #Share with other apps
   share_extend: "^1.1.1"
 
+  syntax_highlighter: ^0.1.0
+  animated_floatactionbuttons: ^0.1.0
+
 
 dev_dependencies:
   flutter_test:
@@ -98,6 +101,7 @@ flutter:
     - assets/images/menu.png
     - assets/images/tomato.jpg
     - assets/images/flutter_slides.jpg
+    - lib/pdf/
 
 
   # To add assets to your application, add an assets section, like this:

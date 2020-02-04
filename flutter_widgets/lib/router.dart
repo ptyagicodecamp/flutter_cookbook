@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widgets/codefile.dart';
 import 'package:flutter_widgets/images/load_image.dart';
 import 'package:flutter_widgets/login/login_page.dart';
 import 'package:flutter_widgets/pdf/load_pdf.dart';
 import 'package:flutter_widgets/plugins/db/shared.dart';
+import 'package:flutter_widgets/screen_args.dart';
 import 'package:flutter_widgets/themes/db/theme_prefs.dart';
 import 'package:flutter_widgets/plugins/firetop/change_notifier.dart';
 import 'package:flutter_widgets/themes/db/themes_db.dart';
@@ -43,6 +45,7 @@ const String LOAD_IMAGE_FIR_STORAGE = 'LOAD_IMAGE_FIR_STORAGE';
 const String TTS_PLUGIN = 'TTS_PLUGIN';
 const String COLOR_FILTER_DEMO = 'COLOR_FILTER_DEMO';
 const String LOAD_PDF_FIR_STORAGE = 'LOAD_PDF_FIR_STORAGE';
+const String SHOW_CODE_FILE = 'SHOW_CODE_FILE';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -50,6 +53,16 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
     case HOME:
       return MaterialPageRoute(builder: (context) => Home());
+      break;
+
+    case SHOW_CODE_FILE:
+      final ScreenArguments screenArgs = routeSettings.arguments;
+
+      return MaterialPageRoute(
+          builder: (context) => CodeFile(
+                codeFilePath: screenArgs.codeFilePath,
+                codeGithubPath: screenArgs.codeGithubPath,
+              ));
       break;
 
     case LOAD_PDF_FIR_STORAGE:
