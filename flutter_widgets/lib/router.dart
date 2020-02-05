@@ -59,7 +59,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       final ScreenArguments screenArgs = routeSettings.arguments;
 
       return MaterialPageRoute(
-          builder: (context) => CodeFile(
+          builder: (context) => CodeFileWidget(
                 pageName: screenArgs.pageName,
                 recipeName: screenArgs.recipeName,
                 codeFilePath: screenArgs.codeFilePath,

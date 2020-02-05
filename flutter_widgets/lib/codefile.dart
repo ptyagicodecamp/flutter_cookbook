@@ -7,22 +7,22 @@ import 'package:flutter_widgets/plugins/url_launcher/url_launcher.dart';
 import 'package:flutter_widgets/screen_args.dart';
 import 'package:syntax_highlighter/syntax_highlighter.dart';
 
-class CodeFile extends StatefulWidget {
+class CodeFileWidget extends StatefulWidget {
   final String recipeName;
   final String pageName;
   final String codeFilePath;
   final String codeGithubPath;
 
-  CodeFile(
+  CodeFileWidget(
       {this.recipeName, this.pageName, this.codeFilePath, this.codeGithubPath});
 
   @override
-  CodeFileState createState() {
-    return CodeFileState();
+  CodeFileWidgetState createState() {
+    return CodeFileWidgetState();
   }
 }
 
-class CodeFileState extends State<CodeFile> {
+class CodeFileWidgetState extends State<CodeFileWidget> {
   double scaleFactorText = 1.0;
 
   @override
