@@ -3,21 +3,22 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets/plugins/pdf/launch_pdf.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:flutter_widgets/screen_args.dart';
+import '../router.dart' as router;
 
 //Load PDF file from Firebase Storage
 
 //void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LoadFirbaseStoragePdf(),
-    );
-  }
-}
+//class MyApp extends StatelessWidget {
+//  // This widget is the root of your application.
+//  @override
+//  Widget build(BuildContext context) {
+//    return MaterialApp(
+//      home: LoadFirbaseStoragePdf(),
+//    );
+//  }
+//}
 
 final Color cyan = Colors.cyan;
 final Color blue = Colors.blue;
@@ -26,6 +27,14 @@ String file = "pdfs/slides.pdf";
 String fileName = "Flutter Slides";
 
 class LoadFirbaseStoragePdf extends StatefulWidget {
+  final String recipeName;
+  final String pageName;
+  final String codeFilePath;
+  final String codeGithubPath;
+
+  const LoadFirbaseStoragePdf(
+      {this.recipeName, this.pageName, this.codeFilePath, this.codeGithubPath});
+
   @override
   _LoadFirbaseStoragePdfState createState() => _LoadFirbaseStoragePdfState();
 }
@@ -58,6 +67,24 @@ class _LoadFirbaseStoragePdfState extends State<LoadFirbaseStoragePdf> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: Text(widget.recipeName),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.code),
+            onPressed: () => Navigator.pushNamed(
+              context,
+              router.SHOW_CODE_FILE,
+              arguments: ScreenArguments(widget.recipeName, widget.pageName,
+                  widget.codeFilePath, widget.codeGithubPath),
+            ),
+          )
+        ],
+      ),
       body: Stack(
         children: <Widget>[
           Container(

@@ -60,13 +60,22 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
 
       return MaterialPageRoute(
           builder: (context) => CodeFile(
+                pageName: screenArgs.pageName,
+                recipeName: screenArgs.recipeName,
                 codeFilePath: screenArgs.codeFilePath,
                 codeGithubPath: screenArgs.codeGithubPath,
               ));
       break;
 
     case LOAD_PDF_FIR_STORAGE:
-      return MaterialPageRoute(builder: (context) => LoadFirbaseStoragePdf());
+      final ScreenArguments screenArgs = routeSettings.arguments;
+      return MaterialPageRoute(
+          builder: (context) => LoadFirbaseStoragePdf(
+                pageName: screenArgs.pageName,
+                recipeName: screenArgs.recipeName,
+                codeFilePath: screenArgs.codeFilePath,
+                codeGithubPath: screenArgs.codeGithubPath,
+              ));
       break;
 
     case THEMES_DEMO_SHAREDPREFS:
