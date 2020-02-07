@@ -52,7 +52,7 @@ class CodeFileWidgetState extends State<CodeFileWidget> {
                 child: highlightCodeSyntax(snapshot.data, context),
               ),
               floatingActionButton: AnimatedFloatingActionButton(
-                fabButtons: actions(snapshot.data),
+                fabButtons: codepreviewActions(),
                 colorStartAnimation: Colors.blue,
                 colorEndAnimation: Colors.cyan,
                 animatedIconData: AnimatedIcons.menu_close,
@@ -66,8 +66,9 @@ class CodeFileWidgetState extends State<CodeFileWidget> {
     );
   }
 
-  List<Widget> actions(String codeContent) {
+  List<Widget> codepreviewActions() {
     return <Widget>[
+      //makes text smaller
       FloatingActionButton(
         heroTag: "zoom_out",
         child: Icon(Icons.zoom_out),
@@ -76,6 +77,7 @@ class CodeFileWidgetState extends State<CodeFileWidget> {
           this.scaleFactorText = max(0.8, this.scaleFactorText - 0.1);
         }),
       ),
+      //makes text bigger
       FloatingActionButton(
         heroTag: "zoom_in",
         child: Icon(Icons.zoom_in),
@@ -107,14 +109,16 @@ class CodeFileWidgetState extends State<CodeFileWidget> {
       constraints: BoxConstraints.expand(),
       child: Scrollbar(
         child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: RichText(
-            textScaleFactor: this.scaleFactorText,
-            text: TextSpan(
-              style: TextStyle(fontFamily: 'monospace', fontSize: 12.0),
-              children: <TextSpan>[
-                DartSyntaxHighlighter(style).format(codeContent)
-              ],
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: RichText(
+              textScaleFactor: this.scaleFactorText,
+              text: TextSpan(
+                style: TextStyle(fontFamily: 'monospace', fontSize: 12.0),
+                children: <TextSpan>[
+                  DartSyntaxHighlighter(style).format(codeContent)
+                ],
+              ),
             ),
           ),
         ),

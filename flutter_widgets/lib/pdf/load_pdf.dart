@@ -1,24 +1,8 @@
 import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets/plugins/pdf/launch_pdf.dart';
 import 'package:flutter_widgets/screen_args.dart';
 import '../router.dart' as router;
-
-//Load PDF file from Firebase Storage
-
-//void main() => runApp(MyApp());
-
-//class MyApp extends StatelessWidget {
-//  // This widget is the root of your application.
-//  @override
-//  Widget build(BuildContext context) {
-//    return MaterialApp(
-//      home: LoadFirbaseStoragePdf(),
-//    );
-//  }
-//}
 
 final Color cyan = Colors.cyan;
 final Color blue = Colors.blue;
