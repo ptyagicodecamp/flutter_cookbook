@@ -102,6 +102,16 @@ flutter:
     - assets/images/tomato.jpg
     - assets/images/flutter_slides.jpg
     - lib/pdf/
+    - lib/images/
+    - lib/lists/
+    - lib/login/
+    - lib/menus/
+    - lib/quizzie/
+    - lib/sliders/
+    - lib/swtch/
+    - lib/themes/db/
+    - lib/themes/sharedPrefs/
+    - lib/tts/
 
 
   # To add assets to your application, add an assets section, like this:
