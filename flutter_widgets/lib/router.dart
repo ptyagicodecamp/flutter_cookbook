@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widgets/canvas/painting.dart';
 import 'package:flutter_widgets/codefile.dart';
 import 'package:flutter_widgets/images/load_image.dart';
 import 'package:flutter_widgets/login/login_page.dart';
@@ -46,6 +47,7 @@ const String TTS_PLUGIN = 'TTS_PLUGIN';
 const String COLOR_FILTER_DEMO = 'COLOR_FILTER_DEMO';
 const String LOAD_PDF_FIR_STORAGE = 'LOAD_PDF_FIR_STORAGE';
 const String SHOW_CODE_FILE = 'SHOW_CODE_FILE';
+const String CANVAS_PAINTING = 'CANVAS_PAINTING';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -53,6 +55,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
     case HOME:
       return MaterialPageRoute(builder: (context) => Home());
+      break;
+
+    case CANVAS_PAINTING:
+      return MaterialPageRoute(builder: (context) => CanvasPainting());
       break;
 
     case SHOW_CODE_FILE:

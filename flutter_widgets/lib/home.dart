@@ -4,6 +4,12 @@ import 'recipes.dart';
 
 final List<RecipeWidget> recipes = [
   RecipeWidget(
+      "Paint Canvas",
+      "Drawing and Painting using CustomPainter",
+      router.CANVAS_PAINTING,
+      "lib/canvas/painting.dart",
+      "https://github.com/ptyagicodecamp/flutter_cookbook/blob/widgets/flutter_widgets/lib/canvas/painting.dart"),
+  RecipeWidget(
       "Loading PDF",
       "Loading PDF file from Firebase Storage",
       router.LOAD_PDF_FIR_STORAGE,

@@ -75,6 +75,11 @@ dependencies:
   syntax_highlighter: ^0.1.0
   animated_floatactionbuttons: ^0.1.0
 
+  flutter_colorpicker: ^0.2.6
+
+  screenshot: ^0.1.1
+  image_gallery_saver: ^1.2.2
+
 
 dev_dependencies:
   flutter_test:
