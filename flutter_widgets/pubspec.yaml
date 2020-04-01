@@ -39,7 +39,7 @@ dependencies:
   provider: ^3.1.0 #ChangeNotifier, Consumer, Providers
 
   #firebase auth for Google SignIn
-  google_sign_in: ^4.0.7 #google signin
+  google_sign_in: ^4.3.0 #google signin
 #
 #  firebase_core: ^0.4.0+9
 #  firebase: any
