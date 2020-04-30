@@ -31,7 +31,7 @@ dependencies:
   moor: ^2.2.0
 
   # Database for mobile and Desktop
-  moor_ffi: ^0.2.0
+  moor_ffi: ^0.3.0
   # Helper to find the database path on mobile
   path_provider: ^1.5.1
   path: ^1.6.4
