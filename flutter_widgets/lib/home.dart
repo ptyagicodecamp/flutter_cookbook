@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'router.dart' as router;
+
 import 'recipes.dart';
+import 'router.dart' as router;
 
 final List<RecipeWidget> recipes = [
+  RecipeWidget(
+      "Persisting Products in Local DB",
+      "Persisting Data in Local DB using sqflite plugin",
+      router.LOCAL_DB,
+      "lib/persistence/ecom.dart",
+      "https://github.com/ptyagicodecamp/flutter_cookbook/blob/widgets/flutter_widgets/lib/persistence/ecom.dart"),
   RecipeWidget(
       "Paint Canvas",
       "Drawing and Painting using CustomPainter",

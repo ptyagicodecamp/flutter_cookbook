@@ -80,6 +80,8 @@ dependencies:
 #  screenshot: ^0.1.1
 #  image_gallery_saver: ^1.2.2
 
+  #Local database
+  sqflite: ^1.3.0
 
 dev_dependencies:
   flutter_test:

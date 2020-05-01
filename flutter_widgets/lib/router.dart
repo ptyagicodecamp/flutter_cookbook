@@ -5,9 +5,9 @@ import 'package:flutter_widgets/images/load_image.dart';
 import 'package:flutter_widgets/login/login_page.dart';
 import 'package:flutter_widgets/pdf/load_pdf.dart';
 import 'package:flutter_widgets/plugins/db/shared.dart';
+import 'package:flutter_widgets/plugins/firetop/change_notifier.dart';
 import 'package:flutter_widgets/screen_args.dart';
 import 'package:flutter_widgets/themes/db/theme_prefs.dart';
-import 'package:flutter_widgets/plugins/firetop/change_notifier.dart';
 import 'package:flutter_widgets/themes/db/themes_db.dart';
 import 'package:flutter_widgets/themes/db/themes_notifier_db.dart';
 import 'package:flutter_widgets/themes/sharedPrefs/themes_notifier_sp.dart';
@@ -16,18 +16,20 @@ import 'package:flutter_widgets/themes/themes_demo.dart';
 import 'package:flutter_widgets/themes/themes_notifier.dart';
 import 'package:flutter_widgets/tts/tts_sample.dart';
 import 'package:provider/provider.dart';
+
 import 'home.dart';
 import 'lists/list_images.dart';
+import 'login/firebase_login.dart';
 import 'login/user_profile.dart';
-import 'swtch/switch_list_tile1.dart';
-import 'unknown.dart';
 import 'menus/sf_popupmenubutton.dart';
 import 'menus/sl_popupmenubutton.dart';
 import 'menus/webview.dart';
-import 'login/firebase_login.dart';
+import 'persistence/ecom.dart';
 import 'plugins/firetop/fire_auth_service.dart';
-import 'sliders/slider_demo.dart';
 import 'quizzie/quizze_demo.dart';
+import 'sliders/slider_demo.dart';
+import 'swtch/switch_list_tile1.dart';
+import 'unknown.dart';
 
 const String HOME = "/";
 const String POP_UP_MENU_BUTTON_SL = '/popupMenuButton_sl';
@@ -48,6 +50,7 @@ const String COLOR_FILTER_DEMO = 'COLOR_FILTER_DEMO';
 const String LOAD_PDF_FIR_STORAGE = 'LOAD_PDF_FIR_STORAGE';
 const String SHOW_CODE_FILE = 'SHOW_CODE_FILE';
 const String CANVAS_PAINTING = 'CANVAS_PAINTING';
+const String LOCAL_DB = 'LOCAL_DB';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -55,6 +58,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
     case HOME:
       return MaterialPageRoute(builder: (context) => Home());
+      break;
+
+    case LOCAL_DB:
+      return MaterialPageRoute(builder: (context) => ProductListing());
       break;
 
     case CANVAS_PAINTING:
