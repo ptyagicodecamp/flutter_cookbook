@@ -8,18 +8,13 @@ const tableProducts = 'products';
 
 Future<Database> db() async {
   return openDatabase(
-    // Set the path to the database. Note: Using the `join` function from the
-    // `path` package is best practice to ensure the path is correctly
-    // constructed for each platform.
     join(await getDatabasesPath(), 'products_database.db'),
-    // When the database is first created, create a table to store dogs.
     onCreate: (db, version) {
       return db.execute(
         'CREATE TABLE IF NOT EXISTS $tableProducts(id INTEGER PRIMARY KEY, title TEXT, description TEXT, image TEXT, price REAL)',
       );
     },
-    // Set the version. This executes the onCreate function and provides a
-    // path to perform database upgrades and downgrades.
+    // Version provides path to perform database upgrades and downgrades.
     version: 1,
   );
 }
@@ -66,7 +61,7 @@ Future<List<Product>> allProducts() async {
   // Get a reference to the database.
   final Database db = await database;
 
-  // Query the table for all The Dogs.
+  // Query the table for all The Products.
   final List<Map<String, dynamic>> maps = await db.query(tableProducts);
 
   // Convert the List<Map<String, dynamic> into a List<Product>.

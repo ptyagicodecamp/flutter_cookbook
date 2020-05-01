@@ -10,13 +10,14 @@ class ProductListing extends StatefulWidget {
   _ProductListingState createState() => _ProductListingState();
 }
 
-@override
-void initState() {
-  //insert demo data
-  initDB();
-}
-
 class _ProductListingState extends State<ProductListing> {
+  @override
+  void initState() {
+    super.initState();
+    //insert demo data
+    initDB();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -73,30 +74,40 @@ class _ProductListingState extends State<ProductListing> {
                   ),
                   color: Colors.amber[700],
                 ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16.0),
-                      child: Text(
-                        product.title,
-                        style: TextStyle(
-                          fontSize: 18,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8.0, top: 8.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          product.title,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: Text(
-                        'Price: ${product.price}',
-                        style: TextStyle(
-                          fontSize: 18,
+                        SizedBox(
+                          height: 5,
                         ),
-                      ),
+                        Text(
+                          '${product.description}',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Price: ${product.price}',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
