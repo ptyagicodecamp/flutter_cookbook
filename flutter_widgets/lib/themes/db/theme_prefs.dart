@@ -26,10 +26,10 @@ class MyDatabase extends _$MyDatabase {
   @override
   MigrationStrategy get migration {
     return MigrationStrategy(onCreate: (Migrator m) {
-      return m.createAllTables();
+      return m.createAll();
     }, onUpgrade: (Migrator m, int from, int to) async {
       m.deleteTable(themePrefs.actualTableName);
-      m.createAllTables();
+      m.createAll();
     }, beforeOpen: (details) async {
       if (details.wasCreated) {
         await into(themePrefs).insert(ThemePrefsCompanion(
