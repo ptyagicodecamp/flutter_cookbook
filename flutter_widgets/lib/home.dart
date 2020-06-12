@@ -5,6 +5,12 @@ import 'router.dart' as router;
 
 final List<RecipeWidget> recipes = [
   RecipeWidget(
+      "Navigation & Routing",
+      "Navigation and Routing in Flutter App",
+      router.NAV_APP,
+      "lib/navigation/page_list_1.dart",
+      "https://github.com/ptyagicodecamp/flutter_cookbook/blob/widgets/flutter_widgets/lib/navigation/page_list_1.dart"),
+  RecipeWidget(
       "Persisting Products in Local DB",
       "Persisting Data in Local DB using sqflite plugin",
       router.LOCAL_DB,

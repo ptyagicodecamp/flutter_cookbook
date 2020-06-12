@@ -5,7 +5,7 @@ class ImageListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Widgets'),
+        title: Text('Flutter Navigation'),
       ),
       body: ListView(
         padding: const EdgeInsets.all(8.0),
@@ -21,7 +21,9 @@ class ImageListView extends StatelessWidget {
                         image: ExactAssetImage('assets/images/sea-rocks.jpg'),
                         fit: BoxFit.fill)),
               )),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Container(
               height: 150,
               child: Container(
@@ -33,7 +35,9 @@ class ImageListView extends StatelessWidget {
                         image: ExactAssetImage('assets/images/sea2.jpg'),
                         fit: BoxFit.fill)),
               )),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Container(
               height: 150,
               child: Container(

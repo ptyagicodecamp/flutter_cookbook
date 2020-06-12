@@ -24,6 +24,7 @@ import 'login/user_profile.dart';
 import 'menus/sf_popupmenubutton.dart';
 import 'menus/sl_popupmenubutton.dart';
 import 'menus/webview.dart';
+import 'navigation/page_list_1.dart';
 import 'persistence/ecom.dart';
 import 'plugins/firetop/fire_auth_service.dart';
 import 'quizzie/quizze_demo.dart';
@@ -51,6 +52,7 @@ const String LOAD_PDF_FIR_STORAGE = 'LOAD_PDF_FIR_STORAGE';
 const String SHOW_CODE_FILE = 'SHOW_CODE_FILE';
 const String CANVAS_PAINTING = 'CANVAS_PAINTING';
 const String LOCAL_DB = 'LOCAL_DB';
+const String NAV_APP = 'NAV_APP';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -58,6 +60,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
     case HOME:
       return MaterialPageRoute(builder: (context) => Home());
+      break;
+
+    case NAV_APP:
+      return MaterialPageRoute(builder: (context) => PageListing());
       break;
 
     case LOCAL_DB:
