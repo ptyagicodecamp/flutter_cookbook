@@ -18,8 +18,10 @@ List<Item> seasideList = [
       details: "Ocean view for Sea 3")
 ];
 
+//Using Static Navigation
 void main() => runApp(
       MaterialApp(
+        debugShowCheckedModeBanner: false,
 //        home: PageListing(),
         //Part#2. Named route using Map
         routes: <String, WidgetBuilder>{
@@ -55,12 +57,14 @@ class PageListing extends StatelessWidget {
     );
   }
 
+  //Launches PageDetails and awaits the results from Navigator.pop() called from PageDetails.
   _navigateToPageDetails(BuildContext context, Item item) async {
-    //Part#2. Named route
+    //Navigation implementations are different for each part.
+    //Part#2. Named route with Maps
     final result = await Navigator.pushNamed(context, '/details');
 
-    // After the PageDetails returns a result, hide any previous snackbars
-    // and show the new result.
+    //snackbars is used to display the result returned from another page.
+    //Hide any previous snackbars and show the new resultFromPageDetails.
     Scaffold.of(context)
       ..removeCurrentSnackBar()
       ..showSnackBar(SnackBar(content: Text("$result")));

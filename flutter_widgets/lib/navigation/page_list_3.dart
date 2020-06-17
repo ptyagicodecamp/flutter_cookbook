@@ -19,8 +19,10 @@ List<Item> seasideList = [
       details: "Ocean view for Sea 3")
 ];
 
+//Using Dynamic Navigation
 void main() => runApp(
       MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: PageListing(),
         //Part#3. Named with onGenerateRoute
         initialRoute: '/',
@@ -81,14 +83,18 @@ class PageListing extends StatelessWidget {
     );
   }
 
+  //Launches PageDetails and awaits the results from Navigator.pop() called from PageDetails.
   _navigateToPageDetails(BuildContext context, Item item) async {
-    //Part#3. Named route
+    //Navigation implementations are different for each part.
+    //Part#3. Named route using callback function
     final result = await Navigator.pushNamed(
       context,
       '/details',
       arguments: item,
     );
 
+    //snackbars is used to display the result returned from another page.
+    //Hide any previous snackbars and show the new resultFromPageDetails.
     Scaffold.of(context)
       ..removeCurrentSnackBar()
       ..showSnackBar(SnackBar(content: Text("$result")));

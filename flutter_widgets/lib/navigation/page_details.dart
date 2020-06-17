@@ -28,6 +28,7 @@ class PageDetails extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.favorite_border),
         onPressed: () {
+          //Current item's name along with message is sent back to last screen
           Navigator.pop(context, '${item.name} is marked as favorite.');
         },
       ),

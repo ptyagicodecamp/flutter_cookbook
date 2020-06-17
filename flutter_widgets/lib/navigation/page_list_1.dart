@@ -18,14 +18,19 @@ List<Item> seasideList = [
       details: "Ocean view for Sea 3")
 ];
 
-void main() => runApp(MaterialApp(
-      home: PageListing(),
-    ));
+//Using Direct Navigation (un-named routing)
+void main() => runApp(
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: PageListing(),
+      ),
+    );
 
 class PageListing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //Shows the name of navigation type/routing used
       appBar: AppBar(
         title: Text('Un-Named Routes'),
       ),
@@ -39,6 +44,7 @@ class PageListing extends StatelessWidget {
               title: Text("${seasideList[index].name}"),
               subtitle: Text("${seasideList[index].details}"),
               onTap: () {
+                //Tapping on listItem navigates to PageDetails
                 _navigateToPageDetails(context, seasideList[index]);
               },
             );
@@ -46,14 +52,14 @@ class PageListing extends StatelessWidget {
     );
   }
 
-  // A method that launches the PageDetails and awaits the result from
-  // Navigator.pop.
+  //Launches PageDetails and awaits the results from Navigator.pop() called from PageDetails.
   _navigateToPageDetails(BuildContext context, Item item) async {
     // Navigator.push returns a Future that completes after calling
     // Navigator.pop on the PageDetails Screen.
 
+    //Navigation implementations are different for each part.
     //Part#1. Un-named
-    final result = await Navigator.push(
+    final resultFromPageDetails = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => PageDetails(
@@ -62,10 +68,10 @@ class PageListing extends StatelessWidget {
       ),
     );
 
-    // After the PageDetails returns a result, hide any previous snackbars
-    // and show the new result.
+    //snackbars is used to display the result returned from another page.
+    //Hide any previous snackbars and show the new resultFromPageDetails.
     Scaffold.of(context)
       ..removeCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text("$result")));
+      ..showSnackBar(SnackBar(content: Text("$resultFromPageDetails")));
   }
 }
