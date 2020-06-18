@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+
 import 'items.dart';
 
 Positioned TopCard(
@@ -88,7 +89,9 @@ Card ImmutableCard(BuildContext context, CardItem cardItem, double width,
               children: <Widget>[
                 FlatButton(
                   padding: const EdgeInsets.all(0.0),
-                  onPressed: () => {if (leftSwipe != null) leftSwipe(cardItem)},
+                  onPressed: () {
+                    if (leftSwipe != null) leftSwipe(cardItem);
+                  },
                   child: Container(
                     height: 60.0,
                     width: 130.0,
@@ -105,8 +108,9 @@ Card ImmutableCard(BuildContext context, CardItem cardItem, double width,
                 ),
                 FlatButton(
                   padding: const EdgeInsets.all(0.0),
-                  onPressed: () =>
-                      {if (rightSwipe != null) rightSwipe(cardItem)},
+                  onPressed: () {
+                    if (rightSwipe != null) rightSwipe(cardItem);
+                  },
                   child: Container(
                     height: 60.0,
                     width: 130.0,
