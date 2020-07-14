@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'router.dart' as router;
+
 import 'recipes.dart';
+import 'router.dart' as router;
 
 final List<RecipeWidget> recipes = [
+  RecipeWidget("Custom Lottie Animation", "Modified Lottie animation (JSON)",
+      router.CUSTOM_LOTTIE_ANIM),
+  RecipeWidget(
+      "Lottie Animation", "Lottie animation (JSON)", router.LOTTIE_ANIM),
   RecipeWidget(
       "ColorTween Animation",
       "Implement animation using ColorTween for Android, iOS and WebApp.",

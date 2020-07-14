@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animations/colorTween/stack_swipe_rotate.dart';
+import 'package:flutter_animations/lottie/lottie_demo.dart';
+
+import 'animations/anim_container.dart';
+import 'animations/anim_padding.dart';
+import 'animations/anim_positioned.dart';
 import 'colorTween/anim_shake.dart';
 import 'colorTween/basic_anim.dart';
 import 'colorTween/color_tween.dart';
 import 'colorTween/double_tween.dart';
 import 'colorTween/swipe_anim.dart';
 import 'home.dart';
+import 'lottie/lottie_demo2.dart';
 import 'unknown.dart';
-import 'animations/anim_container.dart';
-import 'animations/anim_padding.dart';
-import 'animations/anim_positioned.dart';
 
 const String HOME = "/";
 const String ANIMATED_CONTAINER = "ANIMATED_CONTAINER";
@@ -21,6 +24,8 @@ const String BASIC_ANIM = 'BASIC_ANIM';
 const String COLOR_TWEEN = 'COLOR_TWEEN';
 const String DOUBLE_TWEEN = 'DOUBLE_TWEEN';
 const String SHAKE_ANIM = 'SHAKE_ANIM';
+const String LOTTIE_ANIM = 'LOTTIE_ANIM';
+const String CUSTOM_LOTTIE_ANIM = 'CUSTOM_LOTTIE_ANIM';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -28,6 +33,14 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
     case HOME:
       return MaterialPageRoute(builder: (context) => Home());
+      break;
+
+    case CUSTOM_LOTTIE_ANIM:
+      return MaterialPageRoute(builder: (context) => CustomLottieDemoPage());
+      break;
+
+    case LOTTIE_ANIM:
+      return MaterialPageRoute(builder: (context) => LottieDemoPage());
       break;
 
     case SWIPE_ANIM:
