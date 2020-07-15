@@ -5,6 +5,12 @@ import 'router.dart' as router;
 
 final List<RecipeWidget> recipes = [
   RecipeWidget(
+      "BloC Pattern",
+      "Default Counter App using BloC Pattern",
+      router.BLOC_PATTERN,
+      "lib/patterns/bloc_pattern.dart",
+      "https://github.com/ptyagicodecamp/flutter_cookbook/blob/widgets/flutter_widgets/lib/patterns/bloc_pattern.dart"),
+  RecipeWidget(
       "Navigation & Routing",
       "Navigation and Routing in Flutter App",
       router.NAV_APP,

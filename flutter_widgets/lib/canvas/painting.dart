@@ -1,7 +1,9 @@
-import 'dart:ui';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:animated_floatactionbuttons/animated_floatactionbuttons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 //void main() => runApp(CanvasPainting());
 
@@ -11,6 +13,8 @@ class CanvasPainting extends StatefulWidget {
 }
 
 class _CanvasPaintingState extends State<CanvasPainting> {
+  GlobalKey globalKey = GlobalKey();
+
   List<TouchPoints> points = List();
   double opacity = 1.0;
   StrokeCap strokeType = StrokeCap.round;
@@ -130,8 +134,28 @@ class _CanvasPaintingState extends State<CanvasPainting> {
     );
   }
 
+  Future<void> _save() async {
+    RenderRepaintBoundary boundary =
+        globalKey.currentContext.findRenderObject();
+    ui.Image image = await boundary.toImage();
+    ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    Uint8List pngBytes = byteData.buffer.asUint8List();
+    print(pngBytes);
+  }
+
   List<Widget> fabOption() {
     return <Widget>[
+      FloatingActionButton(
+        heroTag: "paint_save",
+        child: Icon(Icons.save),
+        tooltip: 'Save',
+        onPressed: () {
+          //min: 0, max: 50
+          setState(() {
+            _save();
+          });
+        },
+      ),
       FloatingActionButton(
         heroTag: "paint_stroke",
         child: Icon(Icons.brush),
@@ -245,18 +269,21 @@ class _CanvasPaintingState extends State<CanvasPainting> {
               points.add(null);
             });
           },
-          child: Stack(
-            children: <Widget>[
-              Center(
-                child: Image.asset("assets/images/hut.png"),
-              ),
-              CustomPaint(
-                size: Size.infinite,
-                painter: MyPainter(
-                  pointsList: points,
+          child: RepaintBoundary(
+            key: globalKey,
+            child: Stack(
+              children: <Widget>[
+                Center(
+                  child: Image.asset("assets/images/hut.png"),
                 ),
-              ),
-            ],
+                CustomPaint(
+                  size: Size.infinite,
+                  painter: MyPainter(
+                    pointsList: points,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         floatingActionButton: AnimatedFloatingActionButton(
@@ -310,7 +337,8 @@ class MyPainter extends CustomPainter {
             pointsList[i].points.dx + 0.1, pointsList[i].points.dy + 0.1));
 
         //Draw points when two points are not next to each other
-        canvas.drawPoints(PointMode.points, offsetPoints, pointsList[i].paint);
+        canvas.drawPoints(
+            ui.PointMode.points, offsetPoints, pointsList[i].paint);
       }
     }
   }

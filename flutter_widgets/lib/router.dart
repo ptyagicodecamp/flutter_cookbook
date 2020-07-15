@@ -25,6 +25,7 @@ import 'menus/sf_popupmenubutton.dart';
 import 'menus/sl_popupmenubutton.dart';
 import 'menus/webview.dart';
 import 'navigation/page_list_1.dart';
+import 'patterns/bloc_pattern.dart';
 import 'persistence/ecom.dart';
 import 'plugins/firetop/fire_auth_service.dart';
 import 'quizzie/quizze_demo.dart';
@@ -53,6 +54,7 @@ const String SHOW_CODE_FILE = 'SHOW_CODE_FILE';
 const String CANVAS_PAINTING = 'CANVAS_PAINTING';
 const String LOCAL_DB = 'LOCAL_DB';
 const String NAV_APP = 'NAV_APP';
+const String BLOC_PATTERN = 'BLOC_PATTERN';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   print(routeSettings.name);
@@ -60,6 +62,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
     case HOME:
       return MaterialPageRoute(builder: (context) => Home());
+      break;
+
+    case BLOC_PATTERN:
+      return MaterialPageRoute(builder: (context) => MyAppBlocPattern());
       break;
 
     case NAV_APP:
