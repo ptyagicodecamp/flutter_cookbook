@@ -18,6 +18,7 @@ import 'package:flutter_widgets/tts/tts_sample.dart';
 import 'package:provider/provider.dart';
 
 import 'home.dart';
+import 'images/upload_image.dart';
 import 'lists/list_images.dart';
 import 'login/firebase_login.dart';
 import 'login/user_profile.dart';
@@ -47,6 +48,7 @@ const String THEMES_DEMO_DB = 'THEMES_DEMO_DB';
 const String THEMES_DEMO_SHAREDPREFS = 'THEMES_DEMO_SHAREDPREFS';
 const String SLIDER_DEMO = 'SLIDER_DEMO';
 const String LOAD_IMAGE_FIR_STORAGE = 'LOAD_IMAGE_FIR_STORAGE';
+const String UPLOAD_IMAGE_FIR_STORAGE = 'UPLOAD_IMAGE_FIR_STORAGE';
 const String TTS_PLUGIN = 'TTS_PLUGIN';
 const String COLOR_FILTER_DEMO = 'COLOR_FILTER_DEMO';
 const String LOAD_PDF_FIR_STORAGE = 'LOAD_PDF_FIR_STORAGE';
@@ -143,6 +145,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
 
     case LOAD_IMAGE_FIR_STORAGE:
       return MaterialPageRoute(builder: (context) => LoadFirbaseStorageImage());
+      break;
+
+    case UPLOAD_IMAGE_FIR_STORAGE:
+      return MaterialPageRoute(
+          builder: (context) => UploadingImageToFirebaseStorage());
       break;
 
     case SLIDER_DEMO:

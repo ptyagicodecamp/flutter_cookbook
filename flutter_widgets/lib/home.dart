@@ -65,6 +65,12 @@ final List<RecipeWidget> recipes = [
       "lib/images/load_image.dart",
       "https://github.com/ptyagicodecamp/flutter_cookbook/tree/widgets/flutter_widgets/lib/images/load_image.dart"),
   RecipeWidget(
+      "Uploading Image",
+      "Uploading image TO Firebase Storage",
+      router.UPLOAD_IMAGE_FIR_STORAGE,
+      "lib/images/upload_image.dart",
+      "https://github.com/ptyagicodecamp/flutter_cookbook/tree/widgets/flutter_widgets/lib/images/upload_image.dart"),
+  RecipeWidget(
       "Slider Demo",
       "Slider snd Range Slider",
       router.SLIDER_DEMO,
