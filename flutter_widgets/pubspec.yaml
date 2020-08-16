@@ -14,7 +14,7 @@ description: A sample application to demonstrate Flutter widgets.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
@@ -28,10 +28,14 @@ dependencies:
   shared_preferences: ^0.5.6
 
 
-  moor: ^2.2.0
+  moor: ^3.3.1
 
+  #Phasing out moor_ffi: https://github.com/simolus3/moor/issues/691
   # Database for mobile and Desktop
-  moor_ffi: ^0.3.0
+  #moor_ffi: ^0.3.0
+
+  sqlite3_flutter_libs: ^0.2.0
+
   # Helper to find the database path on mobile
   path_provider: ^1.5.1
   path: ^1.6.4
@@ -89,8 +93,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.4.0
-  moor_generator: ^2.2.0
+  build_runner: ^1.10.2
+  moor_generator: ^3.3.1
 
 #  built_value_generator: ^6.5.0
 

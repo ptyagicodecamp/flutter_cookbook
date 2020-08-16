@@ -43,5 +43,10 @@
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+    <string>Need to access your camera to capture a photo add and update profile picture.</string>
+
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Need to access your photo library to select a photo add and update profile picture</string>
 </dict>
 </plist>
