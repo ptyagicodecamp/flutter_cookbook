@@ -333,6 +333,8 @@ PODS:
     - Flutter
   - shared_preferences (0.0.1):
     - Flutter
+  - simple_permissions (0.0.1):
+    - Flutter
   - sqflite (0.0.1):
     - Flutter
     - FMDB (~> 2.7.2)
@@ -373,6 +375,7 @@ DEPENDENCIES:
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - share_extend (from `.symlinks/plugins/share_extend/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
+  - simple_permissions (from `.symlinks/plugins/simple_permissions/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - sqlite3_flutter_libs (from `.symlinks/plugins/sqlite3_flutter_libs/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
@@ -434,6 +437,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/share_extend/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
+  simple_permissions:
+    :path: ".symlinks/plugins/simple_permissions/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
   sqlite3_flutter_libs:
@@ -482,6 +487,7 @@ SPEC CHECKSUMS:
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
   share_extend: b6748dc53695587891126a89533b862b92548c7b
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
+  simple_permissions: 149cd87a11f83c24bf99f6e8a82f9fc8b70be233
   sqflite: 4001a31ff81d210346b500c55b17f4d6c7589dd0
   sqlite3: 8f7d2078ae27778699a622a94b853285793422a2
   sqlite3_flutter_libs: 5651f8ff48e3b44d910863c4ea5916085b1b245f

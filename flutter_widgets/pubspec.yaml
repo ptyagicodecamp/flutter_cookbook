@@ -90,6 +90,10 @@ dependencies:
   #Picking image from gallery
   image_picker: ^0.6.7+4
 
+  #Handling permissions on Android
+  permission_handler: ^5.0.1+1
+  image_gallery_saver: ^1.5.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

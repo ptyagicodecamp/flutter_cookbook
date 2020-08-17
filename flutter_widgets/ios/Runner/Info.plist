@@ -48,5 +48,8 @@
 
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Need to access your photo library to select a photo add and update profile picture</string>
+
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Need to access photo library to save your creation</string>
 </dict>
 </plist>

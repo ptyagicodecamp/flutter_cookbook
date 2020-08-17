@@ -4,6 +4,9 @@ import 'dart:ui' as ui;
 import 'package:animated_floatactionbuttons/animated_floatactionbuttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 //void main() => runApp(CanvasPainting());
 
@@ -140,7 +143,16 @@ class _CanvasPaintingState extends State<CanvasPainting> {
     ui.Image image = await boundary.toImage();
     ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     Uint8List pngBytes = byteData.buffer.asUint8List();
-    print(pngBytes);
+
+    //Request permissions if not already granted
+    if (!(await Permission.storage.status.isGranted))
+      await Permission.storage.request();
+
+    final result = await ImageGallerySaver.saveImage(
+        Uint8List.fromList(pngBytes),
+        quality: 60,
+        name: "canvas_image");
+    print(result);
   }
 
   List<Widget> fabOption() {
