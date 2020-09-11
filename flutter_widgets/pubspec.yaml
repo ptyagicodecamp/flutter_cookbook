@@ -111,7 +111,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/flutter-to-fly-creds.json
     - assets/images/sea-rocks.jpg
     - assets/images/sea2.jpg
     - assets/images/sea3.jpg
